@@ -1,0 +1,6 @@
+.fade-out {
+  background-image: linear-gradient(90deg, black, #0000000f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+

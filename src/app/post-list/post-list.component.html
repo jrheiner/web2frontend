@@ -1,0 +1,28 @@
+<div *ngFor="let post of posts">
+  <div class="card mb-3 mt-3">
+    <div class="card-body">
+      <h5 class="card-title"><a href="/post/{{post._id}}">{{post.title}}</a></h5>
+      <h6 class="card-subtitle mb-2 text-muted">posted by {{post.author}}</h6>
+      <p class="card-text mb-1">{{post.description | slice: 0 : 225}}<span class="fade-out"
+                                                                           *ngIf="post.description.length > 225">{{post.description | slice: 225 : 250}}
+        ...</span>
+      </p>
+      <p class="card-text">
+        <small class="text-muted">
+          <span class="badge badge-primary">Primary</span>
+          <span class="badge badge-secondary">Secondary</span>
+          <span class="badge badge-success">Success</span>
+          <span class="badge badge-danger">Danger</span>
+          <span class="badge badge-warning">Warning</span>
+          <span class="badge badge-info">Info</span>
+          <span class="badge badge-light">Light</span>
+          <span class="badge badge-dark">Dark</span>
+        </small>
+      </p>
+    </div>
+    <img src="https://via.placeholder.com/1800x1500" class="card-img-bottom" alt="...">
+    <div class="card-footer">
+      <small class="text-muted">{{post.createdAt}} {{post.updatedAt}}</small>
+    </div>
+  </div>
+</div>
