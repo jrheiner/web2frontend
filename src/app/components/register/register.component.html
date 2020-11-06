@@ -1,0 +1,26 @@
+<div class="alert alert-danger mt-3" role="alert" *ngIf="alert">
+  {{alert}}
+</div>
+<div class="alert alert-success mt-3" role="alert" *ngIf="info">
+  <h4 class="alert-heading">Success!</h4>
+  <p>{{info}}</p>
+  <hr>
+  <p class="mb-0">Go to the <a routerLink="login">Login</a> to login.</p>
+</div>
+
+<form class="form-signin text-center" [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
+  <h1 class="h3 mb-3 font-weight-normal">Create new account</h1>
+  <label for="username" class="sr-only">Username</label>
+  <input type="text" id="username" formControlName="username" class="form-control" placeholder="Username" required
+         autofocus autocomplete="on" minlength="2">
+  <label for="password" class="sr-only">Password</label>
+  <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password" required
+         autocomplete="on" minlength="5">
+  <button class="btn btn-lg btn-primary btn-block mt-3" type="submit" [disabled]="registerForm.disabled">
+    <span *ngIf="!isLoading">Register</span>
+    <span *ngIf="isLoading" class="spinner-border" role="status"></span>
+  </button>
+  <button class="btn btn-lg btn-block mt-3" [ngClass]="info ? 'btn-success' : 'btn-outline-secondary'"
+          routerLink="/login">Login
+  </button>
+</form>

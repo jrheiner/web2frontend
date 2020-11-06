@@ -2,19 +2,20 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {NavbarComponent} from './navbar/navbar.component';
-import {HomeComponent} from './home/home.component';
-import {PostListComponent} from './post-list/post-list.component';
-import {HttpClientModule} from '@angular/common/http';
+import {NavbarComponent} from './components/navbar/navbar.component';
+import {HomeComponent} from './components/home/home.component';
+import {PostListComponent} from './components/post-list/post-list.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
-import {PostDetailsComponent} from './post-details/post-details.component';
-import {PostNewComponent} from './post-new/post-new.component';
-import {PostEditComponent} from './post-edit/post-edit.component';
-import {LoginComponent} from './login/login.component';
-import {RegisterComponent} from './register/register.component';
-import {UserDetailsComponent} from './user-details/user-details.component';
+import {PostDetailsComponent} from './components/post-details/post-details.component';
+import {PostNewComponent} from './components/post-new/post-new.component';
+import {PostEditComponent} from './components/post-edit/post-edit.component';
+import {LoginComponent} from './components/login/login.component';
+import {RegisterComponent} from './components/register/register.component';
+import {UserDetailsComponent} from './components/user-details/user-details.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { UserEditComponent } from './user-edit/user-edit.component';
+import {UserEditComponent} from './components/user-edit/user-edit.component';
+import {AuthInterceptor} from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,9 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

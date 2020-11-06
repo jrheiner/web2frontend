@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from '../auth.service';
+import {AuthService} from '../../services/auth.service';
 import {FormBuilder} from '@angular/forms';
-import {TokenService} from '../token.service';
+import {TokenService} from '../../services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -53,9 +53,5 @@ export class LoginComponent {
         this.alert = 'Invalid credentials';
       }
     }
-  }
-
-  logout(): void {
-    this.authService.logout();
   }
 }

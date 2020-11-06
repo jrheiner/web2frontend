@@ -1,0 +1,23 @@
+<div class="card mt-5">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="https://via.placeholder.com/500" class="card-img" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title mb-0">{{user.username}}</h5>
+        <p class="card-text"><small class="text-muted">{{user.id}}</small></p>
+        <p class="card-text">USER STATUS</p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">10 Posts and 0 Comments</li>
+          <li class="list-group-item"><span class="text-muted">Last activity:</span></li>
+          <li class="list-group-item"><span class="text-muted">Joined:</span> {{user.createdAt}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
+-->

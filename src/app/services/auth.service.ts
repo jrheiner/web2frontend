@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {ApiService} from './services/api.service';
+import {ApiService} from './api.service';
 import {TokenService} from './token.service';
 
 @Injectable({
