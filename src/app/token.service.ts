@@ -1,15 +1,19 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
+  loginChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  userChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {
   }
 
   public clearSession(): void {
     sessionStorage.clear();
+    this.loginChange.emit(false);
+
   }
 
   public isLoggedIn(): boolean {
@@ -22,6 +26,7 @@ export class TokenService {
 
   public setToken(token: string): void {
     sessionStorage.setItem('t', token);
+    this.loginChange.emit(true);
   }
 
   public getUsername(): string {
@@ -30,5 +35,6 @@ export class TokenService {
 
   public setUsername(username: string): void {
     sessionStorage.setItem('user', username);
+    this.userChange.emit(username);
   }
 }

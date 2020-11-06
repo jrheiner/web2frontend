@@ -30,8 +30,8 @@ export class LoginComponent {
     this.authService.login(data.username, data.password).subscribe((res) => {
       console.log(res);
       if (res.hasOwnProperty('token')) {
-        this.session.setToken(res.token);
         this.session.setUsername(res.username);
+        this.session.setToken(res.token);
 
         this.router.navigate([this.authService.redirectUrl || '']);
       }

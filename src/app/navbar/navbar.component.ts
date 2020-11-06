@@ -1,20 +1,37 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TokenService} from '../token.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
+  hideLogin: boolean = this.session.isLoggedIn();
+  currentUser: string = this.session.getUsername() ? 'Profile: ' + this.session.getUsername() : '';
 
-  constructor(private session: TokenService) {
+  constructor(private session: TokenService, private router: Router) {
   }
 
   ngOnInit(): void {
+    this.session.loginChange.subscribe((val: boolean) => {
+      this.hideLogin = val;
+      if (this.hideLogin) {
+        this.currentUser = 'Profile: ' + this.session.getUsername();
+      } else {
+        this.currentUser = '';
+      }
+    });
   }
+
 
   logout(): void {
     this.session.clearSession();
+    this.router.navigate(['login']);
+  }
+
+  ngOnDestroy(): void {
+    this.session.loginChange.unsubscribe();
   }
 }
