@@ -8,6 +8,7 @@ import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {UserDetailsComponent} from './user-details/user-details.component';
 import {AuthGuard} from './auth.guard';
+import {UserEditComponent} from './user-edit/user-edit.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'user', component: UserDetailsComponent, canActivate: [AuthGuard]},
+  {path: 'user/edit', component: UserEditComponent, canActivate: [AuthGuard]},
   {path: '**', redirectTo: ''}
 ];
 

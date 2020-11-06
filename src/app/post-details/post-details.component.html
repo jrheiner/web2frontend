@@ -6,10 +6,9 @@
       <p class="blog-post-meta">Posted {{post.createdAt}} by {{post.author.username}}</p>
       <p class="text-muted font-italic" *ngIf="post.createdAt != post.updatedAt">Last updated {{post.updatedAt}}</p>
 
-      <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap. Basic
-        typography, images, and code are all supported.</p>
       <hr>
       <p>{{post.description}}</p>
+      <hr>
 
       <ul *ngFor="let comment of comments">
         <li>{{comment.author.username}}: {{comment.description}}</li>
@@ -24,31 +23,33 @@
     <div class="card mt-5">
       <div class="card-body">
         <h5 class="card-title">Manage your post</h5>
-        <button class="btn btn-secondary" routerLink="/post/{{post.id}}/edit">Edit</button>
-        <button class="btn btn-danger">Delete</button>
+        <button class="btn btn-secondary btn-block" routerLink="/post/{{post.id}}/edit">Edit post</button>
+        <button class="btn btn-danger btn-block">Delete post</button>
       </div>
     </div>
 
     <div class="card mt-5">
       <div class="card-header">
-        Top comments
+        User action
       </div>
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.
-        </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <button class="btn btn-success btn-block">Upvote/Like</button>
+        <button class="btn btn-primary btn-block">Save</button>
+        <button class="btn btn-info btn-block">Share</button>
+        <button class="btn btn-info btn-block">Write comment</button>
       </div>
     </div>
     <div class="card mt-5">
       <div class="card-header">
-        Top comments
+        Overview
       </div>
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.
+        <h5 class="card-title">Statistics</h5>
+        <p class="card-text">17 comments by 15 users
         </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <p class="card-text">15 votes
+        </p>
+        <p class="card-text">more stats</p>
       </div>
     </div>
 

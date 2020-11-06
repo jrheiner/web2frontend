@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   hideLogin: boolean = this.session.isLoggedIn();
-  currentUser: string = this.session.getUsername() ? 'Profile: ' + this.session.getUsername() : '';
+  currentUser: string = this.session.getUsername() ? this.session.getUsername() : '';
 
   constructor(private session: TokenService, private router: Router) {
   }
@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.session.loginChange.subscribe((val: boolean) => {
       this.hideLogin = val;
       if (this.hideLogin) {
-        this.currentUser = 'Profile: ' + this.session.getUsername();
+        this.currentUser = this.session.getUsername();
       } else {
         this.currentUser = '';
       }
