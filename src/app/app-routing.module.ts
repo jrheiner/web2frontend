@@ -1,0 +1,32 @@
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {PostListComponent} from './post-list/post-list.component';
+import {PostDetailsComponent} from './post-details/post-details.component';
+import {PostNewComponent} from './post-new/post-new.component';
+import {PostEditComponent} from './post-edit/post-edit.component';
+import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
+import {UserDetailsComponent} from './user-details/user-details.component';
+import {AuthGuard} from './auth.guard';
+
+
+const routes: Routes = [
+  {path: '', component: PostListComponent},
+  {path: 'post/new', component: PostNewComponent, canActivate: [AuthGuard]},
+  {path: 'post/:id', component: PostDetailsComponent},
+  {path: 'post/:id/edit', component: PostEditComponent, canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'user', component: UserDetailsComponent, canActivate: [AuthGuard]},
+  {path: '**', redirectTo: ''}
+];
+
+@NgModule({
+  declarations: [],
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {
+}

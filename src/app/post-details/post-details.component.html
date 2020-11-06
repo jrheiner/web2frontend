@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-xl-8">
+
+    <div class="blog-post">
+      <h2 class="blog-post-title">{{post.title}} ({{post.id}})</h2>
+      <p class="blog-post-meta">Posted {{post.createdAt}} by {{post.author.username}}</p>
+      <p class="text-muted font-italic" *ngIf="post.createdAt != post.updatedAt">Last updated {{post.updatedAt}}</p>
+
+      <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap. Basic
+        typography, images, and code are all supported.</p>
+      <hr>
+      <p>{{post.description}}</p>
+
+      <ul *ngFor="let comment of comments">
+        <li>{{comment.author.username}}: {{comment.description}}</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+  <div class="col-xl-4">
+
+    <div class="card mt-5">
+      <div class="card-body">
+        <h5 class="card-title">Manage your post</h5>
+        <button class="btn btn-secondary" routerLink="/post/{{post.id}}/edit">Edit</button>
+        <button class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+
+    <div class="card mt-5">
+      <div class="card-header">
+        Top comments
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.
+        </p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+    <div class="card mt-5">
+      <div class="card-header">
+        Top comments
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.
+        </p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+
+  </div>
+</div>

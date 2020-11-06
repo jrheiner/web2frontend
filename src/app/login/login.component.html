@@ -1,0 +1,19 @@
+<div class="alert alert-danger mt-5" role="alert" *ngIf="alert">
+  {{alert}}
+</div>
+<form class="form-signin text-center" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+  <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+  <label for="username" class="sr-only">Username</label>
+  <input type="text" id="username" formControlName="username" class="form-control" placeholder="Username" required
+         autofocus autocomplete="on" minlength="2">
+  <label for="password" class="sr-only">Password</label>
+  <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password" required
+         autocomplete="on" minlength="5">
+  <button class="btn btn-lg btn-primary btn-block mt-3" type="submit" [disabled]="loginForm.disabled">
+    <span *ngIf="!isLoading">Login</span>
+    <span *ngIf="isLoading" class="spinner-border" role="status"></span>
+  </button>
+  <button class="btn btn-lg btn-outline-secondary btn-block mt-3" routerLink="/register"
+          [disabled]="loginForm.disabled">Register
+  </button>
+</form>
