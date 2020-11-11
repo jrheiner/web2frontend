@@ -1,4 +1,7 @@
-<h1 class="display-3 pt-4 pb-4">Edit user profile</h1>
+<h1 class="display-4 pt-4 pb-4">Edit user profile</h1>
+<div class="alert alert-success mt-3" role="alert" *ngIf="alert">
+  {{alert}}
+</div>
 <div class="row">
   <div class="col-sm-6">
     <label for="editUsername">Username</label>
@@ -6,14 +9,14 @@
   </div>
   <div class="col-sm-6">
     <label for="editPassword">Password</label>
-    <input id="editPassword" type="text" class="form-control" [(ngModel)]="user.password">
+    <input id="editPassword" type="text" class="form-control" [(ngModel)]="user.password" placeholder="(unchanged)">
   </div>
 </div>
 <div class="row mt-3">
   <div class="col-sm">
     <label for="editStatus">Status</label>
-    <input type="text" id="editStatus" class="form-control">
+    <input type="text" id="editStatus" class="form-control" [(ngModel)]="user.status">
   </div>
 </div>
 
-<button type="submit" class="btn btn-success mt-5" (click)="updateUser()">Save</button>
+<button type="submit" class="btn btn-success mt-4 mb-4" (click)="updateUser()" [disabled]="alert">{{button}}</button>

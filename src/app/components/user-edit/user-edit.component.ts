@@ -9,9 +9,12 @@ import {TokenService} from '../../services/token.service';
 })
 export class UserEditComponent implements OnInit {
 
+  alert;
+  button;
   user = {
     username: '',
-    password: ''
+    password: '',
+    status: ''
   };
 
   constructor(private apiService: ApiService, private session: TokenService) {
@@ -19,24 +22,34 @@ export class UserEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
+    this.button = 'Save';
   }
 
   getUser(): void {
     this.apiService.getUserSelf().subscribe(data => {
       this.user.username = data.username;
+      this.user.status = data.status || '';
       console.log(data);
     }, error =>
       console.log(error));
   }
 
   updateUser(): void {
-    if (this.user.password) {
-      console.log(this.user);
-      this.session.userChange.emit(this.user.username); // update username badge in navbar
-      this.apiService.editUserSelf(this.user).subscribe(res => {
-        console.log(res);
-      }, error => console.log(error));
+    if (!this.user.password || this.user.password.length < 5) {
+      delete this.user.password;
     }
+    console.log(this.user);
+    this.session.userChange.emit(this.user.username);
+    this.session.setUsername(this.user.username);
+    setTimeout(() => {
+      this.alert = '';
+      this.button = 'Save';
+    }, 3000);
+    this.apiService.editUserSelf(this.user).subscribe(res => {
+      console.log(res);
+      this.button = 'Updated!';
+      this.alert = 'Successfully updated user profile!';
+    }, error => console.log(error));
   }
 
 }

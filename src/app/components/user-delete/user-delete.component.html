@@ -1,0 +1,15 @@
+<h1 class="display-4 pt-4 pb-4">Delete user profile</h1>
+<div class="alert alert-success mt-3" role="alert" *ngIf="alert">
+  {{alert}}
+</div>
+<h4>Enter your username to delete your account.</h4>
+<div class="row">
+  <div class="col-sm-6 align-self-center">
+    <label for="deleteUsername"></label>
+    <input id="deleteUsername" type="text" class="form-control" [placeholder]="username" [(ngModel)]="input">
+    <span class="text-muted small">This will delete your account permanently.</span>
+  </div>
+</div>
+
+<button type="submit" class="btn btn-danger mt-4 mb-4" (click)="deleteAccount()" [disabled]="alert">Delete</button>
+

@@ -9,6 +9,7 @@ import {ApiService} from '../../services/api.service';
 export class PostListComponent implements OnInit {
 
   posts;
+  empty = false;
 
   constructor(private apiService: ApiService) {
   }
@@ -16,6 +17,7 @@ export class PostListComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.getAllPosts().subscribe((data) => {
       this.posts = data;
+      this.empty = !Boolean(Object.keys(this.posts).length);
     }, error => {
       console.log(error);
     });

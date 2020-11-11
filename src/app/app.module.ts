@@ -16,6 +16,7 @@ import {UserDetailsComponent} from './components/user-details/user-details.compo
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserEditComponent} from './components/user-edit/user-edit.component';
 import {AuthInterceptor} from './auth.interceptor';
+import {UserDeleteComponent} from './components/user-delete/user-delete.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {AuthInterceptor} from './auth.interceptor';
     LoginComponent,
     RegisterComponent,
     UserDetailsComponent,
-    UserEditComponent
+    UserEditComponent,
+    UserDeleteComponent
   ],
   imports: [
     BrowserModule,

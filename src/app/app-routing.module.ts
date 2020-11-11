@@ -9,6 +9,7 @@ import {RegisterComponent} from './components/register/register.component';
 import {UserDetailsComponent} from './components/user-details/user-details.component';
 import {AuthGuard} from './auth.guard';
 import {UserEditComponent} from './components/user-edit/user-edit.component';
+import {UserDeleteComponent} from './components/user-delete/user-delete.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'user', component: UserDetailsComponent, canActivate: [AuthGuard]},
   {path: 'user/edit', component: UserEditComponent, canActivate: [AuthGuard]},
+  {path: 'user/delete', component: UserDeleteComponent, canActivate: [AuthGuard]},
   {path: '**', redirectTo: ''}
 ];
 
