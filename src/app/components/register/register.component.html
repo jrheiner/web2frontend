@@ -1,3 +1,5 @@
+<h1 class="display-2 pt-5 pb-5 text-center">Create new account</h1>
+
 <div class="alert alert-danger mt-3" role="alert" *ngIf="alert">
   {{alert}}
 </div>
@@ -9,7 +11,6 @@
 </div>
 
 <form class="form-signin text-center" [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
-  <h1 class="h3 mb-3 font-weight-normal">Create new account</h1>
   <label for="username" class="sr-only">Username</label>
   <input type="text" id="username" formControlName="username" class="form-control" placeholder="Username" required
          autofocus autocomplete="on" minlength="2">
