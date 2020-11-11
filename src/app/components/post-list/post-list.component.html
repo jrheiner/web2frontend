@@ -4,7 +4,7 @@
       <div class="card mb-3 mt-3">
         <div class="card-body">
           <h5 class="card-title"><a href="/post/{{post.id}}">{{post.title}}</a></h5>
-          <h6 class="card-subtitle mb-2 text-muted">posted by {{post.author.username}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted" title="{{post.author._id}}">posted by {{post.author.username}}</h6>
           <p class="card-text mb-1">{{post.description | slice: 0 : 225}}<span class="fade-out"
                                                                                *ngIf="post.description.length > 225">{{post.description | slice: 225 : 250}}
             ...</span>

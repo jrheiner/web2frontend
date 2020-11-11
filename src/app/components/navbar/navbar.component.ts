@@ -23,6 +23,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.currentUser = '';
       }
     });
+    this.session.userChange.subscribe((val: string) => {
+      this.currentUser = val;
+    });
   }
 
 
@@ -33,5 +36,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.session.loginChange.unsubscribe();
+    this.session.userChange.unsubscribe();
   }
 }

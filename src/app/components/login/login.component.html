@@ -1,5 +1,5 @@
 <h1 class="display-2 pt-5 pb-5 text-center">Login</h1>
-<div class="alert alert-danger mt-5" role="alert" *ngIf="alert">
+<div class="alert alert-danger" role="alert" *ngIf="alert">
   {{alert}}
 </div>
 <form class="form-signin text-center" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">

@@ -54,7 +54,7 @@ export class ApiService {
     return this.http.get(`/api/user`);
   }
 
-  editUserSelf(data: string): Observable<any> {
+  editUserSelf(data): Observable<any> {
     return this.http.put(`/api/user`, data);
   }
 

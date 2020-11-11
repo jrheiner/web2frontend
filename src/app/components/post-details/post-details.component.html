@@ -2,12 +2,12 @@
   <div class="col-xl-8">
 
     <div class="blog-post">
-      <h2 class="blog-post-title">{{post.title}} ({{post.id}})</h2>
-      <p class="blog-post-meta">Posted {{post.createdAt}} by {{post.author.username}}</p>
-      <p class="text-muted font-italic" *ngIf="post.createdAt != post.updatedAt">Last updated {{post.updatedAt}}</p>
+      <h2 class="blog-post-title">{{post?.title}} ({{post?.id}})</h2>
+      <p class="blog-post-meta">Posted {{post?.createdAt}} by {{post?.author.username}}</p>
+      <p class="text-muted font-italic" *ngIf="post?.createdAt != post?.updatedAt">Last updated {{post?.updatedAt}}</p>
 
       <hr>
-      <p>{{post.description}}</p>
+      <p>{{post?.description}}</p>
       <hr>
 
       <ul *ngFor="let comment of comments">
@@ -23,7 +23,7 @@
     <div class="card mt-5">
       <div class="card-body">
         <h5 class="card-title">Manage your post</h5>
-        <button class="btn btn-secondary btn-block" routerLink="/post/{{post.id}}/edit">Edit post</button>
+        <button class="btn btn-secondary btn-block" routerLink="/post/{{post?.id}}/edit">Edit post</button>
         <button class="btn btn-danger btn-block">Delete post</button>
       </div>
     </div>
