@@ -14,6 +14,8 @@ export class PostListComponent implements OnInit {
   constructor(private apiService: ApiService) {
   }
 
+// TODO post list order currently old -> new
+
   ngOnInit(): void {
     this.apiService.getAllPosts().subscribe((data) => {
       this.posts = data;

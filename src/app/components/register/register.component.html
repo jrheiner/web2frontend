@@ -1,5 +1,7 @@
-<h1 class="display-2 pt-5 pb-5 text-center">Create new account</h1>
-
+<h1 class="display-2 pt-5 pb-5 text-center">Create account</h1>
+<p class="lead">
+  To create a new account simply choose a username and password, according to the <a routerLink="/help">requirements</a>. Later on you can customize you profile by adding a status or profile picture.
+</p>
 <div class="alert alert-danger mt-3" role="alert" *ngIf="alert">
   {{alert}}
 </div>
@@ -10,18 +12,26 @@
   <p class="mb-0">Go to the <a routerLink="login">Login</a> to login.</p>
 </div>
 
-<form class="form-signin text-center" [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
+<form class="form-signin" [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
   <label for="username" class="sr-only">Username</label>
   <input type="text" id="username" formControlName="username" class="form-control" placeholder="Username" required
-         autofocus autocomplete="on" minlength="2">
+         autofocus autocomplete="on" minlength="2" pattern="^(?=[a-zA-Z0-9-_]{2,16}$)[^_-].*[^_-]$">
+  <small id="usernameHelp" class="form-text text-muted">2-16 characters.</small>
   <label for="password" class="sr-only">Password</label>
   <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password" required
-         autocomplete="on" minlength="5">
+         autocomplete="on" minlength="5"
+         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$">
+  <small id="passwordHelp" class="form-text text-muted">5-32 characters. At least one
+    <span class="font-italic">uppercase</span>,
+    one <span class="font-italic">lowercase</span>,
+    one <span class="font-italic">number</span> and
+    one <span class="font-italic">special character</span>.
+  </small>
   <button class="btn btn-lg btn-primary btn-block mt-3" type="submit" [disabled]="registerForm.disabled">
     <span *ngIf="!isLoading">Register</span>
     <span *ngIf="isLoading" class="spinner-border" role="status"></span>
   </button>
   <button class="btn btn-lg btn-block mt-3" [ngClass]="info ? 'btn-success' : 'btn-outline-secondary'"
-          routerLink="/login">Login
+          routerLink="/login">Go to Login
   </button>
 </form>

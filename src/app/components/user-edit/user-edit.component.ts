@@ -10,6 +10,7 @@ import {TokenService} from '../../services/token.service';
 export class UserEditComponent implements OnInit {
 
   alert;
+  info;
   button;
   user = {
     username: '',
@@ -42,14 +43,18 @@ export class UserEditComponent implements OnInit {
     this.session.userChange.emit(this.user.username);
     this.session.setUsername(this.user.username);
     setTimeout(() => {
-      this.alert = '';
+      this.info = '';
       this.button = 'Save';
     }, 3000);
     this.apiService.editUserSelf(this.user).subscribe(res => {
       console.log(res);
+      this.alert = '';
       this.button = 'Updated!';
-      this.alert = 'Successfully updated user profile!';
-    }, error => console.log(error));
+      this.info = 'Successfully updated user profile!';
+    }, err => {
+      this.alert = err.error.message;
+      console.log(err);
+    });
   }
 
 }

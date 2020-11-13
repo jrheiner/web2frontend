@@ -21,4 +21,5 @@ export class AuthService {
   logout(): void {
     this.session.clearSession();
   }
+
 }

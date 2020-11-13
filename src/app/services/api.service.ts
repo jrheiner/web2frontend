@@ -18,8 +18,8 @@ export class ApiService {
     return this.http.get(`/api/posts/${postId}`);
   }
 
-  postPost(data: string): Observable<any> {
-    return this.http.put(`/api/posts`, data);
+  postPost(data): Observable<any> {
+    return this.http.post(`/api/posts`, data);
   }
 
   editPostById(postId: string, data: string): Observable<any> {

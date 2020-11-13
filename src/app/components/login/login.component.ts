@@ -32,7 +32,6 @@ export class LoginComponent {
       if (res.hasOwnProperty('token')) {
         this.session.setUsername(res.username);
         this.session.setToken(res.token);
-
         this.router.navigate([this.authService.redirectUrl || '']);
       }
     }, (err) => {

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {ActivatedRoute} from '@angular/router';
+import {TokenService} from '../../services/token.service';
 
 @Component({
   selector: 'app-post-details',
@@ -13,7 +14,7 @@ export class PostDetailsComponent implements OnInit {
   post;
   comments;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) {
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private session: TokenService) {
   }
 
   ngOnInit(): void {
@@ -30,4 +31,7 @@ export class PostDetailsComponent implements OnInit {
     });
   }
 
+  getUsername(): string {
+    return this.session.getUsername();
+  }
 }

@@ -1,5 +1,8 @@
 <h1 class="display-4 pt-4 pb-4">Edit user profile</h1>
-<div class="alert alert-success mt-3" role="alert" *ngIf="alert">
+<div class="alert alert-success mt-3" role="alert" *ngIf="info">
+  {{info}}
+</div>
+<div class="alert alert-danger mt-3" role="alert" *ngIf="alert">
   {{alert}}
 </div>
 <div class="row">
@@ -19,4 +22,4 @@
   </div>
 </div>
 
-<button type="submit" class="btn btn-success mt-4 mb-4" (click)="updateUser()" [disabled]="alert">{{button}}</button>
+<button type="submit" class="btn btn-success mt-4 mb-4" (click)="updateUser()" [disabled]="info">{{button}}</button>

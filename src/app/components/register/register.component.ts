@@ -48,7 +48,7 @@ export class RegisterComponent {
         this.registerForm.disable();
         this.login(data);
       } else {
-        this.alert = 'Invalid credentials';
+        this.alert = 'Username and password does not match requirements!';
       }
     }
   }

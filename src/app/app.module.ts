@@ -17,6 +17,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserEditComponent} from './components/user-edit/user-edit.component';
 import {AuthInterceptor} from './auth.interceptor';
 import {UserDeleteComponent} from './components/user-delete/user-delete.component';
+import {HelpComponent} from './components/help/help.component';
+import { PostDeleteComponent } from './components/post-delete/post-delete.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import {UserDeleteComponent} from './components/user-delete/user-delete.componen
     RegisterComponent,
     UserDetailsComponent,
     UserEditComponent,
-    UserDeleteComponent
+    UserDeleteComponent,
+    HelpComponent,
+    PostDeleteComponent
   ],
   imports: [
     BrowserModule,
