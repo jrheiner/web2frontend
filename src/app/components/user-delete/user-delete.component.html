@@ -1,4 +1,7 @@
 <h1 class="display-4 pt-4 pb-4">Delete user profile</h1>
+<p class="lead">
+  This action will delete your account permanently with no way to recover it. It also includes deleting your comments
+  and posts. Comments of other users on your posts will be deleted as well.</p>
 <div class="alert alert-success mt-3" role="alert" *ngIf="alert">
   {{alert}}
 </div>
@@ -7,7 +10,6 @@
   <div class="col-sm-6 align-self-center">
     <label for="deleteUsername"></label>
     <input id="deleteUsername" type="text" class="form-control" [placeholder]="username" [(ngModel)]="input">
-    <span class="text-muted small">This will delete your account permanently.</span>
   </div>
 </div>
 
