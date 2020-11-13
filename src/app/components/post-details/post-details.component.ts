@@ -13,22 +13,25 @@ export class PostDetailsComponent implements OnInit {
   private id = this.route.snapshot.paramMap.get('id');
   post;
   comments;
+  notFound;
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private session: TokenService) {
   }
 
   ngOnInit(): void {
-    this.apiService.getPostById(this.id).subscribe((data) => {
-      this.post = data;
+    this.apiService.getPostById(this.id).subscribe((post) => {
+      this.post = post;
+      this.apiService.getComments(this.id).subscribe((comments) => {
+        this.comments = comments;
+      }, error => {
+        console.log(error);
+      });
     }, error => {
       console.log(error);
+      this.notFound = error.error.message;
     });
 
-    this.apiService.getComments(this.id).subscribe((data) => {
-      this.comments = data;
-    }, error => {
-      console.log(error);
-    });
+
   }
 
   getUsername(): string {
