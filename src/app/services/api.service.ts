@@ -54,6 +54,10 @@ export class ApiService {
     return this.http.get(`/api/user`);
   }
 
+  getUserById(id: string): Observable<any> {
+    return this.http.get(`/api/user/${id}`);
+  }
+
   editUserSelf(data): Observable<any> {
     return this.http.put(`/api/user`, data);
   }

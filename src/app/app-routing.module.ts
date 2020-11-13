@@ -27,6 +27,7 @@ const routes: Routes = [
   {path: 'user', component: UserDetailsComponent, canActivate: [AuthGuard]},
   {path: 'user/edit', component: UserEditComponent, canActivate: [AuthGuard]},
   {path: 'user/delete', component: UserDeleteComponent, canActivate: [AuthGuard]},
+  {path: 'user/:id', component: UserDetailsComponent},
   {path: '**', redirectTo: ''}
 ];
 

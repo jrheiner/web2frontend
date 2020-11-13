@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../../services/api.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-user-details',
@@ -8,17 +9,28 @@ import {ApiService} from '../../services/api.service';
 })
 export class UserDetailsComponent implements OnInit {
 
+  notFound;
   user;
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.apiService.getUserSelf().subscribe((data) => {
-      this.user = data;
-    }, error => {
-      console.log(error);
-    });
+    const id: string = this.route.snapshot.paramMap.get('id');
+    if (id !== null) {
+      this.apiService.getUserById(id).subscribe((data) => {
+        this.user = data;
+      }, err => {
+        this.notFound = err.error.message;
+        console.log(err);
+      });
+    } else {
+      this.apiService.getUserSelf().subscribe((data) => {
+        this.user = data;
+      }, error => {
+        console.log(error);
+      });
+    }
   }
 
 }
