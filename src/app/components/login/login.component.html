@@ -10,7 +10,7 @@
   <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password" required
          autocomplete="on" minlength="5"
          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$">
-  <button class="btn btn-lg btn-primary btn-block mt-3" type="submit" [disabled]="loginForm.disabled">
+  <button class="btn btn-lg btn-success btn-block mt-3" type="submit" [disabled]="loginForm.disabled">
     <span *ngIf="!isLoading">Login</span>
     <span *ngIf="isLoading" class="spinner-border" role="status"></span>
   </button>

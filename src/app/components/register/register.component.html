@@ -1,6 +1,7 @@
 <h1 class="display-2 pt-5 pb-5 text-center">Create account</h1>
 <p class="lead">
-  To create a new account simply choose a username and password, according to the <a routerLink="/help">requirements</a>. Later on you can customize you profile by adding a status or profile picture.
+  To create a new account simply choose a username and password, according to the <a routerLink="/help">requirements</a>.
+  Later on you can customize you profile by adding a status or profile picture.
 </p>
 <div class="alert alert-danger mt-3" role="alert" *ngIf="alert">
   {{alert}}
@@ -9,7 +10,7 @@
   <h4 class="alert-heading">Success!</h4>
   <p>{{info}}</p>
   <hr>
-  <p class="mb-0">Go to the <a routerLink="login">Login</a> to login.</p>
+  <p class="mb-0">Go to the <a routerLink="/login">Login</a> to login.</p>
 </div>
 
 <form class="form-signin" [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">

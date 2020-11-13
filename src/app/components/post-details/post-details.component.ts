@@ -11,9 +11,20 @@ import {TokenService} from '../../services/token.service';
 export class PostDetailsComponent implements OnInit {
 
   private id = this.route.snapshot.paramMap.get('id');
-  post;
+  post = {
+    id: String,
+    author: {
+      _id: String,
+      username: String
+    },
+    title: String,
+    description: String,
+    score: Number,
+    createdAt: String,
+    updatedAt: String
+  };
   comments;
-  notFound;
+  notFound: string;
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private session: TokenService) {
   }
@@ -30,8 +41,6 @@ export class PostDetailsComponent implements OnInit {
       console.log(error);
       this.notFound = error.error.message;
     });
-
-
   }
 
   getUsername(): string {
