@@ -29,8 +29,10 @@
       </li>
     </ul>
 
-    <span class="badge badge-secondary mr-3 px-2 login-badge" *ngIf="hideLogin">Logged in as <span
-      class="font-italic">{{currentUser}}</span></span>
+    <span class="badge badge-secondary mr-3 px-2 login-badge" *ngIf="hideLogin">Logged in as
+      <span
+        class="font-italic">{{currentUser}}
+      </span></span>
     <button class="btn btn-success my-2 my-sm-0" routerLink="login" *ngIf="!hideLogin">Login</button>
     <button class="btn btn-primary my-2 my-sm-0 ml-2" routerLink="register" *ngIf="!hideLogin">Register</button>
     <button class="btn btn-danger my-2 my-sm-0" (click)="logout()" *ngIf="hideLogin">Logout</button>
