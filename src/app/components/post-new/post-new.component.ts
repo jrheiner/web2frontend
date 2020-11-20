@@ -6,7 +6,7 @@ import {ApiService} from '../../services/api.service';
 @Component({
   selector: 'app-post-new',
   templateUrl: './post-new.component.html',
-  styleUrls: ['./post-new.component.css']
+  styleUrls: ['./post-new.component.scss']
 })
 export class PostNewComponent implements OnInit {
   postForm;
