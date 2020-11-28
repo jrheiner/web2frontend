@@ -18,7 +18,7 @@ export class PostListComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.getAllPosts().subscribe((data) => {
-      this.posts = data;
+      this.posts = data.reverse();
       this.empty = !Boolean(Object.keys(this.posts).length);
     }, error => {
       console.log(error);
