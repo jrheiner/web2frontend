@@ -12,16 +12,16 @@ export class PostDetailsComponent implements OnInit {
 
   private id = this.route.snapshot.paramMap.get('id');
   post = {
-    id: String,
+    id: '',
     author: {
-      _id: String,
-      username: String
+      _id: '',
+      username: ''
     },
-    title: String,
-    description: String,
-    score: Number,
-    createdAt: String,
-    updatedAt: String
+    title: '',
+    description: '',
+    score: '',
+    createdAt: '',
+    updatedAt: ''
   };
   comments;
   notFound: string;
