@@ -1,29 +1,52 @@
-<h1 class="display-4 pt-4 pb-4">Create new post</h1>
-<div class="alert alert-success mt-3" role="alert" *ngIf="info">
-  {{info}}
-</div>
-<div class="alert alert-danger mt-3" role="alert" *ngIf="alert">
-  {{alert}}
-</div>
+<h1>Create new post</h1>
 
-<form [formGroup]="postForm" (ngSubmit)="onSubmit(postForm.value)">
-  <div class="row">
-    <div class="col-sm-8">
-      <label for="title">Title</label>
-      <input id="title" type="text" class="form-control" formControlName="title">
+<form #newPostForm="ngForm" (ngSubmit)="onSubmit()">
+  <div [hidden]="newPostForm.submitted">
+    <div class="cross-validation" [class.cross-validation-error]="newPostForm.touched || newPostForm.dirty">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input id="title" name="title" type="text" class="form-control" required minlength="" [(ngModel)]="post.title"
+               #title="ngModel">
+        <small class="form-text text-muted"
+               *ngIf="!title.invalid || title.untouched">Required.</small>
+        <div *ngIf="title.invalid && (title.dirty || title.touched)"
+             class="invalid-feedback">
+
+          <div *ngIf="title.errors.required">
+            Every post needs a title.
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" class="form-control" required minlength="5"
+                  [(ngModel)]="post.description"
+                  #description="ngModel"></textarea>
+        <small class="form-text text-muted"
+               *ngIf="!description.invalid || description.untouched">Required.</small>
+        <div *ngIf="description.invalid && (description.dirty || description.touched)"
+             class="invalid-feedback">
+
+          <div *ngIf="description.errors.required">
+            Text posts require an description.
+          </div>
+          <div *ngIf="description.errors.minlength">
+            This description seems a bit short.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="newPostForm.invalid">Post!</button>
+
+  </div>
+
+  <div class="posted-message" *ngIf="newPostForm.submitted">
+    <div class="alert alert-success" role="alert">
+      Success! You can check out your post <a routerLink="../{{successId}}">here</a>.
     </div>
   </div>
-  <div class="row mt-3">
-    <div class="col-sm-12">
-      <label for="description">Description</label>
-      <textarea id="description" class="form-control" formControlName="description"></textarea>
-    </div>
-  </div>
-  <button type="submit" class="btn btn-success mt-4 mb-4" [disabled]="postForm.disabled">
-    <span *ngIf="!isLoading">Publish post</span>
-    <span *ngIf="isLoading" class="spinner-border" role="status"></span>
-  </button>
-  <a class="btn btn-primary ml-2" *ngIf="successId" routerLink="../{{successId}}">View Post</a>
 </form>
-
-

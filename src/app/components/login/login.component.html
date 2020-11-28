@@ -3,17 +3,23 @@
   {{alert}}
 </div>
 <form class="form-signin text-center" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+
   <label for="username" class="sr-only">Username</label>
-  <input type="text" id="username" formControlName="username" class="form-control" placeholder="Username" required
+  <input type="text" id="username" name="username" formControlName="username" class="form-control"
+         placeholder="Username" required
          autofocus autocomplete="on" minlength="2" pattern="^(?=[a-zA-Z0-9-_]{2,16}$)[^_-].*[^_-]$">
+
+
   <label for="password" class="sr-only">Password</label>
   <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password" required
          autocomplete="on" minlength="5"
          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$">
+
   <button class="btn btn-lg btn-success btn-block mt-3" type="submit" [disabled]="loginForm.disabled">
     <span *ngIf="!isLoading">Login</span>
     <span *ngIf="isLoading" class="spinner-border" role="status"></span>
   </button>
+
   <button class="btn btn-lg btn-outline-secondary btn-block mt-3" routerLink="/register"
           [disabled]="loginForm.disabled">Go to Register
   </button>
