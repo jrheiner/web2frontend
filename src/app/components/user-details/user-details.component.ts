@@ -20,6 +20,11 @@ export class UserDetailsComponent implements OnInit {
     if (id !== null) {
       this.apiService.getUserById(id).subscribe((data) => {
         this.user = data;
+        this.user.postCount = Object.keys(data.userActivity.posts).length;
+        this.user.commentCount = Object.keys(data.userActivity.comments).length;
+        this.user.lastAcitivty = data.userActivity.posts[Object.keys(data.userActivity.posts).sort().reverse()[0]].updatedAt
+          || data.userActivity.comments[Object.keys(data.userActivity.comments).sort().reverse()[0]].updatedAt
+          || data.createdAt;
       }, err => {
         this.notFound = err.error.message;
         console.log(err);
@@ -27,10 +32,14 @@ export class UserDetailsComponent implements OnInit {
     } else {
       this.apiService.getUserSelf().subscribe((data) => {
         this.user = data;
+        this.user.postCount = Object.keys(data.userActivity.posts).length;
+        this.user.commentCount = Object.keys(data.userActivity.comments).length;
+        this.user.lastAcitivty = data.userActivity.posts[Object.keys(data.userActivity.posts).sort().reverse()[0]].updatedAt
+          || data.userActivity.comments[Object.keys(data.userActivity.comments).sort().reverse()[0]].updatedAt
+          || data.createdAt;
       }, error => {
         console.log(error);
       });
     }
   }
-
 }
