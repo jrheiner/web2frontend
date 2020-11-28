@@ -66,6 +66,10 @@ export class ApiService {
     return this.http.delete(`/api/user`);
   }
 
+  checkUsername(username: string): Observable<any> {
+    return this.http.get(`/api/user/check/${username}`);
+  }
+
   login(username: string, password: string): Observable<any> {
     return this.http.post('/api/user/login', {username, password});
   }

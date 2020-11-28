@@ -9,13 +9,15 @@ import {TokenService} from '../../services/token.service';
 })
 export class UserEditComponent implements OnInit {
 
-  alert;
-  info;
-  button;
   user = {
     username: '',
     password: '',
     status: ''
+  };
+
+  info = {
+    type: '',
+    message: ''
   };
 
   constructor(private apiService: ApiService, private session: TokenService) {
@@ -23,7 +25,6 @@ export class UserEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
-    this.button = 'Save';
   }
 
   getUser(): void {
@@ -36,25 +37,30 @@ export class UserEditComponent implements OnInit {
   }
 
   updateUser(): void {
-    if (!this.user.password || this.user.password.length < 5) {
-      delete this.user.password;
+    const reqData = this.user;
+    if (!reqData.password || reqData.password.length < 5) {
+      delete reqData.password;
     }
-    console.log(this.user);
-    this.session.userChange.emit(this.user.username);
-    this.session.setUsername(this.user.username);
-    setTimeout(() => {
-      this.info = '';
-      this.button = 'Save';
-    }, 3000);
-    this.apiService.editUserSelf(this.user).subscribe(res => {
+    if (reqData.username === this.session.getUsername()) {
+      delete reqData.username;
+    } else {
+      this.session.userChange.emit(reqData.username);
+      this.session.setUsername(reqData.username);
+    }
+    console.log(reqData);
+    this.apiService.editUserSelf(reqData).subscribe(res => {
       console.log(res);
-      this.alert = '';
-      this.button = 'Updated!';
-      this.info = 'Successfully updated user profile!';
+      this.getUser();
+      this.info.type = 'success';
+      this.info.message = 'Account updated successfully.';
     }, err => {
-      this.alert = err.error.message;
       console.log(err);
+      this.info.type = 'danger';
+      this.info.message = 'Something went wrong. Try again.';
     });
   }
 
+  onSubmit(): void {
+    this.updateUser();
+  }
 }

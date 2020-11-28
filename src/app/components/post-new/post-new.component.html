@@ -5,7 +5,7 @@
     <div class="cross-validation" [class.cross-validation-error]="newPostForm.touched || newPostForm.dirty">
       <div class="form-group">
         <label for="title">Title</label>
-        <input id="title" name="title" type="text" class="form-control" required minlength="" [(ngModel)]="post.title"
+        <input id="title" name="title" type="text" class="form-control" required [(ngModel)]="post.title"
                #title="ngModel">
         <small class="form-text text-muted"
                *ngIf="!title.invalid || title.untouched">Required.</small>

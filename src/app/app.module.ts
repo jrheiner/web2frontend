@@ -19,6 +19,7 @@ import {AuthInterceptor} from './auth.interceptor';
 import {UserDeleteComponent} from './components/user-delete/user-delete.component';
 import {HelpComponent} from './components/help/help.component';
 import { PostDeleteComponent } from './components/post-delete/post-delete.component';
+import { UniqueUsernameDirective } from './directives/unique-username.directive';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PostDeleteComponent } from './components/post-delete/post-delete.compon
     UserEditComponent,
     UserDeleteComponent,
     HelpComponent,
-    PostDeleteComponent
+    PostDeleteComponent,
+    UniqueUsernameDirective
   ],
   imports: [
     BrowserModule,
