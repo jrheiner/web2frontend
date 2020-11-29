@@ -15,6 +15,7 @@ export class PostListComponent implements OnInit {
   }
 
 // TODO post list order currently old -> new
+  // update: now reversed
 
   ngOnInit(): void {
     this.apiService.getAllPosts().subscribe((data) => {

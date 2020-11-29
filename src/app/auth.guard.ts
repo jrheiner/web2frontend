@@ -22,6 +22,16 @@ export class AuthGuard implements CanActivate {
     return this.checkLogin(url);
   }
 
+  /**
+   * Checks the SessionStorage if the user is logged in.
+   *  - If the user is logged in return `true`
+   *  - If the user is not logged in redirect them to the login page
+   *
+   * Note:
+   *   This function solely relies on the client-side 'SessionStorage' and therefore can be easily manipulated.
+   *   It should not be used for authentication but rather hiding/showing UI elements.
+   * @param url - Redirect URL, User will be redirected here after logging in
+   */
   checkLogin(url: string): boolean | UrlTree {
     console.log('checkLogin: ' + this.session.isLoggedIn());
     if (this.session.isLoggedIn()) {
