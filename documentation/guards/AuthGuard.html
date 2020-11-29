@@ -278,8 +278,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="35"
-                            class="link-to-prism">src/app/auth.guard.ts:35</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="32"
+                            class="link-to-prism">src/app/auth.guard.ts:32</a></div>
                 </td>
             </tr>
 
@@ -291,9 +291,6 @@
 <li>If the user is logged in return <code>true</code></li>
 <li>If the user is not logged in redirect them to the login page</li>
 </ul>
-<p><em>Note:</em>
-   This function solely relies on the client-side &#39;SessionStorage&#39; and therefore can be easily manipulated.
-   It should not be used for authentication but rather hiding/showing UI elements.</p>
 </div>
 
                     <div class="io-description">
@@ -376,9 +373,6 @@ export class AuthGuard implements CanActivate {
    *  - If the user is logged in return &#x60;true&#x60;
    *  - If the user is not logged in redirect them to the login page
    *
-   * *Note:*
-   *   This function solely relies on the client-side &#x27;SessionStorage&#x27; and therefore can be easily manipulated.
-   *   It should not be used for authentication but rather hiding/showing UI elements.
    * @param url - Redirect URL, User will be redirected here after logging in
    */
   checkLogin(url: string): boolean | UrlTree {

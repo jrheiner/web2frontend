@@ -89,17 +89,29 @@ import {RoleGuard} from &#x27;./role.guard&#x27;;
 
 const routes: Routes &#x3D; [
   {path: &#x27;&#x27;, component: PostListComponent},
-  {path: &#x27;post/new&#x27;, component: PostNewComponent, canActivate: [AuthGuard]},
-  {path: &#x27;post/:id&#x27;, component: PostDetailsComponent},
-  {path: &#x27;post/:id/edit&#x27;, component: PostEditComponent, canActivate: [AuthGuard, RoleGuard]},
-  {path: &#x27;post/:id/delete&#x27;, component: PostDeleteComponent, canActivate: [AuthGuard, RoleGuard]},
   {path: &#x27;login&#x27;, component: LoginComponent},
   {path: &#x27;register&#x27;, component: RegisterComponent},
   {path: &#x27;help&#x27;, component: HelpComponent},
-  {path: &#x27;user&#x27;, component: UserDetailsComponent, canActivate: [AuthGuard]},
-  {path: &#x27;user/edit&#x27;, component: UserEditComponent, canActivate: [AuthGuard]},
-  {path: &#x27;user/delete&#x27;, component: UserDeleteComponent, canActivate: [AuthGuard]},
-  {path: &#x27;user/:id&#x27;, component: UserDetailsComponent},
+  {
+    path: &#x27;post&#x27;, children: [
+      {path: &#x27;new&#x27;, component: PostNewComponent, canActivate: [AuthGuard]},
+      {
+        path: &#x27;:id&#x27;, children: [
+          {path: &#x27;&#x27;, component: PostDetailsComponent},
+          {path: &#x27;edit&#x27;, component: PostEditComponent, canActivate: [AuthGuard, RoleGuard]},
+          {path: &#x27;delete&#x27;, component: PostDeleteComponent, canActivate: [AuthGuard, RoleGuard]}
+        ]
+      },
+    ]
+  },
+  {
+    path: &#x27;user&#x27;, children: [
+      {path: &#x27;&#x27;, component: UserDetailsComponent, canActivate: [AuthGuard]},
+      {path: &#x27;edit&#x27;, component: UserEditComponent, canActivate: [AuthGuard]},
+      {path: &#x27;delete&#x27;, component: UserDeleteComponent, canActivate: [AuthGuard]},
+      {path: &#x27;:id&#x27;, component: UserDetailsComponent}
+    ]
+  },
   {path: &#x27;**&#x27;, redirectTo: &#x27;&#x27;}
 ];
 
