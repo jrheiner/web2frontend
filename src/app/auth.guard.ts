@@ -5,15 +5,30 @@ import {TokenService} from './services/token.service';
 
 import {AuthService} from './services/auth.service';
 
-
+/**
+ * Route guard to check if a user is logged in. Redirects them to the login page if they are not logged in.
+ * Stores the original url the user was trying to visit to redirect them there after login.
+ */
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthGuard implements CanActivate {
 
+  /**
+   * AuthGuard constructor
+   * @param authService - To pass the redirect url to the login service
+   * @param router - Router to redirect the user
+   * @param session - To determine whether the user is already logged in
+   */
   constructor(private authService: AuthService, private router: Router, private session: TokenService) {
   }
 
+  /**
+   * Decides if current route should be activated or based on the login status of the user
+   * @param route - Information about the route that called the guard
+   * @param state - Original url
+   */
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
@@ -34,12 +49,7 @@ export class AuthGuard implements CanActivate {
     if (this.session.isLoggedIn()) {
       return true;
     }
-
-
-    // Store the attempted URL for redirecting
     this.authService.redirectUrl = url;
-
-    // Redirect to the login page
     return this.router.parseUrl('/login');
   }
 
