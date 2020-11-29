@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-help',
@@ -7,7 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HelpComponent implements OnInit {
 
-  constructor() { }
+  helpDB = [
+    {
+      question: 'How can I create a post?',
+      answer: 'test'
+    },
+    {
+      question: 'How can I delete my account?',
+      answer: 'test1'
+    },
+    {
+      question: 'What are the username and password requirements?',
+      answer: 'test2'
+    }
+  ];
+
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

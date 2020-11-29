@@ -1,1 +1,13 @@
-<p>help works!</p>
+<h1 class="display-4 pt-4 pb-4">Help and Frequently Asked Questions</h1>
+
+<div class="list-group" *ngFor="let help of helpDB; let i = index">
+  <div class="list-group-item">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{help.question}}</h5>
+    </div>
+    <p class="mb-1">{{help.answer}}</p>
+    <small>Additional information</small>
+  </div>
+</div>
+
+
