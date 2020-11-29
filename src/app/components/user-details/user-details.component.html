@@ -1,7 +1,8 @@
+<h1 class="display-4 pt-4 pb-4">Profile</h1>
 <div class="alert alert-danger mt-3" role="alert" *ngIf="notFound">
   {{notFound}}
 </div>
-<div class="card mt-5" *ngIf="!notFound">
+<div class="card" *ngIf="!notFound">
   <div class="row no-gutters">
     <div class="col-md-4">
       <img src="https://via.placeholder.com/500" class="card-img" alt="...">
@@ -23,7 +24,16 @@
     </div>
   </div>
 </div>
+<h1 class="display-4 pt-4 pb-4" *ngIf="!notFound">Posts</h1>
+<div *ngIf="!notFound">
+  <div class="list-group" *ngFor="let post of user?.userActivity.posts">
+    <a routerLink="/post/{{post.id}}" class="list-group-item list-group-item-action">
+      <div class="d-flex w-100 justify-content-between">
+        <span>{{post.title}}</span>
+        <small>{{post.createdAt}}</small>
+      </div>
 
-<!--
-request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
--->
+    </a>
+  </div>
+</div>
+

@@ -11,6 +11,7 @@ export class UserDetailsComponent implements OnInit {
 
   notFound;
   user;
+  userPosts;
 
   constructor(private apiService: ApiService, private route: ActivatedRoute) {
   }
