@@ -600,7 +600,7 @@ export class LoginComponent {
 &lt;div class&#x3D;&quot;alert alert-danger&quot; role&#x3D;&quot;alert&quot; *ngIf&#x3D;&quot;alert&quot;&gt;
   {{alert}}
 &lt;/div&gt;
-&lt;form class&#x3D;&quot;form-signin text-center&quot; [formGroup]&#x3D;&quot;loginForm&quot; (ngSubmit)&#x3D;&quot;onSubmit(loginForm.value)&quot;&gt;
+&lt;form class&#x3D;&quot;form-login text-center&quot; [formGroup]&#x3D;&quot;loginForm&quot; (ngSubmit)&#x3D;&quot;onSubmit(loginForm.value)&quot;&gt;
 
   &lt;label for&#x3D;&quot;username&quot; class&#x3D;&quot;sr-only&quot;&gt;Username&lt;/label&gt;
   &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;username&quot; name&#x3D;&quot;username&quot; formControlName&#x3D;&quot;username&quot; class&#x3D;&quot;form-control&quot;
@@ -629,18 +629,18 @@ export class LoginComponent {
                 <p class="comment">
                     <code>./login.component.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">.form-signin {
+                <pre class="line-numbers"><code class="language-scss">.form-login {
   width: 100%;
-  max-width: 330px;
+  max-width: 450px;
   padding: 15px;
   margin: auto;
 }
 
-.form-signin .checkbox {
+.form-login .checkbox {
   font-weight: 400;
 }
 
-.form-signin .form-control {
+.form-login .form-control {
   position: relative;
   box-sizing: border-box;
   height: auto;
@@ -648,17 +648,17 @@ export class LoginComponent {
   font-size: 16px;
 }
 
-.form-signin .form-control:focus {
+.form-login .form-control:focus {
   z-index: 2;
 }
 
-.form-signin input[type&#x3D;&quot;text&quot;] {
+.form-login input[type&#x3D;&quot;text&quot;] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.form-signin input[type&#x3D;&quot;password&quot;] {
+.form-login input[type&#x3D;&quot;password&quot;] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -691,9 +691,9 @@ export class LoginComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><h1 class="display-2 pt-5 pb-5 text-center">Login</h1><div class="alert alert-danger" role="alert" *ngIf="alert">  {{alert}}</div><form class="form-signin text-center" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">  <label for="username" class="sr-only">Username</label>  <input type="text" id="username" name="username" formControlName="username" class="form-control"         placeholder="Username" required         autofocus autocomplete="on" minlength="2" pattern="^(?=[a-zA-Z0-9-_]{2,16}$)[^_-].*[^_-]$">  <label for="password" class="sr-only">Password</label>  <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password" required         autocomplete="on" minlength="5"         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$">  <button class="btn btn-lg btn-success btn-block mt-3" type="submit" [disabled]="loginForm.disabled">    <span *ngIf="!isLoading">Login</span>    <span *ngIf="isLoading" class="spinner-border" role="status"></span>  </button>  <button class="btn btn-lg btn-outline-secondary btn-block mt-3" routerLink="/register"          [disabled]="loginForm.disabled">Go to Register  </button></form></div>'
+        var COMPONENT_TEMPLATE = '<div><h1 class="display-2 pt-5 pb-5 text-center">Login</h1><div class="alert alert-danger" role="alert" *ngIf="alert">  {{alert}}</div><form class="form-login text-center" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">  <label for="username" class="sr-only">Username</label>  <input type="text" id="username" name="username" formControlName="username" class="form-control"         placeholder="Username" required         autofocus autocomplete="on" minlength="2" pattern="^(?=[a-zA-Z0-9-_]{2,16}$)[^_-].*[^_-]$">  <label for="password" class="sr-only">Password</label>  <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password" required         autocomplete="on" minlength="5"         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$">  <button class="btn btn-lg btn-success btn-block mt-3" type="submit" [disabled]="loginForm.disabled">    <span *ngIf="!isLoading">Login</span>    <span *ngIf="isLoading" class="spinner-border" role="status"></span>  </button>  <button class="btn btn-lg btn-outline-secondary btn-block mt-3" routerLink="/register"          [disabled]="loginForm.disabled">Go to Register  </button></form></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PostDeleteComponent', 'selector': 'app-post-delete'},{'name': 'PostDetailsComponent', 'selector': 'app-post-details'},{'name': 'PostEditComponent', 'selector': 'app-post-edit'},{'name': 'PostListComponent', 'selector': 'app-post-list'},{'name': 'PostNewComponent', 'selector': 'app-post-new'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'UserDeleteComponent', 'selector': 'app-user-delete'},{'name': 'UserDetailsComponent', 'selector': 'app-user-details'},{'name': 'UserEditComponent', 'selector': 'app-user-edit'}];
-    var DIRECTIVES = [{'name': 'UniqueUsernameDirective', 'selector': '[appUniqueUsername]'}];
+    var DIRECTIVES = [{'name': 'RepeatPasswordValidatorDirective', 'selector': '[appRepeatPassword]'},{'name': 'UniqueUsernameDirective', 'selector': '[appUniqueUsername]'}];
     var ACTUAL_COMPONENT = {'name': 'LoginComponent'};
 </script>
 <script src="../js/tree.js"></script>

@@ -121,6 +121,20 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#helpDB">helpDB</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -156,7 +170,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/components/help/help.component.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/help/help.component.ts:23</a></div>
                             </td>
                         </tr>
 
@@ -195,8 +209,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="12"
-                            class="link-to-prism">src/app/components/help/help.component.ts:12</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">src/app/components/help/help.component.ts:29</a></div>
                 </td>
             </tr>
 
@@ -213,12 +227,63 @@
         </tbody>
     </table>
 </section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="helpDB"></a>
+                        <span class="name">
+                            <b>
+                            helpDB</b>
+                            <a href="#helpDB"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[
+    {
+      question: &#x27;How can I create a post?&#x27;,
+      answer: &#x27;test&#x27;
+    },
+    {
+      question: &#x27;How can I delete my account?&#x27;,
+      answer: &#x27;test1&#x27;
+    },
+    {
+      question: &#x27;What are the username and password requirements?&#x27;,
+      answer: &#x27;test2&#x27;
+    }
+  ]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/components/help/help.component.ts:10</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
 
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnInit} from &#x27;@angular/core&#x27;;
 
 @Component({
   selector: &#x27;app-help&#x27;,
@@ -227,7 +292,24 @@
 })
 export class HelpComponent implements OnInit {
 
-  constructor() { }
+  helpDB &#x3D; [
+    {
+      question: &#x27;How can I create a post?&#x27;,
+      answer: &#x27;test&#x27;
+    },
+    {
+      question: &#x27;How can I delete my account?&#x27;,
+      answer: &#x27;test1&#x27;
+    },
+    {
+      question: &#x27;What are the username and password requirements?&#x27;,
+      answer: &#x27;test2&#x27;
+    }
+  ];
+
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
@@ -237,7 +319,19 @@ export class HelpComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;p&gt;help works!&lt;/p&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;h1 class&#x3D;&quot;display-4 pt-4 pb-4&quot;&gt;Help and Frequently Asked Questions&lt;/h1&gt;
+
+&lt;div class&#x3D;&quot;list-group&quot; *ngFor&#x3D;&quot;let help of helpDB; let i &#x3D; index&quot;&gt;
+  &lt;div class&#x3D;&quot;list-group-item&quot;&gt;
+    &lt;div class&#x3D;&quot;d-flex w-100 justify-content-between&quot;&gt;
+      &lt;h5 class&#x3D;&quot;mb-1&quot;&gt;{{help.question}}&lt;/h5&gt;
+    &lt;/div&gt;
+    &lt;p class&#x3D;&quot;mb-1&quot;&gt;{{help.answer}}&lt;/p&gt;
+    &lt;small&gt;Additional information&lt;/small&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
 </code></pre>
     </div>
 
@@ -245,7 +339,10 @@ export class HelpComponent implements OnInit {
                 <p class="comment">
                     <code>./help.component.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
+                <pre class="line-numbers"><code class="language-scss">.list-group {
+  margin-bottom: 20px;
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -273,9 +370,9 @@ export class HelpComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p>help works!</p></div>'
+        var COMPONENT_TEMPLATE = '<div><h1 class="display-4 pt-4 pb-4">Help and Frequently Asked Questions</h1><div class="list-group" *ngFor="let help of helpDB; let i = index">  <div class="list-group-item">    <div class="d-flex w-100 justify-content-between">      <h5 class="mb-1">{{help.question}}</h5>    </div>    <p class="mb-1">{{help.answer}}</p>    <small>Additional information</small>  </div></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PostDeleteComponent', 'selector': 'app-post-delete'},{'name': 'PostDetailsComponent', 'selector': 'app-post-details'},{'name': 'PostEditComponent', 'selector': 'app-post-edit'},{'name': 'PostListComponent', 'selector': 'app-post-list'},{'name': 'PostNewComponent', 'selector': 'app-post-new'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'UserDeleteComponent', 'selector': 'app-user-delete'},{'name': 'UserDetailsComponent', 'selector': 'app-user-details'},{'name': 'UserEditComponent', 'selector': 'app-user-edit'}];
-    var DIRECTIVES = [{'name': 'UniqueUsernameDirective', 'selector': '[appUniqueUsername]'}];
+    var DIRECTIVES = [{'name': 'RepeatPasswordValidatorDirective', 'selector': '[appRepeatPassword]'},{'name': 'UniqueUsernameDirective', 'selector': '[appUniqueUsername]'}];
     var ACTUAL_COMPONENT = {'name': 'HelpComponent'};
 </script>
 <script src="../js/tree.js"></script>

@@ -550,9 +550,9 @@ export class UserEditComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;h1&gt;Edit account&lt;/h1&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;h1 class&#x3D;&quot;display-4 pt-4 pb-4&quot;&gt;Edit account&lt;/h1&gt;
 
-&lt;div class&#x3D;&quot;alert alert-{{info.type}}&quot; *ngIf&#x3D;&quot;info&quot;&gt;
+&lt;div class&#x3D;&quot;alert alert-{{info.type}}&quot; *ngIf&#x3D;&quot;info.message&quot;&gt;
   {{info.message}}
 &lt;/div&gt;
 
@@ -578,15 +578,12 @@ export class UserEditComponent implements OnInit {
           &lt;div *ngIf&#x3D;&quot;editUsername.errors?.uniqueError&quot;&gt;
             This username is already taken.
           &lt;/div&gt;
-          &lt;div *ngIf&#x3D;&quot;editUsername.errors?.currentError&quot;&gt;
-            You currently have this username.
-          &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
 
       &lt;div class&#x3D;&quot;form-group col-sm-6&quot;&gt;
         &lt;label for&#x3D;&quot;editPassword&quot;&gt;Password&lt;/label&gt;
-        &lt;input id&#x3D;&quot;editPassword&quot; name&#x3D;&quot;editPassword&quot; type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; [(ngModel)]&#x3D;&quot;user.password&quot;
+        &lt;input id&#x3D;&quot;editPassword&quot; name&#x3D;&quot;editPassword&quot; type&#x3D;&quot;password&quot; class&#x3D;&quot;form-control&quot; [(ngModel)]&#x3D;&quot;user.password&quot;
                #editPassword&#x3D;&quot;ngModel&quot; placeholder&#x3D;&quot;(unchanged)&quot;
                pattern&#x3D;&quot;(^(?&#x3D;.*[a-z])(?&#x3D;.*[A-Z])(?&#x3D;.*\d)(?&#x3D;.*[@$!%*?&amp;])[A-Za-z\d@$!%*?&amp;]{5,32}$)&quot;&gt;
         &lt;small id&#x3D;&quot;passwordHelp&quot; class&#x3D;&quot;form-text text-muted&quot; *ngIf&#x3D;&quot;editPassword.touched &amp;&amp; editPassword.value&quot;&gt;5-32
@@ -594,16 +591,13 @@ export class UserEditComponent implements OnInit {
           &lt;span class&#x3D;&quot;font-italic&quot;&gt;uppercase&lt;/span&gt;,
           one &lt;span class&#x3D;&quot;font-italic&quot;&gt;lowercase&lt;/span&gt;,
           one &lt;span class&#x3D;&quot;font-italic&quot;&gt;number&lt;/span&gt; and
-          one &lt;span class&#x3D;&quot;font-italic&quot;&gt;special character&lt;/span&gt;.
+          one &lt;span class&#x3D;&quot;font-italic&quot;&gt;special character (@$!%*?&amp;)&lt;/span&gt;.
         &lt;/small&gt;
         &lt;div *ngIf&#x3D;&quot;editPassword.invalid &amp;&amp; (editPassword.dirty || editPassword.touched)&quot;
              class&#x3D;&quot;invalid-feedback&quot;&gt;
 
           &lt;div *ngIf&#x3D;&quot;editPassword.errors.pattern&quot;&gt;
             New password is not matching the &lt;a routerLink&#x3D;&quot;/help&quot;&gt;requirements&lt;/a&gt;.
-          &lt;/div&gt;
-          &lt;div *ngIf&#x3D;&quot;editPassword.errors.required&quot;&gt;
-            Every post needs a title.
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
@@ -670,9 +664,9 @@ export class UserEditComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><h1>Edit account</h1><div class="alert alert-{{info.type}}" *ngIf="info">  {{info.message}}</div><form #editUserForm="ngForm" (ngSubmit)="onSubmit()">  <div class="cross-validation" [class.cross-validation-error]="editUserForm.touched || editUserForm.dirty">    <div class="form-row">      <div class="form-group col-sm-6">        <label for="editUsername">Username</label>        <input id="editUsername" name="editUsername" type="text" class="form-control" required               minlength="2" [(ngModel)]="user.username" #editUsername="ngModel" [ngModelOptions]="{ updateOn: \'blur\' }"               appUniqueUsername pattern="^(?=[a-zA-Z0-9-_]{2,16}$)[^_-].*[^_-]$" maxlength="16">        <small class="form-text text-muted" *ngIf="editUsername.pending">Checking username...</small>        <div *ngIf="editUsername.invalid && (editUsername.dirty || editUsername.touched)"             class="invalid-feedback">          <div *ngIf="editUsername.errors.required">            Username is required.          </div>          <div *ngIf="editUsername.errors.pattern">            Username is not matching the <a routerLink="/help">requirements</a>.          </div>          <div *ngIf="editUsername.errors?.uniqueError">            This username is already taken.          </div>          <div *ngIf="editUsername.errors?.currentError">            You currently have this username.          </div>        </div>      </div>      <div class="form-group col-sm-6">        <label for="editPassword">Password</label>        <input id="editPassword" name="editPassword" type="text" class="form-control" [(ngModel)]="user.password"               #editPassword="ngModel" placeholder="(unchanged)"               pattern="(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$)">        <small id="passwordHelp" class="form-text text-muted" *ngIf="editPassword.touched && editPassword.value">5-32          characters. At least one          <span class="font-italic">uppercase</span>,          one <span class="font-italic">lowercase</span>,          one <span class="font-italic">number</span> and          one <span class="font-italic">special character</span>.        </small>        <div *ngIf="editPassword.invalid && (editPassword.dirty || editPassword.touched)"             class="invalid-feedback">          <div *ngIf="editPassword.errors.pattern">            New password is not matching the <a routerLink="/help">requirements</a>.          </div>          <div *ngIf="editPassword.errors.required">            Every post needs a title.          </div>        </div>      </div>    </div>    <div class="form-group">      <label for="editStatus">Status</label>      <input id="editStatus" name="editStatus" type="text" class="form-control" [(ngModel)]="user.status"             #editStatus="ngModel" maxlength="150">    </div>  </div>  <button type="submit" class="btn btn-success"          [disabled]="(editUserForm.invalid || editUsername.pending)">Update  </button></form></div>'
+        var COMPONENT_TEMPLATE = '<div><h1 class="display-4 pt-4 pb-4">Edit account</h1><div class="alert alert-{{info.type}}" *ngIf="info.message">  {{info.message}}</div><form #editUserForm="ngForm" (ngSubmit)="onSubmit()">  <div class="cross-validation" [class.cross-validation-error]="editUserForm.touched || editUserForm.dirty">    <div class="form-row">      <div class="form-group col-sm-6">        <label for="editUsername">Username</label>        <input id="editUsername" name="editUsername" type="text" class="form-control" required               minlength="2" [(ngModel)]="user.username" #editUsername="ngModel" [ngModelOptions]="{ updateOn: \'blur\' }"               appUniqueUsername pattern="^(?=[a-zA-Z0-9-_]{2,16}$)[^_-].*[^_-]$" maxlength="16">        <small class="form-text text-muted" *ngIf="editUsername.pending">Checking username...</small>        <div *ngIf="editUsername.invalid && (editUsername.dirty || editUsername.touched)"             class="invalid-feedback">          <div *ngIf="editUsername.errors.required">            Username is required.          </div>          <div *ngIf="editUsername.errors.pattern">            Username is not matching the <a routerLink="/help">requirements</a>.          </div>          <div *ngIf="editUsername.errors?.uniqueError">            This username is already taken.          </div>        </div>      </div>      <div class="form-group col-sm-6">        <label for="editPassword">Password</label>        <input id="editPassword" name="editPassword" type="password" class="form-control" [(ngModel)]="user.password"               #editPassword="ngModel" placeholder="(unchanged)"               pattern="(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$)">        <small id="passwordHelp" class="form-text text-muted" *ngIf="editPassword.touched && editPassword.value">5-32          characters. At least one          <span class="font-italic">uppercase</span>,          one <span class="font-italic">lowercase</span>,          one <span class="font-italic">number</span> and          one <span class="font-italic">special character (@$!%*?&)</span>.        </small>        <div *ngIf="editPassword.invalid && (editPassword.dirty || editPassword.touched)"             class="invalid-feedback">          <div *ngIf="editPassword.errors.pattern">            New password is not matching the <a routerLink="/help">requirements</a>.          </div>        </div>      </div>    </div>    <div class="form-group">      <label for="editStatus">Status</label>      <input id="editStatus" name="editStatus" type="text" class="form-control" [(ngModel)]="user.status"             #editStatus="ngModel" maxlength="150">    </div>  </div>  <button type="submit" class="btn btn-success"          [disabled]="(editUserForm.invalid || editUsername.pending)">Update  </button></form></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PostDeleteComponent', 'selector': 'app-post-delete'},{'name': 'PostDetailsComponent', 'selector': 'app-post-details'},{'name': 'PostEditComponent', 'selector': 'app-post-edit'},{'name': 'PostListComponent', 'selector': 'app-post-list'},{'name': 'PostNewComponent', 'selector': 'app-post-new'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'UserDeleteComponent', 'selector': 'app-user-delete'},{'name': 'UserDetailsComponent', 'selector': 'app-user-details'},{'name': 'UserEditComponent', 'selector': 'app-user-edit'}];
-    var DIRECTIVES = [{'name': 'UniqueUsernameDirective', 'selector': '[appUniqueUsername]'}];
+    var DIRECTIVES = [{'name': 'RepeatPasswordValidatorDirective', 'selector': '[appRepeatPassword]'},{'name': 'UniqueUsernameDirective', 'selector': '[appUniqueUsername]'}];
     var ACTUAL_COMPONENT = {'name': 'UserEditComponent'};
 </script>
 <script src="../js/tree.js"></script>

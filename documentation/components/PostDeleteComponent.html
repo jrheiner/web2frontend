@@ -121,6 +121,21 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#id">id</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -130,6 +145,12 @@
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
+                            <li>
+                                <a href="#cancel">cancel</a>
+                            </li>
+                            <li>
+                                <a href="#delete">delete</a>
+                            </li>
                             <li>
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
@@ -151,15 +172,69 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(apiService: <a href="../injectables/ApiService.html">ApiService</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/components/post-delete/post-delete.component.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/components/post-delete/post-delete.component.ts:12</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>apiService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ApiService.html" target="_self" >ApiService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -173,6 +248,84 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cancel"></a>
+                    <span class="name">
+                        <b>
+                            cancel
+                        </b>
+                        <a href="#cancel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cancel()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="27"
+                            class="link-to-prism">src/app/components/post-delete/post-delete.component.ts:27</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="delete"></a>
+                    <span class="name">
+                        <b>
+                            delete
+                        </b>
+                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>delete()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="20"
+                            class="link-to-prism">src/app/components/post-delete/post-delete.component.ts:20</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -195,8 +348,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="12"
-                            class="link-to-prism">src/app/components/post-delete/post-delete.component.ts:12</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="17"
+                            class="link-to-prism">src/app/components/post-delete/post-delete.component.ts:17</a></div>
                 </td>
             </tr>
 
@@ -213,12 +366,47 @@
         </tbody>
     </table>
 </section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="id"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            id</b>
+                            <a href="#id"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>this.route.snapshot.paramMap.get(&#x27;id&#x27;)</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/components/post-delete/post-delete.component.ts:12</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
 
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnInit} from &#x27;@angular/core&#x27;;
+import {ActivatedRoute, Router} from &#x27;@angular/router&#x27;;
+import {ApiService} from &#x27;../../services/api.service&#x27;;
 
 @Component({
   selector: &#x27;app-post-delete&#x27;,
@@ -227,17 +415,46 @@
 })
 export class PostDeleteComponent implements OnInit {
 
-  constructor() { }
+  private id &#x3D; this.route.snapshot.paramMap.get(&#x27;id&#x27;);
+
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit(): void {
   }
 
+  delete(): void {
+    this.apiService.deletePostById(this.id).subscribe(() &#x3D;&gt; {
+      this.router.navigate([&#x27;/&#x27;]);
+    });
+
+  }
+
+  cancel(): void {
+    this.router.navigate([&#x27;/post/&#x27; + this.id]);
+  }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;p&gt;post-delete works!&lt;/p&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;h1 class&#x3D;&quot;display-4 pt-4 pb-4&quot;&gt;Delete post&lt;/h1&gt;
+
+&lt;p class&#x3D;&quot;lead&quot;&gt;
+  This action will delete the post permanently with no way to recover it. It also includes deleting all comments
+  associated with this post.
+&lt;/p&gt;
+
+&lt;h4&gt;Are you sure?&lt;/h4&gt;
+
+&lt;div class&#x3D;&quot;btn-toolbar mt-3&quot;&gt;
+  &lt;div class&#x3D;&quot;btn-group mr-1&quot;&gt;
+    &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-danger&quot; (click)&#x3D;&quot;delete()&quot;&gt;Yes, delete post!&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;btn-group&quot;&gt;
+    &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-secondary&quot; (click)&#x3D;&quot;cancel()&quot;&gt;Cancel&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
     </div>
 
@@ -273,9 +490,9 @@ export class PostDeleteComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p>post-delete works!</p></div>'
+        var COMPONENT_TEMPLATE = '<div><h1 class="display-4 pt-4 pb-4">Delete post</h1><p class="lead">  This action will delete the post permanently with no way to recover it. It also includes deleting all comments  associated with this post.</p><h4>Are you sure?</h4><div class="btn-toolbar mt-3">  <div class="btn-group mr-1">    <button type="button" class="btn btn-danger" (click)="delete()">Yes, delete post!</button>  </div>  <div class="btn-group">    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>  </div></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PostDeleteComponent', 'selector': 'app-post-delete'},{'name': 'PostDetailsComponent', 'selector': 'app-post-details'},{'name': 'PostEditComponent', 'selector': 'app-post-edit'},{'name': 'PostListComponent', 'selector': 'app-post-list'},{'name': 'PostNewComponent', 'selector': 'app-post-new'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'UserDeleteComponent', 'selector': 'app-user-delete'},{'name': 'UserDetailsComponent', 'selector': 'app-user-details'},{'name': 'UserEditComponent', 'selector': 'app-user-edit'}];
-    var DIRECTIVES = [{'name': 'UniqueUsernameDirective', 'selector': '[appUniqueUsername]'}];
+    var DIRECTIVES = [{'name': 'RepeatPasswordValidatorDirective', 'selector': '[appRepeatPassword]'},{'name': 'UniqueUsernameDirective', 'selector': '[appUniqueUsername]'}];
     var ACTUAL_COMPONENT = {'name': 'PostDeleteComponent'};
 </script>
 <script src="../js/tree.js"></script>

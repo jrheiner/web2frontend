@@ -55,13 +55,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/AppModule.html" data-type="entity-link">AppModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-AppModule-22839669e653ef43af756272e8e2242d"' : 'data-target="#xs-components-links-module-AppModule-22839669e653ef43af756272e8e2242d"' }>
+                                            'data-target="#components-links-module-AppModule-526cfcd042825db1aca81c29a6f7eeee"' : 'data-target="#xs-components-links-module-AppModule-526cfcd042825db1aca81c29a6f7eeee"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-AppModule-22839669e653ef43af756272e8e2242d"' :
-                                            'id="xs-components-links-module-AppModule-22839669e653ef43af756272e8e2242d"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-AppModule-526cfcd042825db1aca81c29a6f7eeee"' :
+                                            'id="xs-components-links-module-AppModule-526cfcd042825db1aca81c29a6f7eeee"' }>
                                             <li class="link">
                                                 <a href="components/AppComponent.html"
                                                     data-type="entity-link" data-context="sub-entity" data-context-id="modules">AppComponent</a>
@@ -122,13 +122,17 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     </li>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#directives-links-module-AppModule-22839669e653ef43af756272e8e2242d"' : 'data-target="#xs-directives-links-module-AppModule-22839669e653ef43af756272e8e2242d"' }>
+                                        'data-target="#directives-links-module-AppModule-526cfcd042825db1aca81c29a6f7eeee"' : 'data-target="#xs-directives-links-module-AppModule-526cfcd042825db1aca81c29a6f7eeee"' }>
                                         <span class="icon ion-md-code-working"></span>
                                         <span>Directives</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-AppModule-22839669e653ef43af756272e8e2242d"' :
-                                        'id="xs-directives-links-module-AppModule-22839669e653ef43af756272e8e2242d"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-AppModule-526cfcd042825db1aca81c29a6f7eeee"' :
+                                        'id="xs-directives-links-module-AppModule-526cfcd042825db1aca81c29a6f7eeee"' }>
+                                        <li class="link">
+                                            <a href="directives/RepeatPasswordValidatorDirective.html"
+                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules">RepeatPasswordValidatorDirective</a>
+                                        </li>
                                         <li class="link">
                                             <a href="directives/UniqueUsernameDirective.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules">UniqueUsernameDirective</a>
