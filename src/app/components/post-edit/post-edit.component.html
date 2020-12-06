@@ -2,8 +2,8 @@
 
 <div class="alert alert-{{info.type}}" *ngIf="info.message">
   {{info.message}}
+  <span *ngIf="info.type==='success'">Check out the post <a routerLink="/post/{{post.id}}">here</a>.</span>
 </div>
-
 
 <form #editPostForm="ngForm" (ngSubmit)="onSubmit()">
   <div [hidden]="editPostForm.submitted">
@@ -26,7 +26,7 @@
 
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea id="description" name="description" class="form-control" required minlength="5"
+        <textarea id="description" name="description" class="form-control" required minlength="5" rows="5"
                   [(ngModel)]="post.description"
                   #description="ngModel"></textarea>
         <small class="form-text text-muted"
