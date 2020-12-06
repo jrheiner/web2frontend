@@ -1,17 +1,16 @@
-#fileupload-delete {
-  border-top-left-radius: unset;
-  border-top-right-radius: unset;
-  width: 100%;
-  display: none;
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/mixins";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/forms";
+
+.ng-valid {
+  &:not(.ng-untouched) {
+    @extend .is-valid
+  }
 }
 
-#fileupload-delete:hover ~ #form-fileupload-preview {
-  border-color: #dc3545 !important;
-  background-color: #dc3545 !important;
-}
-
-#form-fileupload-preview {
-  border-bottom-left-radius: unset !important;
-  border-bottom-right-radius: unset !important;
-  transition: opacity .15s ease-in-out, border-color .15s ease-in-out;
+.ng-invalid {
+  &:not(.ng-untouched) {
+    @extend .is-invalid
+  }
 }

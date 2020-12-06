@@ -1,22 +1,7 @@
-.form-signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
-}
-
-.form-signin .checkbox {
-  font-weight: 400;
-}
-
-.form-signin .form-control {
-  position: relative;
-  box-sizing: border-box;
-  height: auto;
-  padding: 10px;
-  font-size: 16px;
-}
-
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/mixins";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/forms";
 
 .registerForm {
   width: 100%;
@@ -24,3 +9,20 @@
   padding: 15px;
   margin: auto;
 }
+
+.cross-validation-error input {
+  @extend .is-invalid
+}
+
+.ng-valid {
+  &:not(.ng-untouched) {
+    @extend .is-valid
+  }
+}
+
+.ng-invalid {
+  &:not(.ng-untouched) {
+    @extend .is-invalid
+  }
+}
+

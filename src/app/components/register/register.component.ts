@@ -14,6 +14,8 @@ export class RegisterComponent {
     password: ''
   };
 
+  passwordRepeat = '';
+
   info = {
     type: '',
     message: ''

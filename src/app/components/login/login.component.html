@@ -2,7 +2,7 @@
 <div class="alert alert-danger" role="alert" *ngIf="alert">
   {{alert}}
 </div>
-<form class="form-signin text-center" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+<form class="form-login text-center" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
 
   <label for="username" class="sr-only">Username</label>
   <input type="text" id="username" name="username" formControlName="username" class="form-control"

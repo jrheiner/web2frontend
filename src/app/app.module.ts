@@ -18,9 +18,9 @@ import {UserEditComponent} from './components/user-edit/user-edit.component';
 import {AuthInterceptor} from './auth.interceptor';
 import {UserDeleteComponent} from './components/user-delete/user-delete.component';
 import {HelpComponent} from './components/help/help.component';
-import { PostDeleteComponent } from './components/post-delete/post-delete.component';
-import { UniqueUsernameDirective } from './directives/unique-username.directive';
-import { RepeatPasswordDirective } from './directives/repeat-password.directive';
+import {PostDeleteComponent} from './components/post-delete/post-delete.component';
+import {UniqueUsernameDirective} from './directives/unique-username.directive';
+import {RepeatPasswordValidatorDirective} from './directives/repeat-password.directive';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,7 @@ import { RepeatPasswordDirective } from './directives/repeat-password.directive'
     HelpComponent,
     PostDeleteComponent,
     UniqueUsernameDirective,
-    RepeatPasswordDirective
+    RepeatPasswordValidatorDirective
   ],
   imports: [
     BrowserModule,

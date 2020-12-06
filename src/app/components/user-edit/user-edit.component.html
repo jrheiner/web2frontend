@@ -32,7 +32,7 @@
       <div class="form-group col-sm-6">
         <label for="editPassword">Password</label>
         <input id="editPassword" name="editPassword" type="password" class="form-control" [(ngModel)]="user.password"
-               #editPassword="ngModel" placeholder="(unchanged)"
+               #editPassword="ngModel" placeholder="(unchanged)" autocomplete="new-password"
                pattern="(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$)">
         <small id="passwordHelp" class="form-text text-muted" *ngIf="editPassword.touched && editPassword.value">5-32
           characters. At least one
