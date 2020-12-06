@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {FormBuilder} from '@angular/forms';
 import {ApiService} from '../../services/api.service';
 import {TokenService} from '../../services/token.service';
 
@@ -10,24 +9,36 @@ import {TokenService} from '../../services/token.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  registerForm;
-  alert;
-  info;
-  isLoading = false;
+  user = {
+    username: '',
+    password: ''
+  };
 
-  constructor(private apiService: ApiService, public router: Router, private formBuilder: FormBuilder, private session: TokenService) {
-    this.registerForm = this.formBuilder.group({
-      username: '',
-      password: ''
-    });
+  info = {
+    type: '',
+    message: ''
+  };
+
+  constructor(private apiService: ApiService, public router: Router, private session: TokenService) {
 
     if (this.session.isLoggedIn()) {
       this.router.navigate(['']);
     }
   }
 
+  register(): void {
+    this.apiService.register(this.user.username, this.user.password).subscribe((res) => {
+      console.log(res);
+      this.info.type = 'success';
+      this.info.message = `Account ${res.username} created!`;
+    }, err => {
+      this.info.type = 'danger';
+      this.info.message = 'Something went wrong. Try again.';
+    });
+  }
 
-  login(data: { username: string, password: string }): void {
+
+  /*login(data: { username: string, password: string }): void {
     this.apiService.register(data.username, data.password).subscribe((res) => {
       console.log(res);
       this.info = `Account ${res.username} created!`;
@@ -39,18 +50,10 @@ export class RegisterComponent {
       this.registerForm.enable();
       this.alert = err.error.message;
     });
-  }
+  }*/
 
-  onSubmit(data): void {
-    if (data.username !== '' && data.password !== '') {
-      if (data.username.length > 1 && data.password.length > 4) {
-        this.isLoading = true;
-        this.registerForm.disable();
-        this.login(data);
-      } else {
-        this.alert = 'Username and password does not match requirements!';
-      }
-    }
+  onSubmit(): void {
+    this.register();
   }
 
 }

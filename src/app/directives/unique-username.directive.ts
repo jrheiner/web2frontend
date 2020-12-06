@@ -37,7 +37,7 @@ export class UniqueUsernameValidator implements AsyncValidator {
 
 export class UniqueUsernameDirective {
 
-  constructor(private validator: UniqueUsernameValidator, private session: TokenService) {
+  constructor(private validator: UniqueUsernameValidator) {
   }
 
   validate(control: AbstractControl): void {

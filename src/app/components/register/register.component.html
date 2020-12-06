@@ -3,16 +3,71 @@
   To create a new account simply choose a username and password, according to the <a routerLink="/help">requirements</a>.
   Later on you can customize you profile by adding a status or profile picture.
 </p>
-<div class="alert alert-danger mt-3" role="alert" *ngIf="alert">
-  {{alert}}
-</div>
-<div class="alert alert-success mt-3" role="alert" *ngIf="info">
-  <h4 class="alert-heading">Success!</h4>
-  <p>{{info}}</p>
-  <hr>
-  <p class="mb-0">Go to the <a routerLink="/login">Login</a> to login.</p>
+
+<div class="alert alert-{{info.type}}" *ngIf="info.message">
+  {{info.message}}
 </div>
 
+<div class="registerForm">
+  <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="cross-validation" [class.cross-validation-error]="registerForm.touched || registerForm.dirty">
+      <div class="form-group">
+        <label for="editUsername">Username</label>
+        <input id="editUsername" name="editUsername" type="text" class="form-control" required
+               minlength="2" [(ngModel)]="user.username" #registerUsername="ngModel"
+               [ngModelOptions]="{ updateOn: 'blur' }"
+               appUniqueUsername pattern="^(?=[a-zA-Z0-9-_]{2,16}$)[^_-].*[^_-]$" maxlength="16">
+
+        <small class="form-text text-muted" *ngIf="registerForm.pending">Checking username...</small>
+        <div *ngIf="registerUsername.invalid && (registerUsername.dirty || registerUsername.touched)"
+             class="invalid-feedback">
+
+          <div *ngIf="registerUsername.errors.required">
+            Username is required.
+          </div>
+          <div *ngIf="registerUsername.errors.pattern">
+            Username is not matching the <a routerLink="/help">requirements</a>.
+          </div>
+          <div *ngIf="registerUsername.errors?.uniqueError">
+            This username is already taken.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="editPassword">Password</label>
+      <input id="editPassword" name="editPassword" type="password" class="form-control" [(ngModel)]="user.password"
+             #registerPassword="ngModel" required
+             pattern="(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$)">
+      <small id="passwordHelp" class="form-text text-muted" *ngIf="registerPassword.touched && registerPassword.value">5-32
+        characters. At least one
+        <span class="font-italic">uppercase</span>,
+        one <span class="font-italic">lowercase</span>,
+        one <span class="font-italic">number</span> and
+        one <span class="font-italic">special character (@$!%*?&)</span>.
+      </small>
+      <div *ngIf="registerPassword.invalid && (registerPassword.dirty || registerPassword.touched)"
+           class="invalid-feedback">
+
+        <div *ngIf="registerPassword.errors.pattern">
+          Password is not matching the <a routerLink="/help">requirements</a>.
+        </div>
+        <div *ngIf="registerPassword.errors.required">
+          Password is required.
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block btn-lg"
+            [disabled]="(registerForm.invalid || registerForm.pending)">Register
+    </button>
+  </form>
+  <button class="btn btn-lg btn-outline-secondary btn-block mt-3" routerLink="/login">Go to Login
+  </button>
+</div>
+
+<!--
 <form class="form-signin" [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
   <label for="username" class="sr-only">Username</label>
   <input type="text" id="username" formControlName="username" class="form-control" placeholder="Username" required
@@ -36,3 +91,4 @@
           routerLink="/login">Go to Login
   </button>
 </form>
+-->

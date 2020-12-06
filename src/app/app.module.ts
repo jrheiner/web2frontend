@@ -20,6 +20,7 @@ import {UserDeleteComponent} from './components/user-delete/user-delete.componen
 import {HelpComponent} from './components/help/help.component';
 import { PostDeleteComponent } from './components/post-delete/post-delete.component';
 import { UniqueUsernameDirective } from './directives/unique-username.directive';
+import { RepeatPasswordDirective } from './directives/repeat-password.directive';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { UniqueUsernameDirective } from './directives/unique-username.directive'
     UserDeleteComponent,
     HelpComponent,
     PostDeleteComponent,
-    UniqueUsernameDirective
+    UniqueUsernameDirective,
+    RepeatPasswordDirective
   ],
   imports: [
     BrowserModule,

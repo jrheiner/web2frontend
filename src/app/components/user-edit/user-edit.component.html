@@ -26,15 +26,12 @@
           <div *ngIf="editUsername.errors?.uniqueError">
             This username is already taken.
           </div>
-          <div *ngIf="editUsername.errors?.currentError">
-            You currently have this username.
-          </div>
         </div>
       </div>
 
       <div class="form-group col-sm-6">
         <label for="editPassword">Password</label>
-        <input id="editPassword" name="editPassword" type="text" class="form-control" [(ngModel)]="user.password"
+        <input id="editPassword" name="editPassword" type="password" class="form-control" [(ngModel)]="user.password"
                #editPassword="ngModel" placeholder="(unchanged)"
                pattern="(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$)">
         <small id="passwordHelp" class="form-text text-muted" *ngIf="editPassword.touched && editPassword.value">5-32
@@ -42,16 +39,13 @@
           <span class="font-italic">uppercase</span>,
           one <span class="font-italic">lowercase</span>,
           one <span class="font-italic">number</span> and
-          one <span class="font-italic">special character</span>.
+          one <span class="font-italic">special character (@$!%*?&)</span>.
         </small>
         <div *ngIf="editPassword.invalid && (editPassword.dirty || editPassword.touched)"
              class="invalid-feedback">
 
           <div *ngIf="editPassword.errors.pattern">
             New password is not matching the <a routerLink="/help">requirements</a>.
-          </div>
-          <div *ngIf="editPassword.errors.required">
-            Every post needs a title.
           </div>
         </div>
       </div>
