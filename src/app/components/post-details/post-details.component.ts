@@ -32,6 +32,7 @@ export class PostDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.getPostById(this.id).subscribe((post) => {
       this.post = post;
+      this.post.description = this.post.description.replace(/\\n/g, String.fromCharCode(13, 10));
       this.apiService.getComments(this.id).subscribe((comments) => {
         this.comments = comments;
       }, error => {

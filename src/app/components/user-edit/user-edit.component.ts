@@ -36,7 +36,7 @@ export class UserEditComponent implements OnInit {
       console.log(error));
   }
 
-  updateUser(): void {
+  private updateUser(): void {
     const reqData = this.user;
     if (!reqData.password || reqData.password.length < 5) {
       delete reqData.password;

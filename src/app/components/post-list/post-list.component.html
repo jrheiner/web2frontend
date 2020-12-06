@@ -9,10 +9,11 @@
           <h5 class="card-title"><a routerLink="/post/{{post.id}}">{{post.title}}</a></h5>
           <h6 class="card-subtitle mb-2 text-muted" title="{{post.author._id}}">posted by <a
             routerLink="/user/{{post?.author._id}}">{{post?.author.username}}</a></h6>
-          <p class="card-text mb-1">{{post.description | slice: 0 : 225}}<span class="fade-out"
-                                                                               *ngIf="post.description.length > 225">{{post.description | slice: 225 : 250}}
+          <div class="card-text mb-1">{{post.description | slice: 0 : 225}}<span
+            class="fade-out"
+            *ngIf="post.description.length > 225">{{post.description | slice: 225 : 250}}
             ...</span>
-          </p>
+          </div>
           <p class="card-text">
             <small class="text-muted">
               <span class="badge badge-primary">Primary</span>

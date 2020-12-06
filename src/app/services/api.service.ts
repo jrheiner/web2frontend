@@ -22,7 +22,7 @@ export class ApiService {
     return this.http.post(`/api/posts`, data);
   }
 
-  editPostById(postId: string, data: string): Observable<any> {
+  editPostById(postId: string, data: any): Observable<any> {
     return this.http.put(`/api/posts/${postId}`, data);
   }
 

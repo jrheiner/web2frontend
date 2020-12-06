@@ -1,1 +1,53 @@
 <h1 class="display-4 pt-4 pb-4">Edit post</h1>
+
+<div class="alert alert-{{info.type}}" *ngIf="info.message">
+  {{info.message}}
+</div>
+
+
+<form #editPostForm="ngForm" (ngSubmit)="onSubmit()">
+  <div [hidden]="editPostForm.submitted">
+    <div class="cross-validation" [class.cross-validation-error]="editPostForm.touched || editPostForm.dirty">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input id="title" name="title" type="text" class="form-control" required [(ngModel)]="post.title"
+               #title="ngModel">
+        <small class="form-text text-muted"
+               *ngIf="!title.invalid || title.untouched">Required.</small>
+        <div *ngIf="title.invalid && (title.dirty || title.touched)"
+             class="invalid-feedback">
+
+          <div *ngIf="title.errors.required">
+            Every post needs a title.
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" class="form-control" required minlength="5"
+                  [(ngModel)]="post.description"
+                  #description="ngModel"></textarea>
+        <small class="form-text text-muted"
+               *ngIf="!description.invalid || description.untouched">Required.</small>
+        <div *ngIf="description.invalid && (description.dirty || description.touched)"
+             class="invalid-feedback">
+
+          <div *ngIf="description.errors.required">
+            Text posts require an description.
+          </div>
+          <div *ngIf="description.errors.minlength">
+            This description seems a bit short.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="editPostForm.invalid">
+      Update post
+    </button>
+
+  </div>
+</form>

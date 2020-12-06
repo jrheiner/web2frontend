@@ -11,7 +11,7 @@
       <p class="text-muted font-italic" *ngIf="post?.createdAt != post?.updatedAt">Last updated {{post?.updatedAt}}</p>
 
       <hr>
-      <p>{{post?.description}}</p>
+      <div class="post-description">{{post?.description}}</div>
       <hr>
 
       <ul *ngFor="let comment of comments">
