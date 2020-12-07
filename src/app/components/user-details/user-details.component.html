@@ -15,8 +15,20 @@
           <p class="card-text">{{user?.status}}</p>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              {{user?.postCount == 1 ? "1 post" : user?.postCount + " posts"}} and
-              {{user?.commentCount == 1 ? "1 comment" : user?.commentCount + " comments"}}
+              <h5>
+                <span class="badge badge-secondary">
+                  {{user?.postCount == 1 ? "1 Post" : user?.postCount + " Posts"}}
+                </span>
+              </h5>
+              <h5>
+                <span class="badge badge-secondary">
+                  {{user?.commentCount == 1 ? "1 Comment" : user?.commentCount + " Comments"}}
+                </span>
+              </h5>
+              <h5><span class="badge badge-secondary">
+                {{user?.score == 1 ? "1 Like received" : user?.score + " Likes received"}}
+              </span>
+              </h5>
             </li>
             <li class="list-group-item"><span class="text-muted">Last activity:</span> {{user?.lastAcitivty}}</li>
             <li class="list-group-item"><span class="text-muted">Joined:</span> {{user?.createdAt}}</li>
