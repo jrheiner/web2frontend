@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../../services/api.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-post-edit',
@@ -27,7 +27,7 @@ export class PostEditComponent implements OnInit {
     message: ''
   };
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) {
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -56,5 +56,9 @@ export class PostEditComponent implements OnInit {
       this.info.type = 'danger';
       this.info.message = 'Something went wrong. Try again.';
     });
+  }
+
+  cancel(): void {
+    this.router.navigate(['/post/' + this.id]);
   }
 }
