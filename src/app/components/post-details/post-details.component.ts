@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../../services/api.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {TokenService} from '../../services/token.service';
 
 @Component({
@@ -25,8 +25,10 @@ export class PostDetailsComponent implements OnInit {
   };
   comments;
   notFound: string;
+  copyLink: string;
+  postIsSaved = false;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private session: TokenService) {
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private session: TokenService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -46,5 +48,27 @@ export class PostDetailsComponent implements OnInit {
 
   getUsername(): string {
     return this.session.getUsername();
+  }
+
+
+  copyShareLink(): void {
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = window.location.href; // TODO this doesn't work in production i think
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+    this.copyLink = 'Link copied to clipboard';
+  }
+
+  savePost(currentValue: boolean): void {
+    // TODO save post to user list idk
+    // do request
+    this.postIsSaved = !currentValue;
   }
 }

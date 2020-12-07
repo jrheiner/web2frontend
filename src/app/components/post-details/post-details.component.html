@@ -37,6 +37,7 @@
         User action
       </div>
       <div class="card-body">
+        <!-- Like button -->
         <button class="btn btn-success btn-block">
           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"
                xmlns="http://www.w3.org/2000/svg">
@@ -44,26 +45,34 @@
           </svg>
           {{post?.score}}
         </button>
-        <button class="btn btn-primary btn-block">
-          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-fill" fill="currentColor"
-               xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-                  d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5V2z"/>
-          </svg>
-          <!-- TODO IF SAVED CHANGE ICON -->
-          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-check-fill" fill="currentColor"
-               xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-                  d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm6.854 5.854a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
-          </svg>
+        <!-- Save button -->
+        <button class="btn btn-primary btn-block" (click)="savePost(postIsSaved)">
+          <div *ngIf="!postIsSaved">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-fill" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5V2z"/>
+            </svg>
+          </div>
+          <div *ngIf="postIsSaved">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-check-fill" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                    d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm6.854 5.854a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+            </svg>
+            (Saved)
+          </div>
         </button>
-        <button class="btn btn-info btn-block">
+        <!-- Share button -->
+        <button class="btn btn-info btn-block" (click)="copyShareLink()">
           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-share-fill" fill="currentColor"
                xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd"
                   d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
           </svg>
+          <span *ngIf="copyLink"> {{copyLink}}</span>
         </button>
+        <!-- Comment button -->
         <button class="btn btn-info btn-block">
           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chat-right-text-fill" fill="currentColor"
                xmlns="http://www.w3.org/2000/svg">
