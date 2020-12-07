@@ -19,7 +19,7 @@ export class PostDetailsComponent implements OnInit {
     },
     title: '',
     description: '',
-    score: '',
+    score: 0,
     createdAt: '',
     updatedAt: ''
   };
@@ -27,11 +27,16 @@ export class PostDetailsComponent implements OnInit {
   notFound: string;
   copyLink: string;
   postIsSaved = false;
+  isLoading = false;
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private session: TokenService, private router: Router) {
   }
 
   ngOnInit(): void {
+    this.updatePostDetails();
+  }
+
+  private updatePostDetails(): void {
     this.apiService.getPostById(this.id).subscribe((post) => {
       this.post = post;
       this.post.description = this.post.description.replace(/\\n/g, String.fromCharCode(13, 10));
@@ -48,6 +53,10 @@ export class PostDetailsComponent implements OnInit {
 
   getUsername(): string {
     return this.session.getUsername();
+  }
+
+  isLoggedIn(): boolean {
+    return this.session.isLoggedIn();
   }
 
 
@@ -70,5 +79,24 @@ export class PostDetailsComponent implements OnInit {
     // TODO save post to user list idk
     // do request
     this.postIsSaved = !currentValue;
+  }
+
+  likePost(): void {
+    this.isLoading = true;
+    this.apiService.likePost(this.post.id).subscribe(res => {
+      if (res.hasOwnProperty('success') && res.success) {
+        this.post.score++;
+        this.isLoading = false;
+      } else if (res.hasOwnProperty('success') && !res.success) {
+        this.apiService.removeLikePost(this.post.id).subscribe(() => {
+          this.post.score--;
+          this.isLoading = false;
+        });
+      }
+    }, error => {
+      this.isLoading = false;
+      console.log(error);
+    });
+
   }
 }

@@ -30,6 +30,14 @@ export class ApiService {
     return this.http.delete(`/api/posts/${postId}`);
   }
 
+  likePost(postId: string): Observable<any> {
+    return this.http.get(`/api/posts/${postId}/vote`);
+  }
+
+  removeLikePost(postId: string): Observable<any> {
+    return this.http.delete(`/api/posts/${postId}/vote`);
+  }
+
   getComments(postId: string): Observable<any> {
     return this.http.get(`/api/comments/post/${postId}`);
   }
