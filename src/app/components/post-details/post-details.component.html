@@ -8,7 +8,7 @@
       <h2 class="post-title">{{post?.title}} ({{post?.id}})</h2>
       <p class="text-muted">Posted {{post?.createdAt}} by <a
         routerLink="/user/{{post?.author._id}}">{{post?.author.username}}</a></p>
-      <p class="text-muted font-italic" *ngIf="post?.createdAt != post?.updatedAt">Last activity {{post?.updatedAt}}</p>
+      <p class="text-muted font-italic" *ngIf="post?.createdAt != post?.updatedAt">Last updated {{post?.updatedAt}}</p>
 
       <hr>
       <div class="post-description">{{post?.description}}</div>
