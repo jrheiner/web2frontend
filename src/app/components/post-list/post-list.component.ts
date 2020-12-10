@@ -10,17 +10,16 @@ export class PostListComponent implements OnInit {
 
   posts;
   empty = false;
+  componentLoading = true;
 
   constructor(private apiService: ApiService) {
   }
-
-// TODO post list order currently old -> new
-  // update: now reversed
 
   ngOnInit(): void {
     this.apiService.getAllPosts().subscribe((data) => {
       this.posts = data.reverse();
       this.empty = !Boolean(Object.keys(this.posts).length);
+      this.componentLoading = false;
     }, error => {
       console.log(error);
     });

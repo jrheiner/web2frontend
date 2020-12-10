@@ -30,6 +30,7 @@ export class PostDetailsComponent implements OnInit {
   isLoading = false;
   sending = false;
   writeComment = '';
+  componentLoading = true;
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private session: TokenService, private router: Router) {
   }
@@ -52,6 +53,7 @@ export class PostDetailsComponent implements OnInit {
   private updateComments(): void {
     this.apiService.getComments(this.id).subscribe((comments) => {
       this.comments = comments.reverse();
+      this.componentLoading = false;
     }, error => {
       console.log(error);
     });

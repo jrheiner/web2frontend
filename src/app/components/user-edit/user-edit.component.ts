@@ -19,6 +19,7 @@ export class UserEditComponent implements OnInit {
     type: '',
     message: ''
   };
+  componentLoading = true;
 
   constructor(private apiService: ApiService, private session: TokenService) {
   }
@@ -32,6 +33,7 @@ export class UserEditComponent implements OnInit {
       this.user.username = data.username;
       this.user.status = data.status || '';
       console.log(data);
+      this.componentLoading = false;
     }, error =>
       console.log(error));
   }

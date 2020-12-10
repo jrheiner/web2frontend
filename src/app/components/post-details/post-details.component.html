@@ -1,114 +1,118 @@
-<div class="alert alert-danger mt-3" role="alert" *ngIf="notFound">
-  {{notFound}}
-</div>
-<div class="row" *ngIf="!notFound">
-  <div class="col-xl-8">
+<div *ngIf="!componentLoading">
+  <div class="alert alert-danger mt-3" role="alert" *ngIf="notFound">
+    {{notFound}}
+  </div>
+  <div class="row" *ngIf="!notFound">
+    <div class="col-xl-8">
 
-    <div class="mt-4">
-      <h2 class="post-title" [title]="post?.id">{{post?.title}}</h2>
-      <p class="text-muted">Posted {{post?.createdAt}} by <a
-        routerLink="/user/{{post?.author._id}}">{{post?.author.username}}</a></p>
-      <p class="text-muted font-italic" *ngIf="post?.createdAt != post?.updatedAt">Last updated {{post?.updatedAt}}</p>
+      <div class="mt-4">
+        <h2 class="post-title" [title]="post?.id">{{post?.title}}</h2>
+        <p class="text-muted">Posted {{post?.createdAt}} by <a
+          routerLink="/user/{{post?.author._id}}">{{post?.author.username}}</a></p>
+        <p class="text-muted font-italic" *ngIf="post?.createdAt != post?.updatedAt">Last
+          updated {{post?.updatedAt}}</p>
 
-      <hr>
-      <div class="post-description">{{post?.description}}</div>
-      <hr>
+        <hr>
+        <div class="post-description">{{post?.description}}</div>
+        <hr>
 
-      <div class="border p-3 rounded" *ngIf="isLoggedIn()">
-        <div class="row">
-          <div class="col-lg-10">
-            <label for="write-comment" class="d-none"></label>
-            <textarea class="form-control" id="write-comment" placeholder="Write a comment"
-                      [(ngModel)]="writeComment" maxlength="500"></textarea>
-          </div>
-          <div class="col-lg-2">
-            <button class="btn btn-outline-success btn-block mt-2" (click)="postComment()"
-                    [disabled]="sending">
-              <span class="spinner-border spinner-border-sm" *ngIf="sending"></span>
-              <span *ngIf="!sending">Comment</span>
-            </button>
-          </div>
-        </div>
-
-      </div>
-      <hr *ngIf="isLoggedIn()">
-
-      <div class="list-group" *ngFor="let comment of comments">
-        <div class="list-group-item mt-1" [id]="comment.id">
-          <div class="d-flex w-100 justify-content-between">
-            <div class="align-self-center">
-              <a routerLink="/user/{{comment.author._id}}" class="text-decoration-none">
-                <h6 class="mb-1">
-                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor"
-                       xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
-                    <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                    <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
-                  </svg>
-                  {{comment.author.username}}</h6>
-              </a>
+        <div class="border p-3 rounded" *ngIf="isLoggedIn()">
+          <div class="row">
+            <div class="col-lg-10">
+              <label for="write-comment" class="d-none"></label>
+              <textarea class="form-control" id="write-comment" placeholder="Write a comment"
+                        [(ngModel)]="writeComment" maxlength="500"></textarea>
             </div>
-            <div class="d-inline-flex align-items-end flex-column">
-              <div><small class="text-nowrap text-muted">{{comment.createdAt}}</small></div>
-              <div>
-                <div class="btn-group" *ngIf="comment.author.username === getUsername()">
-                  <button class="btn btn-sm btn-outline-primary">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square"
-                         fill="currentColor"
+            <div class="col-lg-2">
+              <button class="btn btn-outline-success btn-block mt-2" (click)="postComment()"
+                      [disabled]="sending">
+                <span class="spinner-border spinner-border-sm" *ngIf="sending"></span>
+                <span *ngIf="!sending">Comment</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+        <hr *ngIf="isLoggedIn()">
+
+        <div class="list-group" *ngFor="let comment of comments">
+          <div class="list-group-item mt-1" [id]="comment.id">
+            <div class="d-flex w-100 justify-content-between">
+              <div class="align-self-center">
+                <a routerLink="/user/{{comment.author._id}}" class="text-decoration-none">
+                  <h6 class="mb-1">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
                       <path
-                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+                      <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                       <path fill-rule="evenodd"
-                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
                     </svg>
-                  </button>
-                  <button class="btn btn-sm btn-outline-danger" [id]="'btn-delete-'+comment.id"
-                          (click)="deleteComment(comment.id)">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd"
-                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
-                    </svg>
-                  </button>
+                    {{comment.author.username}}</h6>
+                </a>
+              </div>
+              <div class="d-inline-flex align-items-end flex-column">
+                <div><small class="text-nowrap text-muted">{{comment.createdAt}}</small></div>
+                <div>
+                  <div class="btn-group" *ngIf="comment.author.username === getUsername()">
+                    <button class="btn btn-sm btn-outline-primary">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square"
+                           fill="currentColor"
+                           xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd"
+                              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                      </svg>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger" [id]="'btn-delete-'+comment.id"
+                            (click)="deleteComment(comment.id)">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor"
+                           xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="mb-1 text-break">{{comment.description}}</div>
+            <small *ngIf="comment.createdAt == comment.updatedAt"
+                   class="text-muted">Edited {{comment.updatedAt}}</small>
           </div>
-          <div class="mb-1 text-break">{{comment.description}}</div>
-          <small *ngIf="comment.createdAt == comment.updatedAt" class="text-muted">Edited {{comment.updatedAt}}</small>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-xl-4">
+
+      <div class="card mt-5" *ngIf="post?.author.username === getUsername()">
+        <div class="card-body">
+          <h5 class="card-title">Manage your post</h5>
+          <button class="btn btn-secondary btn-block" routerLink="/post/{{post?.id}}/edit">Edit post</button>
+          <button class="btn btn-danger btn-block" routerLink="/post/{{post?.id}}/delete">Delete post</button>
         </div>
       </div>
 
-    </div>
-
-  </div>
-
-  <div class="col-xl-4">
-
-    <div class="card mt-5" *ngIf="post?.author.username === getUsername()">
-      <div class="card-body">
-        <h5 class="card-title">Manage your post</h5>
-        <button class="btn btn-secondary btn-block" routerLink="/post/{{post?.id}}/edit">Edit post</button>
-        <button class="btn btn-danger btn-block" routerLink="/post/{{post?.id}}/delete">Delete post</button>
-      </div>
-    </div>
-
-    <div class="card mt-5">
-      <div class="card-header">
-        User action
-      </div>
-      <div class="card-body">
-        <!-- Like button -->
-        <button class="btn btn-success btn-block" (click)="likePost()" [disabled]="!isLoggedIn() || isLoading">
-          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"
-               xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-          </svg>
-          <span> {{post?.score}}</span>
-        </button>
-        <!-- Save button -->
-        <button class="btn btn-primary btn-block" (click)="savePost(postIsSaved)" [disabled]="!isLoggedIn()">
+      <div class="card mt-5">
+        <div class="card-header">
+          User action
+        </div>
+        <div class="card-body">
+          <!-- Like button -->
+          <button class="btn btn-success btn-block" (click)="likePost()" [disabled]="!isLoggedIn() || isLoading">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+            </svg>
+            <span> {{post?.score}}</span>
+          </button>
+          <!-- Save button -->
+          <button class="btn btn-primary btn-block" (click)="savePost(postIsSaved)" [disabled]="!isLoggedIn()">
           <span *ngIf="!postIsSaved">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-fill" fill="currentColor"
                  xmlns="http://www.w3.org/2000/svg">
@@ -116,7 +120,7 @@
                     d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5V2z"/>
             </svg>
           </span>
-          <span *ngIf="postIsSaved">
+            <span *ngIf="postIsSaved">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-check-fill" fill="currentColor"
                  xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
@@ -124,31 +128,36 @@
             </svg>
             (Saved)
           </span>
-        </button>
-        <!-- Share button -->
-        <button class="btn btn-info btn-block" (click)="copyShareLink()">
-          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-share-fill" fill="currentColor"
-               xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-                  d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
-          </svg>
-          <span *ngIf="copyLink"> {{copyLink}}</span>
-        </button>
+          </button>
+          <!-- Share button -->
+          <button class="btn btn-info btn-block" (click)="copyShareLink()">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-share-fill" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                    d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
+            </svg>
+            <span *ngIf="copyLink"> {{copyLink}}</span>
+          </button>
+        </div>
       </div>
-    </div>
-    <div class="card mt-5">
-      <div class="card-header">
-        Overview
+      <div class="card mt-5">
+        <div class="card-header">
+          Overview
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Statistics</h5>
+          <p class="card-text">17 comments by 15 users
+          </p>
+          <p class="card-text">15 votes
+          </p>
+          <p class="card-text">more stats</p>
+        </div>
       </div>
-      <div class="card-body">
-        <h5 class="card-title">Statistics</h5>
-        <p class="card-text">17 comments by 15 users
-        </p>
-        <p class="card-text">15 votes
-        </p>
-        <p class="card-text">more stats</p>
-      </div>
-    </div>
 
+    </div>
+  </div>
+</div>
+<div *ngIf="componentLoading">
+  <div class="spinner-border text-secondary loading-spinner">
   </div>
 </div>

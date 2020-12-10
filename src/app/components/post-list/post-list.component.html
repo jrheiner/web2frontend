@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="!componentLoading">
   <div class="col-xl-8">
     <div class="alert alert-info mt-5" *ngIf="empty">
       No posts yet!
@@ -77,5 +77,8 @@
   </div>
 
 </div>
-
+<div *ngIf="componentLoading">
+  <div class="spinner-border text-secondary loading-spinner">
+  </div>
+</div>
 

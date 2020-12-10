@@ -1,62 +1,68 @@
 <h1 class="display-4 pt-4 pb-4">Edit account</h1>
-
-<div class="alert alert-{{info.type}}" *ngIf="info.message">
-  {{info.message}}
-</div>
-
-<form #editUserForm="ngForm" (ngSubmit)="onSubmit()">
-  <div class="cross-validation" [class.cross-validation-error]="editUserForm.touched || editUserForm.dirty">
-    <div class="form-row">
-      <div class="form-group col-sm-6">
-        <label for="editUsername">Username</label>
-        <input id="editUsername" name="editUsername" type="text" class="form-control" required
-               minlength="2" [(ngModel)]="user.username" #editUsername="ngModel" [ngModelOptions]="{ updateOn: 'blur' }"
-               appUniqueUsername pattern="^(?=[a-zA-Z0-9-_]{2,16}$)[^_-].*[^_-]$" maxlength="16">
-
-        <small class="form-text text-muted" *ngIf="editUsername.pending">Checking username...</small>
-        <div *ngIf="editUsername.invalid && (editUsername.dirty || editUsername.touched)"
-             class="invalid-feedback">
-
-          <div *ngIf="editUsername.errors.required">
-            Username is required.
-          </div>
-          <div *ngIf="editUsername.errors.pattern">
-            Username is not matching the <a routerLink="/help">requirements</a>.
-          </div>
-          <div *ngIf="editUsername.errors?.uniqueError">
-            This username is already taken.
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group col-sm-6">
-        <label for="editPassword">Password</label>
-        <input id="editPassword" name="editPassword" type="password" class="form-control" [(ngModel)]="user.password"
-               #editPassword="ngModel" placeholder="(unchanged)" autocomplete="new-password"
-               pattern="(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$)">
-        <small id="passwordHelp" class="form-text text-muted" *ngIf="editPassword.touched && editPassword.value">5-32
-          characters. At least one
-          <span class="font-italic">uppercase</span>,
-          one <span class="font-italic">lowercase</span>,
-          one <span class="font-italic">number</span> and
-          one <span class="font-italic">special character (@$!%*?&)</span>.
-        </small>
-        <div *ngIf="editPassword.invalid && (editPassword.dirty || editPassword.touched)"
-             class="invalid-feedback">
-
-          <div *ngIf="editPassword.errors.pattern">
-            New password is not matching the <a routerLink="/help">requirements</a>.
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="editStatus">Status</label>
-      <input id="editStatus" name="editStatus" type="text" class="form-control" [(ngModel)]="user.status"
-             #editStatus="ngModel" maxlength="150">
-    </div>
+<div *ngIf="!componentLoading">
+  <div class="alert alert-{{info.type}}" *ngIf="info.message">
+    {{info.message}}
   </div>
-  <button type="submit" class="btn btn-success"
-          [disabled]="(editUserForm.invalid || editUsername.pending)">Update
-  </button>
-</form>
+
+  <form #editUserForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="cross-validation" [class.cross-validation-error]="editUserForm.touched || editUserForm.dirty">
+      <div class="form-row">
+        <div class="form-group col-sm-6">
+          <label for="editUsername">Username</label>
+          <input id="editUsername" name="editUsername" type="text" class="form-control" required
+                 minlength="2" [(ngModel)]="user.username" #editUsername="ngModel"
+                 [ngModelOptions]="{ updateOn: 'blur' }"
+                 appUniqueUsername pattern="^(?=[a-zA-Z0-9-_]{2,16}$)[^_-].*[^_-]$" maxlength="16">
+
+          <small class="form-text text-muted" *ngIf="editUsername.pending">Checking username...</small>
+          <div *ngIf="editUsername.invalid && (editUsername.dirty || editUsername.touched)"
+               class="invalid-feedback">
+
+            <div *ngIf="editUsername.errors.required">
+              Username is required.
+            </div>
+            <div *ngIf="editUsername.errors.pattern">
+              Username is not matching the <a routerLink="/help">requirements</a>.
+            </div>
+            <div *ngIf="editUsername.errors?.uniqueError">
+              This username is already taken.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-sm-6">
+          <label for="editPassword">Password</label>
+          <input id="editPassword" name="editPassword" type="password" class="form-control" [(ngModel)]="user.password"
+                 #editPassword="ngModel" placeholder="(unchanged)" autocomplete="new-password"
+                 pattern="(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$)">
+          <small id="passwordHelp" class="form-text text-muted" *ngIf="editPassword.touched && editPassword.value">5-32
+            characters. At least one
+            <span class="font-italic">uppercase</span>,
+            one <span class="font-italic">lowercase</span>,
+            one <span class="font-italic">number</span> and
+            one <span class="font-italic">special character (@$!%*?&)</span>.
+          </small>
+          <div *ngIf="editPassword.invalid && (editPassword.dirty || editPassword.touched)"
+               class="invalid-feedback">
+
+            <div *ngIf="editPassword.errors.pattern">
+              New password is not matching the <a routerLink="/help">requirements</a>.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="editStatus">Status</label>
+        <input id="editStatus" name="editStatus" type="text" class="form-control" [(ngModel)]="user.status"
+               #editStatus="ngModel" maxlength="150">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success"
+            [disabled]="(editUserForm.invalid || editUsername.pending)">Update
+    </button>
+  </form>
+</div>
+<div *ngIf="componentLoading">
+  <div class="spinner-border text-secondary loading-spinner">
+  </div>
+</div>

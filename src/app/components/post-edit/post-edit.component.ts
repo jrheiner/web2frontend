@@ -26,6 +26,7 @@ export class PostEditComponent implements OnInit {
     type: '',
     message: ''
   };
+  componentLoading = true;
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
   }
@@ -33,6 +34,7 @@ export class PostEditComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.getPostById(this.id).subscribe((post) => {
       this.post = post;
+      this.componentLoading = false;
     }, error => {
       console.log(error);
     });
