@@ -46,8 +46,8 @@ export class ApiService {
     return this.http.get(`/api/comments/${commentId}`);
   }
 
-  postComment(data: string): Observable<any> {
-    return this.http.put(`/api/comments`, data);
+  postComment(id: string, data: { description: string }): Observable<any> {
+    return this.http.post(`/api/comments/${id}`, data);
   }
 
   editCommentById(commentId: string, data: string): Observable<any> {

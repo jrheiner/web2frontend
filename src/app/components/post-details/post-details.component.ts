@@ -28,6 +28,8 @@ export class PostDetailsComponent implements OnInit {
   copyLink: string;
   postIsSaved = false;
   isLoading = false;
+  sending = false;
+  writeComment = '';
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private session: TokenService, private router: Router) {
   }
@@ -41,7 +43,7 @@ export class PostDetailsComponent implements OnInit {
       this.post = post;
       this.post.description = this.post.description.replace(/\\n/g, String.fromCharCode(13, 10));
       this.apiService.getComments(this.id).subscribe((comments) => {
-        this.comments = comments;
+        this.comments = comments.reverse();
       }, error => {
         console.log(error);
       });
@@ -66,7 +68,7 @@ export class PostDetailsComponent implements OnInit {
     selBox.style.left = '0';
     selBox.style.top = '0';
     selBox.style.opacity = '0';
-    selBox.value = window.location.href; // TODO this doesn't work in production i think
+    selBox.value = window.location.href; // TODO link doesn't work in production i think
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();
@@ -98,5 +100,23 @@ export class PostDetailsComponent implements OnInit {
       console.log(error);
     });
 
+  }
+
+  postComment(): void {
+    if (this.writeComment === '') {
+      return;
+    }
+    this.sending = true;
+    const comment = {
+      description: this.writeComment
+    };
+    this.apiService.postComment(this.post.id, comment).subscribe(res => {
+      console.log(res);
+      this.updatePostDetails();
+      this.sending = false;
+    }, error => {
+      this.sending = false;
+      console.log(error);
+    });
   }
 }
