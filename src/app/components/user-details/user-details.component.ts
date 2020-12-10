@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {ActivatedRoute} from '@angular/router';
-import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-details',
@@ -20,7 +19,7 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit(): void {
     const id: string = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
-      this.apiService.getUserById(id).pipe(delay(10000)).subscribe((data) => {
+      this.apiService.getUserById(id).subscribe((data) => {
         this.setUserInfo(data);
         this.componentLoading = false;
       }, err => {
