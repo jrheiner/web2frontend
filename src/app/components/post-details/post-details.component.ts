@@ -42,14 +42,18 @@ export class PostDetailsComponent implements OnInit {
     this.apiService.getPostById(this.id).subscribe((post) => {
       this.post = post;
       this.post.description = this.post.description.replace(/\\n/g, String.fromCharCode(13, 10));
-      this.apiService.getComments(this.id).subscribe((comments) => {
-        this.comments = comments.reverse();
-      }, error => {
-        console.log(error);
-      });
+      this.updateComments();
     }, error => {
       console.log(error);
       this.notFound = error.error.message;
+    });
+  }
+
+  private updateComments(): void {
+    this.apiService.getComments(this.id).subscribe((comments) => {
+      this.comments = comments.reverse();
+    }, error => {
+      console.log(error);
     });
   }
 
@@ -111,12 +115,27 @@ export class PostDetailsComponent implements OnInit {
       description: this.writeComment
     };
     this.apiService.postComment(this.post.id, comment).subscribe(res => {
-      console.log(res);
-      this.updatePostDetails();
+      this.updateComments();
       this.sending = false;
+      this.writeComment = '';
     }, error => {
       this.sending = false;
       console.log(error);
     });
   }
+
+  deleteComment(id: string): void {
+    const comment = document.getElementById(id);
+    const btn = document.getElementById('btn-delete-' + id) as HTMLButtonElement;
+    comment.className += ' border-danger text-muted';
+    btn.disabled = true;
+    this.apiService.deleteCommentById(id).subscribe(() => {
+      setTimeout(() => {
+        this.updateComments();
+      }, 300);
+    }, error => {
+      console.log(error);
+    });
+  }
+
 }
