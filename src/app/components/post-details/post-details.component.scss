@@ -2,8 +2,8 @@
   word-break: break-all;
 }
 
-.post-description, .comment-description {
-
+.post-description {
+  white-space: pre-wrap;
 }
 
 .comment-description {
