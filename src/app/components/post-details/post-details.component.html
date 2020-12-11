@@ -55,8 +55,10 @@
               <div class="d-inline-flex align-items-end flex-column">
                 <div><small class="text-nowrap text-muted">{{comment.createdAt}}</small></div>
                 <div>
-                  <div class="btn-group" *ngIf="comment.author.username === getUsername()">
-                    <button class="btn btn-sm btn-outline-primary">
+                  <div class="btn-group" [id]="'btn-group-'+comment.id"
+                       *ngIf="comment.author.username === getUsername()">
+                    <button class="btn btn-sm btn-outline-primary btn-edit-comment" [id]="'btn-edit-'+comment.id"
+                            (click)="startCommentEdit(comment.id)">
                       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square"
                            fill="currentColor"
                            xmlns="http://www.w3.org/2000/svg">
@@ -75,12 +77,50 @@
                       </svg>
                     </button>
                   </div>
+                  <div class="btn-group d-none" [id]="'btn-edit-group-'+comment.id"
+                       *ngIf="comment.author.username === getUsername()">
+                    <button class="btn btn-sm btn-success mb-1" [id]="'btn-confirm-'+comment.id"
+                            (click)="finishCommentEdit(comment.id)">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2-square" fill="currentColor"
+                           xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M15.354 2.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L8 9.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        <path fill-rule="evenodd"
+                              d="M1.5 13A1.5 1.5 0 0 0 3 14.5h10a1.5 1.5 0 0 0 1.5-1.5V8a.5.5 0 0 0-1 0v5a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5h8a.5.5 0 0 0 0-1H3A1.5 1.5 0 0 0 1.5 3v10z"/>
+                      </svg>
+                    </button>
+                    <button class="btn btn-sm btn-danger mb-1" [id]="'btn-cancel-'+comment.id"
+                            (click)="cancelCommentEdit(comment.id)">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-square" fill="currentColor"
+                           xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                        <path fill-rule="evenodd"
+                              d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                      </svg>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger mb-1" disabled>
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor"
+                           xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="mb-1 text-break">{{comment.description}}</div>
-            <small *ngIf="comment.createdAt == comment.updatedAt"
-                   class="text-muted">Edited {{comment.updatedAt}}</small>
+            <div [id]="'comment-display-'+comment.id">
+              <div class="mb-1 text-break comment-description"
+                   [id]="'comment-desc-'+comment.id">{{comment.description}}</div>
+              <small *ngIf="comment.createdAt !== comment.updatedAt"
+                     class="text-muted">Edited {{comment.updatedAt}}</small>
+            </div>
+            <div [id]="'comment-edit-'+comment.id">
+              <textarea class="form-control d-none" [id]="'edit-area-'+comment.id"
+                        [(ngModel)]="updateComment" maxlength="500"
+                        onkeydown='this.style.height = "";this.style.height = this.scrollHeight + 3 + "px"'></textarea>
+            </div>
           </div>
         </div>
 

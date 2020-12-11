@@ -2,6 +2,12 @@
   word-break: break-all;
 }
 
-.post-description {
+.post-description, .comment-description {
+
+}
+
+.comment-description {
   white-space: pre-wrap;
+  max-height: 400px;
+  overflow-y: auto
 }

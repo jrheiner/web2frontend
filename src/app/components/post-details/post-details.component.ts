@@ -10,6 +10,9 @@ import {TokenService} from '../../services/token.service';
 })
 export class PostDetailsComponent implements OnInit {
 
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private session: TokenService, private router: Router) {
+  }
+
   private id = this.route.snapshot.paramMap.get('id');
   post = {
     id: '',
@@ -30,9 +33,29 @@ export class PostDetailsComponent implements OnInit {
   isLoading = false;
   sending = false;
   writeComment = '';
+  updateComment = '';
   componentLoading = true;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private session: TokenService, private router: Router) {
+  private static commentsAllow(allowed: boolean): void {
+    const buttons = document.getElementsByClassName('btn-edit-comment') as HTMLCollectionOf<HTMLButtonElement>;
+    // @ts-ignore
+    for (const btn of buttons) {
+      btn.disabled = !allowed;
+    }
+  }
+
+  private static enableCommentEditing(id: string): void {
+    const btnGroup = document.getElementById('btn-group-' + id);
+    const btnEditGroup = document.getElementById('btn-edit-group-' + id);
+    const commentDisplay = document.getElementById('comment-display-' + id);
+    const commentEdit = document.getElementById('comment-edit-' + id);
+    const EditArea = document.getElementById('edit-area-' + id);
+
+    btnGroup.className = 'btn-group';
+    btnEditGroup.className = 'btn-group  d-none';
+    commentDisplay.className = '';
+    commentEdit.className = 'd-none';
+    EditArea.className = 'form-control d-none';
   }
 
   ngOnInit(): void {
@@ -140,4 +163,47 @@ export class PostDetailsComponent implements OnInit {
     });
   }
 
+  startCommentEdit(id: string): void {
+    PostDetailsComponent.commentsAllow(false);
+    const btnGroup = document.getElementById('btn-group-' + id);
+    const btnEditGroup = document.getElementById('btn-edit-group-' + id);
+    const commentDisplay = document.getElementById('comment-display-' + id);
+    const commentEdit = document.getElementById('comment-edit-' + id);
+    const EditArea = document.getElementById('edit-area-' + id) as HTMLTextAreaElement;
+
+    EditArea.value = this.getCommentText(id);
+    btnGroup.className = 'btn-group d-none';
+    btnEditGroup.className = 'btn-group';
+    commentDisplay.className = 'd-none';
+    commentEdit.className = '';
+    EditArea.className = 'form-control';
+    EditArea.style.height = '';
+    EditArea.style.height = EditArea.scrollHeight + 3 + 'px';
+
+  }
+
+  finishCommentEdit(id: string): void {
+    PostDetailsComponent.commentsAllow(true);
+    PostDetailsComponent.enableCommentEditing(id);
+    const commentDescription = document.getElementById('comment-desc-' + id);
+    if (this.updateComment !== '') {
+      this.apiService.editCommentById(id, {description: this.updateComment}).subscribe((res) => {
+        //commentDescription.innerText = res.description;
+        this.updateComments();
+      }, error => {
+        console.log(error);
+      });
+    }
+  }
+
+  cancelCommentEdit(id: string): void {
+    PostDetailsComponent.commentsAllow(true);
+    PostDetailsComponent.enableCommentEditing(id);
+    this.updateComment = '';
+  }
+
+  private getCommentText(id: string): string {
+    const foundComment = this.comments.find(element => element.id === id);
+    return foundComment ? foundComment.description : '';
+  }
 }
