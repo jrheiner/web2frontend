@@ -37,6 +37,7 @@ export class PostEditComponent implements OnInit {
       this.componentLoading = false;
     }, error => {
       console.log(error);
+      this.componentLoading = false;
     });
   }
 

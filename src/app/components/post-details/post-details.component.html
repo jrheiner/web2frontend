@@ -3,19 +3,17 @@
     {{notFound}}
   </div>
   <div class="row" *ngIf="!notFound">
-    <div class="col-xl-8">
-
+    <div class="col-lg-9">
       <div class="mt-4">
         <h2 class="post-title" [title]="post?.id">{{post?.title}}</h2>
-        <p class="text-muted">Posted {{post?.createdAt}} by <a
-          routerLink="/user/{{post?.author._id}}">{{post?.author.username}}</a></p>
-        <p class="text-muted font-italic" *ngIf="post?.createdAt != post?.updatedAt">Last
-          updated {{post?.updatedAt}}</p>
-
+        <span class="text-muted">Posted {{post?.createdAt}} by <a
+          routerLink="/user/{{post?.author._id}}">{{post?.author.username}}</a></span>
+        <br>
+        <small class="text-muted" *ngIf="post?.createdAt != post?.updatedAt">Last
+          updated {{post?.updatedAt}}</small>
         <hr>
         <div class="post-description">{{post?.description}}</div>
         <hr>
-
         <div class="border p-3 rounded" *ngIf="isLoggedIn()">
           <div class="row">
             <div class="col-lg-10">
@@ -31,10 +29,8 @@
               </button>
             </div>
           </div>
-
         </div>
         <hr *ngIf="isLoggedIn()">
-
         <div class="list-group" *ngFor="let comment of comments">
           <div class="list-group-item mt-1" [id]="comment.id">
             <div class="d-flex w-100 justify-content-between">
@@ -123,36 +119,38 @@
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
-
-    <div class="col-xl-4">
-
-      <div class="card mt-5" *ngIf="post?.author.username === getUsername()">
-        <div class="card-body">
-          <h5 class="card-title">Manage your post</h5>
-          <button class="btn btn-secondary btn-block" routerLink="/post/{{post?.id}}/edit">Edit post</button>
-          <button class="btn btn-danger btn-block" routerLink="/post/{{post?.id}}/delete">Delete post</button>
+    <div class="col-lg-3 order-lg-last order-first">
+      <div class="row">
+        <!-- Show Cards below each other on larger screens -->
+        <div class="mt-5 pixel-div d-none d-lg-block"></div>
+        <div class="col-sm-12 d-none d-lg-block">
+          <div class="card mt-3" *ngIf="post?.author.username === getUsername()">
+            <div class="card-body">
+              <h5 class="card-title">Manage your post</h5>
+              <button class="btn btn-secondary btn-block" routerLink="/post/{{post?.id}}/edit">Edit post</button>
+              <button class="btn btn-danger btn-block" routerLink="/post/{{post?.id}}/delete">Delete post</button>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div class="card mt-5">
-        <div class="card-header">
-          User action
-        </div>
-        <div class="card-body">
-          <!-- Like button -->
-          <button class="btn btn-success btn-block" (click)="likePost()" [disabled]="!isLoggedIn() || isLoading">
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"
-                 xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-            </svg>
-            <span> {{post?.score}}</span>
-          </button>
-          <!-- Save button -->
-          <button class="btn btn-primary btn-block" (click)="savePost(postIsSaved)" [disabled]="!isLoggedIn()">
+        <div class="col-sm-12 d-none d-lg-block">
+          <div class="card mt-3">
+            <div class="card-header">
+              User action
+            </div>
+            <div class="card-body">
+              <!-- Like button -->
+              <button class="btn btn-success btn-block" (click)="likePost()" [disabled]="!isLoggedIn() || isLoading">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                </svg>
+                <span> {{post?.score}}</span>
+              </button>
+              <!-- Save button -->
+              <button class="btn btn-primary btn-block" (click)="savePost(postIsSaved)" [disabled]="!isLoggedIn()">
           <span *ngIf="!postIsSaved">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-fill" fill="currentColor"
                  xmlns="http://www.w3.org/2000/svg">
@@ -160,7 +158,7 @@
                     d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5V2z"/>
             </svg>
           </span>
-            <span *ngIf="postIsSaved">
+                <span *ngIf="postIsSaved">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-check-fill" fill="currentColor"
                  xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
@@ -168,29 +166,73 @@
             </svg>
             (Saved)
           </span>
-          </button>
-          <!-- Share button -->
-          <button class="btn btn-info btn-block" (click)="copyShareLink()">
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-share-fill" fill="currentColor"
+              </button>
+              <!-- Share button -->
+              <button class="btn btn-info btn-block" (click)="copyShareLink()">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-share-fill" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg" *ngIf="!copyLink">
+                  <path fill-rule="evenodd"
+                        d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
+                </svg>
+                <span *ngIf="copyLink"> {{copyLink}}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Show Cards next to each other on smaller screens -->
+        <div class="col-sm-6 d-lg-none">
+          <div class="card mt-3" *ngIf="post?.author.username === getUsername()">
+            <div class="card-body">
+              <h5 class="card-title">Manage your post</h5>
+              <button class="btn btn-secondary btn-block" routerLink="/post/{{post?.id}}/edit">Edit post</button>
+              <button class="btn btn-danger btn-block" routerLink="/post/{{post?.id}}/delete">Delete post</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 d-lg-none">
+          <div class="card mt-3">
+            <div class="card-header">
+              User action
+            </div>
+            <div class="card-body">
+              <!-- Like button -->
+              <button class="btn btn-success btn-block" (click)="likePost()" [disabled]="!isLoggedIn() || isLoading">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                </svg>
+                <span> {{post?.score}}</span>
+              </button>
+              <!-- Save button -->
+              <button class="btn btn-primary btn-block" (click)="savePost(postIsSaved)" [disabled]="!isLoggedIn()">
+          <span *ngIf="!postIsSaved">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-fill" fill="currentColor"
                  xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
-                    d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
+                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5V2z"/>
             </svg>
-            <span *ngIf="copyLink"> {{copyLink}}</span>
-          </button>
-        </div>
-      </div>
-      <div class="card mt-5">
-        <div class="card-header">
-          Overview
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Statistics</h5>
-          <p class="card-text">17 comments by 15 users
-          </p>
-          <p class="card-text">15 votes
-          </p>
-          <p class="card-text">more stats</p>
+          </span>
+                <span *ngIf="postIsSaved">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-check-fill" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                    d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm6.854 5.854a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+            </svg>
+            (Saved)
+          </span>
+              </button>
+              <!-- Share button -->
+              <button class="btn btn-info btn-block" (click)="copyShareLink()">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-share-fill" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg" *ngIf="!copyLink">
+                  <path fill-rule="evenodd"
+                        d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
+                </svg>
+                <span *ngIf="copyLink"> {{copyLink}}</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 

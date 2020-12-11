@@ -70,6 +70,7 @@ export class PostDetailsComponent implements OnInit {
     }, error => {
       console.log(error);
       this.notFound = error.error.message;
+      this.componentLoading = false;
     });
   }
 
@@ -79,6 +80,7 @@ export class PostDetailsComponent implements OnInit {
       this.componentLoading = false;
     }, error => {
       console.log(error);
+      this.componentLoading = false;
     });
   }
 
@@ -97,13 +99,13 @@ export class PostDetailsComponent implements OnInit {
     selBox.style.left = '0';
     selBox.style.top = '0';
     selBox.style.opacity = '0';
-    selBox.value = window.location.href; // TODO link doesn't work in production i think
+    selBox.value = window.location.href;
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
-    this.copyLink = 'Link copied to clipboard';
+    this.copyLink = '✓ (Link copied to clipboard)';
   }
 
   savePost(currentValue: boolean): void {

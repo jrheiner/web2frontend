@@ -25,6 +25,7 @@ export class UserDetailsComponent implements OnInit {
       }, err => {
         this.notFound = err.error.message;
         console.log(err);
+        this.componentLoading = false;
       });
     } else {
       this.apiService.getUserSelf().subscribe((data) => {
@@ -32,6 +33,7 @@ export class UserDetailsComponent implements OnInit {
         this.componentLoading = false;
       }, error => {
         console.log(error);
+        this.componentLoading = false;
       });
     }
   }

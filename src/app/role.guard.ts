@@ -20,11 +20,12 @@ export class RoleGuard implements CanActivate {
     console.log('RoleGuard called');
     return new Observable<any>(obs => {
       this.apiService.getPostById(id).subscribe(res => {
-        // TODO easy to circumvent but does not matter since api will return 401
         if (res.author.username === this.session.getUsername()) {
           obs.next(true);
         } else {
-          this.router.navigate(['/post/' + id]);
+          if (this.session.isLoggedIn()) {
+            this.router.navigate(['/post/' + id]);
+          }
           obs.next(false);
         }
       }, err => {
