@@ -21,6 +21,8 @@ export class RegisterComponent {
     message: ''
   };
 
+  disableRegisterBtn = false;
+
   constructor(private apiService: ApiService, public router: Router, private session: TokenService) {
 
     if (this.session.isLoggedIn()) {
@@ -33,6 +35,7 @@ export class RegisterComponent {
       console.log(res);
       this.info.type = 'success';
       this.info.message = `Account ${res.username} created!`;
+      this.disableRegisterBtn = true;
     }, err => {
       this.info.type = 'danger';
       this.info.message = 'Something went wrong. Try again.';

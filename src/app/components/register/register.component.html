@@ -33,58 +33,62 @@
         </div>
       </div>
     </div>
-    <div class="cross-validation"
-         [class.cross-validation-error]="registerForm.errors?.NotMatching && (registerForm.touched || registerForm.dirty)">
-      <div class="form-group">
-        <label for="registerPassword">Password</label>
-        <input id="registerPassword" name="registerPassword" type="password" class="form-control"
-               [(ngModel)]="user.password" autocomplete="new-password"
-               #registerPassword="ngModel" required
-               pattern="(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$)">
-        <small id="passwordHelp" class="form-text text-muted"
-               *ngIf="registerPassword.touched && registerPassword.value">5-32
-          characters. At least one
-          <span class="font-italic">uppercase</span>,
-          one <span class="font-italic">lowercase</span>,
-          one <span class="font-italic">number</span> and
-          one <span class="font-italic">special character (@$!%*?&)</span>.
-        </small>
-        <div *ngIf="registerPassword.invalid && (registerPassword.dirty || registerPassword.touched)"
-             class="invalid-feedback">
 
-          <div *ngIf="registerPassword.errors.pattern">
-            Password is not matching the <a routerLink="/help">requirements</a>.
-          </div>
-          <div *ngIf="registerPassword.errors.required">
-            Password is required.
-          </div>
+    <div class="form-group">
+      <label for="registerPassword">Password</label>
+      <input id="registerPassword" name="registerPassword" type="password" class="form-control"
+             [(ngModel)]="user.password" autocomplete="new-password"
+             #registerPassword="ngModel" required
+             pattern="(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$)">
+      <small id="passwordHelp" class="form-text text-muted"
+             *ngIf="registerPassword.touched && registerPassword.value">5-32
+        characters. At least one
+        <span class="font-italic">uppercase</span>,
+        one <span class="font-italic">lowercase</span>,
+        one <span class="font-italic">number</span> and
+        one <span class="font-italic">special character (@$!%*?&)</span>.
+      </small>
+      <div *ngIf="registerPassword.invalid && (registerPassword.dirty || registerPassword.touched)"
+           class="invalid-feedback">
+
+        <div *ngIf="registerPassword.errors.pattern">
+          Password is not matching the <a routerLink="/help">requirements</a>.
+        </div>
+        <div *ngIf="registerPassword.errors.required">
+          Password is required.
         </div>
       </div>
-
+    </div>
+    <div class="cross-validation"
+         [class.cross-validation-error]="registerForm.errors?.NotMatching && (registerForm.touched || registerForm.dirty)">
       <div class="form-group">
         <label for="registerPasswordRepeat">Repeat Password</label>
         <input id="registerPasswordRepeat" name="registerPasswordRepeat" type="password" class="form-control"
                [(ngModel)]="passwordRepeat" autocomplete="new-password"
                #registerPasswordRepeat="ngModel" required
                pattern="(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$)">
-        <div *ngIf="registerPasswordRepeat.invalid && (registerPasswordRepeat.dirty || registerPasswordRepeat.touched)"
-             class="invalid-feedback">
+        <div
+          *ngIf="(registerPasswordRepeat.invalid || registerForm.errors?.NotMatching) && (registerPasswordRepeat.dirty || registerPasswordRepeat.touched)"
+          class="invalid-feedback">
           <div *ngIf="registerPasswordRepeat.errors.required">
             Repeating the password is required.
           </div>
-
+          <div
+            *ngIf="registerForm.errors?.NotMatching && !registerPasswordRepeat.errors.required">
+            The repeated password is not the same.
+          </div>
         </div>
-      </div>
-      <div *ngIf="registerForm.errors?.NotMatching && (registerForm.touched || registerForm.dirty)"
-           class="cross-validation-error-message alert alert-danger">
-        The repeated password is not the same.
       </div>
     </div>
 
     <button type="submit" class="btn btn-success btn-block btn-lg"
-            [disabled]="(registerForm.invalid || registerForm.pending)">Register
+            [disabled]="(registerForm.invalid || registerForm.pending || disableRegisterBtn)">Register
     </button>
   </form>
-  <button class="btn btn-lg btn-outline-secondary btn-block mt-3" routerLink="/login">Go to Login
+  <button class="btn btn-lg btn-outline-secondary btn-block mt-3" routerLink="/login" *ngIf="!disableRegisterBtn">Go to
+    Login
+  </button>
+  <button class="btn btn-lg btn-primary btn-block mt-3" routerLink="/login" *ngIf="disableRegisterBtn">Go to
+    Login
   </button>
 </div>

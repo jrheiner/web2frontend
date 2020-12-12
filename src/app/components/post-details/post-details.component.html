@@ -180,7 +180,7 @@
           </div>
         </div>
         <!-- Show Cards next to each other on smaller screens -->
-        <div class="col-sm-6 d-lg-none">
+        <div class="col-sm-6 d-lg-none order-1">
           <div class="card mt-3" *ngIf="post?.author.username === getUsername()">
             <div class="card-body">
               <h5 class="card-title">Manage your post</h5>
@@ -189,7 +189,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-6 d-lg-none">
+        <div class="col-sm-6 d-lg-none order-0">
           <div class="card mt-3">
             <div class="card-header">
               User action

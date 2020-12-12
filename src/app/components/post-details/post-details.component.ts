@@ -153,9 +153,11 @@ export class PostDetailsComponent implements OnInit {
 
   deleteComment(id: string): void {
     const comment = document.getElementById(id);
-    const btn = document.getElementById('btn-delete-' + id) as HTMLButtonElement;
+    const deleteBtn = document.getElementById('btn-delete-' + id) as HTMLButtonElement;
+    const editBtn = document.getElementById('btn-edit-' + id) as HTMLButtonElement;
     comment.className += ' border-danger text-muted';
-    btn.disabled = true;
+    deleteBtn.disabled = true;
+    editBtn.disabled = true;
     this.apiService.deleteCommentById(id).subscribe(() => {
       setTimeout(() => {
         this.updateComments();
@@ -190,7 +192,7 @@ export class PostDetailsComponent implements OnInit {
     const commentDescription = document.getElementById('comment-desc-' + id);
     if (this.updateComment !== '') {
       this.apiService.editCommentById(id, {description: this.updateComment}).subscribe((res) => {
-        //commentDescription.innerText = res.description;
+        commentDescription.innerText = res.description;
         this.updateComments();
       }, error => {
         console.log(error);

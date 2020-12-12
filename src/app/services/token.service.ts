@@ -13,7 +13,6 @@ export class TokenService {
   public clearSession(): void {
     sessionStorage.clear();
     this.loginChange.emit(false);
-
   }
 
   public isLoggedIn(): boolean {
