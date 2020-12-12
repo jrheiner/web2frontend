@@ -23,6 +23,8 @@ export class PostDetailsComponent implements OnInit {
     title: '',
     description: '',
     score: 0,
+    type: '',
+    images: [],
     createdAt: '',
     updatedAt: ''
   };

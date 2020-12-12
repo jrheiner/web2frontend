@@ -12,8 +12,47 @@
         <small class="text-muted" *ngIf="post?.createdAt != post?.updatedAt">Last
           updated {{post?.updatedAt}}</small>
         <hr>
+
+
+        <!-- Post with single image -->
+        <img *ngIf="post?.type === 'img' && post?.images.length === 1"
+             src="http://localhost:3000/assets/{{post?.id}}/{{post?.images[0]}}.png"
+             class="d-block w-100" alt="Post image one">
+
+        <!-- Post with multiple images -->
+        <div id="carouselIndicators" class="carousel slide" data-ride="carousel"
+             *ngIf="post?.type === 'img' && post?.images.length > 1">
+          <ol class="carousel-indicators bg-dark">
+            <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselIndicators" data-slide-to="1" *ngIf="post?.images.length >= 2"></li>
+            <li data-target="#carouselIndicators" data-slide-to="2" *ngIf="post?.images.length === 3"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="http://localhost:3000/assets/{{post?.id}}/{{post?.images[0]}}.png" class="d-block w-100"
+                   alt="Post image one">
+            </div>
+            <div class="carousel-item" *ngIf="post?.images.length >= 2">
+              <img src="http://localhost:3000/assets/{{post?.id}}/{{post?.images[1]}}.png" class="d-block w-100"
+                   alt="Post image two">
+            </div>
+            <div class="carousel-item" *ngIf="post?.images.length === 3">
+              <img src="http://localhost:3000/assets/{{post?.id}}/{{post?.images[2]}}.png" class="d-block w-100"
+                   alt="Post image three">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselIndicators" data-slide="prev">
+            <span class="carousel-control-prev-icon bg-dark"></span>
+          </a>
+          <a class="carousel-control-next" href="#carouselIndicators" data-slide="next">
+            <span class="carousel-control-next-icon bg-dark"></span>
+          </a>
+        </div>
+        <hr *ngIf="post?.type === 'img'">
+        <!-- Post description -->
         <div class="post-description">{{post?.description}}</div>
         <hr>
+        <!-- Comment posting -->
         <div class="border p-3 rounded" *ngIf="isLoggedIn()">
           <div class="row">
             <div class="col-lg-10">
@@ -30,6 +69,7 @@
             </div>
           </div>
         </div>
+        <!-- Comments -->
         <hr *ngIf="isLoggedIn()">
         <div class="list-group" *ngFor="let comment of comments">
           <div class="list-group-item mt-1 pl-2 pr-2" [id]="comment.id">
@@ -39,7 +79,7 @@
                   <a routerLink="/user/{{comment.author._id}}" class="text-decoration-none">
                     <h6 class="mb-2">
                       <img src="http://localhost:3000/avatars/{{comment.author._id}}.png"
-                           style="width: 24px; height: 24px;" class="border"
+                           style="width: 32px; height: 32px;" class="border"
                            alt="Avatar">
                       {{comment.author.username}}</h6>
                   </a>

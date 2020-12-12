@@ -18,6 +18,7 @@ export class PostEditComponent implements OnInit {
     title: '',
     description: '',
     score: '',
+    type: '',
     createdAt: '',
     updatedAt: ''
   };

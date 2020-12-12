@@ -5,6 +5,8 @@
     <span *ngIf="info.type==='success'">Check out the post <a routerLink="/post/{{post.id}}">here</a>.</span>
   </div>
 
+  <p class="lead" *ngIf="post.type === 'img'">At the moment only the title and description of image posts can be
+    edited.</p>
   <form #editPostForm="ngForm" (ngSubmit)="onSubmit()">
     <div [hidden]="editPostForm.submitted">
       <div class="cross-validation" [class.cross-validation-error]="editPostForm.touched || editPostForm.dirty">
@@ -26,7 +28,7 @@
 
         <div class="form-group">
           <label for="description">Description</label>
-          <textarea id="description" name="description" class="form-control" required minlength="5"
+          <textarea id="description" name="description" class="form-control" required minlength="3"
                     onkeydown='this.style.height = "";this.style.height = this.scrollHeight + 3 + "px"'
                     [(ngModel)]="post.description"
                     #description="ngModel"></textarea>

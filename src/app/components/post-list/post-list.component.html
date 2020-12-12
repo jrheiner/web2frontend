@@ -15,16 +15,9 @@
             ...</span>
           </div>
           <p class="card-text">
-            <small class="text-muted">
-              <span class="badge badge-primary">Primary</span>
-              <span class="badge badge-secondary">Secondary</span>
-              <span class="badge badge-success">Success</span>
-              <span class="badge badge-danger">Danger</span>
-              <span class="badge badge-warning">Warning</span>
-              <span class="badge badge-info">Info</span>
-              <span class="badge badge-light">Light</span>
-              <span class="badge badge-dark">Dark</span>
-            </small>
+            <span class="badge badge-dark" *ngIf="post.type === 'text'">Text</span>
+            <span class="badge badge-dark" *ngIf="post.type === 'img'">Image</span>
+            <span class="badge badge-dark" *ngIf="post.type === 'link'">Link</span>
           </p>
         </div>
         <!--<img src="https://via.placeholder.com/1800x1500" class="card-img-bottom" alt="...">-->
