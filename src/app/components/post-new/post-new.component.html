@@ -21,7 +21,8 @@
 
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea id="description" name="description" class="form-control" required minlength="5" rows="5"
+        <textarea id="description" name="description" class="form-control" required minlength="3"
+                  onkeydown='this.style.height = "";this.style.height = this.scrollHeight + 3 + "px"'
                   [(ngModel)]="post.description"
                   #description="ngModel"></textarea>
         <small class="form-text text-muted"

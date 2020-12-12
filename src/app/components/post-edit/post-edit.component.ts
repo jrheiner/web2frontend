@@ -35,6 +35,11 @@ export class PostEditComponent implements OnInit {
     this.apiService.getPostById(this.id).subscribe((post) => {
       this.post = post;
       this.componentLoading = false;
+      setTimeout(() => {
+        const textarea = document.getElementById('description') as HTMLTextAreaElement;
+        textarea.style.height = '';
+        textarea.style.height = textarea.scrollHeight + 3 + 'px';
+      }, 0);
     }, error => {
       console.log(error);
       this.componentLoading = false;
