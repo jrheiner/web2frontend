@@ -78,7 +78,7 @@ export class HelpComponent implements OnInit {
   }
 
   search(event: string): void {
-    const term = event.toLowerCase();
+    const term = event ? event.toLowerCase() : '';
     this.helpDB.forEach((entry, outerIndex) => {
       this.helpDB[outerIndex].collection.forEach((item, innerIndex) => {
         this.helpDB[outerIndex].collection[innerIndex].show = item.question.toLowerCase().includes(term)
