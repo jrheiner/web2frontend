@@ -17,7 +17,7 @@
         <!-- Post with single image -->
         <img *ngIf="post?.type === 'img' && post?.images.length === 1"
              src="http://localhost:3000/assets/{{post?.images[0]}}"
-             class="d-block w-100" alt="Post image one">
+             class="d-block w-100 post-img" alt="Post image one">
 
         <!-- Post with multiple images -->
         <div id="carouselIndicators" class="carousel slide" data-ride="carousel"
@@ -29,15 +29,15 @@
           </ol>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="http://localhost:3000/assets/{{post?.images[0]}}" class="d-block w-100"
+              <img src="http://localhost:3000/assets/{{post?.images[0]}}" class="d-block w-100 post-img"
                    alt="Post image one">
             </div>
             <div class="carousel-item" *ngIf="post?.images.length >= 2">
-              <img src="http://localhost:3000/assets/{{post?.images[1]}}" class="d-block w-100"
+              <img src="http://localhost:3000/assets/{{post?.images[1]}}" class="d-block w-100 post-img"
                    alt="Post image two">
             </div>
             <div class="carousel-item" *ngIf="post?.images.length === 3">
-              <img src="http://localhost:3000/assets/{{post?.images[2]}}" class="d-block w-100"
+              <img src="http://localhost:3000/assets/{{post?.images[2]}}" class="d-block w-100 post-img"
                    alt="Post image three">
             </div>
           </div>

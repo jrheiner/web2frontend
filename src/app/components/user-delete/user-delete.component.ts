@@ -13,6 +13,7 @@ export class UserDeleteComponent implements OnInit {
   alert;
   username;
   input = '';
+  working = false;
 
   constructor(private apiService: ApiService, private session: TokenService, private router: Router) {
   }
@@ -23,11 +24,13 @@ export class UserDeleteComponent implements OnInit {
 
   deleteAccount(): void {
     if (this.input === this.username) {
+      this.working = true;
       this.apiService.deleteUserSelf().subscribe(data => {
         this.session.clearSession();
         this.alert = 'Successfully deleted account.';
         this.session.clearSession();
         this.session.loginChange.emit(false);
+        this.working = false;
       }, error => console.log(error));
     }
   }

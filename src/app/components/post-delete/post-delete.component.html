@@ -1,17 +1,23 @@
 <h1 class="display-4 pt-4 pb-4">Delete post</h1>
 
 <p class="lead">
-  This action will delete the post permanently with no way to recover it. It also includes deleting all comments
-  associated with this post.
+  This action will delete the post permanently with no way to recover it. It also includes deleting all images, votes
+  and comments associated with this post.
 </p>
 
 <h4>Are you sure?</h4>
 
 <div class="btn-toolbar mt-3">
   <div class="btn-group mr-1">
-    <button type="button" class="btn btn-danger" (click)="delete()">Yes, delete post!</button>
+    <button type="button" class="btn btn-danger" (click)="delete()" [disabled]="working">
+      <span *ngIf="!working">Yes, delete post!</span>
+      <div *ngIf="working">
+        <span class="spinner-border">
+        </span>
+      </div>
+    </button>
   </div>
   <div class="btn-group">
-    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()" [disabled]="working">Cancel</button>
   </div>
 </div>

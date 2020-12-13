@@ -10,6 +10,7 @@ import {ApiService} from '../../services/api.service';
 export class PostDeleteComponent implements OnInit {
 
   private id = this.route.snapshot.paramMap.get('id');
+  working = false;
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
   }
@@ -18,6 +19,7 @@ export class PostDeleteComponent implements OnInit {
   }
 
   delete(): void {
+    this.working = true;
     this.apiService.deletePostById(this.id).subscribe(() => {
       this.router.navigate(['/']);
     });

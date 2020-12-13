@@ -13,5 +13,11 @@
   </div>
 </div>
 
-<button type="submit" class="btn btn-danger mt-4 mb-4" (click)="deleteAccount()" [disabled]="alert">Delete</button>
+<button type="submit" class="btn btn-lg btn-danger mt-4 mb-4" (click)="deleteAccount()" [disabled]="alert || working">
+  <span *ngIf="!working">Delete account</span>
+  <div *ngIf="working">
+        <span class="spinner-border">
+        </span>
+  </div>
+</button>
 
