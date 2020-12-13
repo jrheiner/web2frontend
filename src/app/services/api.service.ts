@@ -11,7 +11,7 @@ export class ApiService {
   }
 
   getProjectStats(): Observable<any> {
-    return this.http.get('/api/');
+    return this.http.get('/api');
   }
 
 
