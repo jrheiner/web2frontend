@@ -12,8 +12,8 @@
     <button type="button" class="btn btn-danger" (click)="delete()" [disabled]="working">
       <span *ngIf="!working">Yes, delete post!</span>
       <div *ngIf="working">
-        <span class="spinner-border">
-        </span>
+        <div class="spinner-border">
+        </div>
       </div>
     </button>
   </div>

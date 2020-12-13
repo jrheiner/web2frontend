@@ -126,7 +126,12 @@
       link form here
     </div>
 
-    <button type="submit" class="btn btn-success" [disabled]="newPostForm.invalid || filesInvalid">Post!
+    <button type="submit" class="btn btn-success" [disabled]="newPostForm.invalid || filesInvalid || working">
+      <span *ngIf="!working">Submit post</span>
+      <div *ngIf="working">
+        <div class="spinner-border">
+        </div>
+      </div>
     </button>
 
   </div>

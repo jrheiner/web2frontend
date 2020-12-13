@@ -44,11 +44,10 @@ export class PostNewComponent implements OnInit {
 
   createPost(data: FormData): void {
     this.apiService.postPost(data).subscribe(res => {
-      console.log(res);
-      if (res) {
-        this.successId = res.id;
-      }
+      this.working = false;
+      this.successId = res.id;
     }, err => {
+      this.working = false;
       console.log(err);
     });
   }
