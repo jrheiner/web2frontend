@@ -1,6 +1,9 @@
 <h1 class="display-2 pt-5 pb-5 text-center">Create account</h1>
 <p class="lead">
-  To create a new account simply choose a username and password, according to the <a routerLink="/help">requirements</a>.
+  To create a new account simply choose a username and password, according to the <a routerLink="/help"
+                                                                                     [queryParams]="{
+                                          s: 'What are the username and password requirements?'
+                                          }">requirements</a>.
   Later on you can customize you profile by adding a status or profile picture.
 </p>
 
@@ -26,7 +29,10 @@
           Username is required.
         </div>
         <div *ngIf="registerUsername.errors.pattern">
-          Username is not matching the <a routerLink="/help">requirements</a>.
+          Username is not matching the <a routerLink="/help"
+                                          [queryParams]="{
+                                          s: 'What are the username and password requirements?'
+                                          }">requirements</a>.
         </div>
         <div *ngIf="registerUsername.errors?.uniqueError">
           This username is already taken.
@@ -52,7 +58,10 @@
            class="invalid-feedback">
 
         <div *ngIf="registerPassword.errors.pattern">
-          Password is not matching the <a routerLink="/help">requirements</a>.
+          Password is not matching the <a routerLink="/help"
+                                          [queryParams]="{
+          s: 'What are the username and password requirements?'
+          }">requirements</a>.
         </div>
         <div *ngIf="registerPassword.errors.required">
           Password is required.

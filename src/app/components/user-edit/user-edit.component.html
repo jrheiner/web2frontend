@@ -22,7 +22,10 @@
               Username is required.
             </div>
             <div *ngIf="editUsername.errors.pattern">
-              Username is not matching the <a routerLink="/help">requirements</a>.
+              Username is not matching the <a routerLink="/help"
+                                              [queryParams]="{
+                                          s: 'What are the username and password requirements?'
+                                          }">requirements</a>.
             </div>
             <div *ngIf="editUsername.errors?.uniqueError">
               This username is already taken.
@@ -46,7 +49,10 @@
                class="invalid-feedback">
 
             <div *ngIf="editPassword.errors.pattern">
-              New password is not matching the <a routerLink="/help">requirements</a>.
+              New password is not matching the <a routerLink="/help"
+                                                  [queryParams]="{
+                                          s: 'What are the username and password requirements?'
+                                          }">requirements</a>.
             </div>
           </div>
         </div>

@@ -1,12 +1,24 @@
 <h1 class="display-4 pt-4 pb-4">Help and Frequently Asked Questions</h1>
+<p class="lead font-italic">Use <kbd>CTRL + f</kbd> | <kbd>⌘ + f</kbd> or type below to search for keywords or
+  questions.</p>
 
-<div class="list-group" *ngFor="let help of helpDB; let i = index">
-  <div class="list-group-item">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">{{help.question}}</h5>
+<div class="mb-3">
+  <label for="search" class="d-none"></label>
+  <input [(ngModel)]="searchTerm" class="form-control" placeholder="Search..." id="search"
+         (ngModelChange)="search($event)">
+</div>
+<div *ngFor="let category of helpDB; let i  = index">
+  <div *ngIf="category.show">
+    <p class="h3">{{category.category}}</p>
+    <div class="list-group" *ngFor="let help of category.collection; let i = index">
+      <div class="list-group-item" *ngIf="help.show">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{help.question}}</h5>
+        </div>
+        <p class="mb-1" style="white-space: pre-wrap;">{{help.answer}}</p>
+        <small class="text-muted"> small text </small>
+      </div>
     </div>
-    <p class="mb-1">{{help.answer}}</p>
-    <small>Additional information</small>
   </div>
 </div>
 
