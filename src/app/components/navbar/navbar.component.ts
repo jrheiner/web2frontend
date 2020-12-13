@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TokenService} from '../../services/token.service';
 import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -10,12 +11,14 @@ import {Router} from '@angular/router';
 export class NavbarComponent implements OnInit, OnDestroy {
   hideLogin: boolean = this.session.isLoggedIn();
   currentUser: string = this.session.getUsername() ? this.session.getUsername() : '';
+  private serviceSubscriptionLogin: Subscription;
+  private serviceSubscriptionUser: Subscription;
 
   constructor(private session: TokenService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.session.loginChange.subscribe((val: boolean) => {
+    this.serviceSubscriptionLogin = this.session.loginChange.subscribe((val: boolean) => {
       this.hideLogin = val;
       if (this.hideLogin) {
         this.currentUser = this.session.getUsername();
@@ -23,7 +26,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.currentUser = '';
       }
     });
-    this.session.userChange.subscribe((val: string) => {
+    this.serviceSubscriptionUser = this.session.userChange.subscribe((val: string) => {
       this.currentUser = val;
     });
   }
@@ -35,7 +38,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.session.loginChange.unsubscribe();
-    this.session.userChange.unsubscribe();
+    this.serviceSubscriptionLogin.unsubscribe();
+    this.serviceSubscriptionUser.unsubscribe();
   }
 }
