@@ -16,7 +16,7 @@
 
         <!-- Post with single image -->
         <img *ngIf="post?.type === 'img' && post?.images.length === 1"
-             src="http://localhost:3000/assets/{{post?.id}}/{{post?.images[0]}}.png"
+             src="http://localhost:3000/assets/{{post?.images[0]}}"
              class="d-block w-100" alt="Post image one">
 
         <!-- Post with multiple images -->
@@ -29,15 +29,15 @@
           </ol>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="http://localhost:3000/assets/{{post?.id}}/{{post?.images[0]}}.png" class="d-block w-100"
+              <img src="http://localhost:3000/assets/{{post?.images[0]}}" class="d-block w-100"
                    alt="Post image one">
             </div>
             <div class="carousel-item" *ngIf="post?.images.length >= 2">
-              <img src="http://localhost:3000/assets/{{post?.id}}/{{post?.images[1]}}.png" class="d-block w-100"
+              <img src="http://localhost:3000/assets/{{post?.images[1]}}" class="d-block w-100"
                    alt="Post image two">
             </div>
             <div class="carousel-item" *ngIf="post?.images.length === 3">
-              <img src="http://localhost:3000/assets/{{post?.id}}/{{post?.images[2]}}.png" class="d-block w-100"
+              <img src="http://localhost:3000/assets/{{post?.images[2]}}" class="d-block w-100"
                    alt="Post image three">
             </div>
           </div>
@@ -79,7 +79,7 @@
                   <a routerLink="/user/{{comment.author._id}}" class="text-decoration-none">
                     <h6 class="mb-2">
                       <img src="http://localhost:3000/avatars/{{comment.author._id}}.png"
-                           style="width: 32px; height: 32px;" class="border"
+                           class="border user-avatar"
                            alt="Avatar">
                       {{comment.author.username}}</h6>
                   </a>

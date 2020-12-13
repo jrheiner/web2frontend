@@ -18,8 +18,8 @@ export class ApiService {
     return this.http.get(`/api/posts/${postId}`);
   }
 
-  postPost(data): Observable<any> {
-    return this.http.post(`/api/posts`, data);
+  postPost(data: FormData): Observable<any> {
+    return this.http.post(`/api/posts`, data, {headers: {Accept: 'application/json'}});
   }
 
   editPostById(postId: string, data: any): Observable<any> {

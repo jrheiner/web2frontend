@@ -1,7 +1,7 @@
 <h1 class="display-4 pt-4 pb-4">Create new post</h1>
 
-<form #newPostForm="ngForm" (ngSubmit)="onSubmit()">
-  <div [hidden]="newPostForm.submitted">
+<form #newPostForm="ngForm" (ngSubmit)="onSubmit()" id="newPostForm">
+  <div [hidden]="newPostForm.submitted && !working">
     <h6>Post type</h6>
     <div class="btn-group mb-3">
       <button type="button" class="btn btn-primary" disabled id="btn-text-post" (click)="setPostType('text')">Text
@@ -56,13 +56,14 @@
       <div class="col-md-10 d-flex flex-wrap">
         <div class="form-group">
           <label for="image-1" class="text-muted">Image 1</label>
-          <input type="file" class="form-control-file" id="image-1" name="imageOne" (change)="onFileChange($event)">
+          <input type="file" class="form-control-file" id="image-1" name="imageOne" (change)="onFileChange($event)"
+                 accept="image/jpeg,image/png">
           <small class="text-success"
-                 *ngIf="postImages.imageOne.size < 500000 && postImages.imageOne.size">
-            {{postImages.imageOne?.size / 1000}} kb
+                 *ngIf="postImages.imageOne.size <= 500000 && postImages.imageOne.size">
+            {{postImages.imageOne?.size / 1024 | number}} kb
           </small>
           <small class="text-danger" *ngIf="postImages.imageOne.size > 500000">
-            {{postImages.imageOne?.size / 1000}} kb
+            {{postImages.imageOne?.size / 1024 | number}} kb
           </small>
           <br>
           <small class="text-success"
@@ -76,13 +77,14 @@
         </div>
         <div class="form-group">
           <label for="image-2" class="text-muted">Image 2</label>
-          <input type="file" class="form-control-file" id="image-2" name="imageTwo" (change)="onFileChange($event)">
+          <input type="file" class="form-control-file" id="image-2" name="imageTwo" (change)="onFileChange($event)"
+                 accept="image/jpeg,image/png">
           <small class="text-success"
-                 *ngIf="postImages.imageTwo.size < 500000 && postImages.imageTwo.size">
-            {{postImages.imageTwo?.size / 1000}} kb
+                 *ngIf="postImages.imageTwo.size <= 500000 && postImages.imageTwo.size">
+            {{postImages.imageTwo?.size / 1024 | number}} kb
           </small>
           <small class="text-danger" *ngIf="postImages.imageTwo.size > 500000">
-            {{postImages.imageTwo?.size / 1000}} kb
+            {{postImages.imageTwo?.size / 1024 | number}} kb
           </small>
           <br>
           <small class="text-success"
@@ -96,13 +98,14 @@
         </div>
         <div class="form-group">
           <label for="image-3" class="text-muted">Image 3</label>
-          <input type="file" class="form-control-file" id="image-3" name="imageThree" (change)="onFileChange($event)">
+          <input type="file" class="form-control-file" id="image-3" name="imageThree" (change)="onFileChange($event)"
+                 accept="image/jpeg,image/png">
           <small class="text-success"
-                 *ngIf="postImages.imageThree.size < 500000 && postImages.imageThree.size">
-            {{postImages.imageThree?.size / 1000}} kb
+                 *ngIf="postImages.imageThree.size <= 500000 && postImages.imageThree.size">
+            {{postImages.imageThree?.size / 1024 | number}} kb
           </small>
           <small class="text-danger" *ngIf="postImages.imageThree.size > 500000">
-            {{postImages.imageThree?.size / 1000}} kb
+            {{postImages.imageThree?.size / 1024 | number}} kb
           </small>
           <br>
           <small class="text-success"
@@ -123,12 +126,12 @@
       link form here
     </div>
 
-    <button type="submit" class="btn btn-success" [disabled]="newPostForm.invalid || fileIsInvalid">Post!
+    <button type="submit" class="btn btn-success" [disabled]="newPostForm.invalid || filesInvalid">Post!
     </button>
 
   </div>
 
-  <div class="posted-message" *ngIf="newPostForm.submitted">
+  <div class="posted-message" *ngIf="newPostForm.submitted && successId !== '0'">
     <div class="alert alert-success" role="alert">
       Success! You can check out your post <a routerLink="../{{successId}}">here</a>.
     </div>

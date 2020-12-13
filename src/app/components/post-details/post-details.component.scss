@@ -11,3 +11,17 @@
   max-height: 400px;
   overflow-y: auto
 }
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+}
+
+img {
+  display: block;
+  max-width: 500px;
+  max-height: 500px;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+}
