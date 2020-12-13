@@ -1,0 +1,66 @@
+<div class="card mt-5" *ngIf="!isLoggedIn()">
+  <div class="card-body">
+    <h5 class="card-title">Create an account or login</h5>
+    <p class="card-text">You can create your own posts, or vote and comment on other posts.</p>
+    <button class="btn btn-success btn-block" routerLink="login">Login</button>
+    <button class="btn btn-primary btn-block" routerLink="register">Register</button>
+  </div>
+</div>
+
+<div class="card mt-5">
+  <div class="card-body" *ngIf="!loading">
+    <h5 class="card-title">About this project</h5>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <h5 class="mb-0">
+        <span class="badge bg-dark text-white btn-block">
+          {{convertBytes(projectData.disk_assets.storageSize + projectData.disk_avatars.storageSize)}} Assets
+        </span>
+        </h5>
+        <h5 class="mb-0">
+        <span class="badge bg-dark text-white btn-block">
+          {{convertBytes(projectData.db.storageSize)}} Database size
+        </span>
+        </h5>
+      </li>
+      <li class="list-group-item d-flex flex-column">
+        <h5 class="mb-0">
+        <span class="badge bg-dark text-white btn-block">
+          {{projectData.user.count == 1 ? "1 User" : projectData.user.count + " Users"}}
+        </span>
+        </h5>
+        <h5 class="mb-0">
+        <span class="badge bg-dark text-white btn-block">
+          {{projectData.post.count == 1 ? "1 Post" : projectData.post.count + " Posts"}}
+        </span>
+        </h5>
+        <h5 class="mb-0">
+        <span class="badge bg-dark text-white btn-block">
+          {{projectData.comment.count == 1 ? "1 Comment" : projectData.comment.count + " Comments"}}
+        </span>
+        </h5>
+        <h5 class="mb-0">
+        <span class="badge bg-dark text-white btn-block">
+          {{projectData.vote.count == 1 ? "1 Like" : projectData.vote.count + " Likes"}}
+        </span>
+        </h5>
+      </li>
+
+    </ul>
+
+  </div>
+
+  <div class="m-4 d-flex align-items-center flex-column" *ngIf="loading">
+    <div class="spinner-border text-muted m-5"></div>
+  </div>
+
+</div>
+<div class="card mt-5">
+  <div class="card-body">
+    <h5 class="card-title">Need help?</h5>
+    <p class="card-text">
+      Check out the Help and Frequently Asked Questions
+    </p>
+    <a routerLink="/help" class="btn btn-info btn-block">Go to Help and FAQ</a>
+  </div>
+</div>

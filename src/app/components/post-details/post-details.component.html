@@ -173,10 +173,8 @@
         </div>
         <div class="col-sm-12 d-none d-lg-block">
           <div class="card mt-3">
-            <div class="card-header">
-              User action
-            </div>
             <div class="card-body">
+              <h5 class="card-title">User action</h5>
               <!-- Like button -->
               <button class="btn btn-success btn-block" (click)="likePost()" [disabled]="!isLoggedIn() || isLoading">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"

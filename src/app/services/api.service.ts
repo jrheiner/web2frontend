@@ -10,6 +10,11 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
+  getProjectStats(): Observable<any> {
+    return this.http.get('/api/');
+  }
+
+
   getAllPosts(): Observable<any> {
     return this.http.get('/api/posts');
   }
