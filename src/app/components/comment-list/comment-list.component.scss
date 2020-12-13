@@ -1,0 +1,19 @@
+.comment-description {
+  white-space: pre-wrap;
+  max-height: 400px;
+  overflow-y: auto
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+}
+
+.loading-spinner {
+  width: 2rem !important;
+  height: 2rem !important;
+  position: relative;
+  top: 25px;
+  left: calc(50% - 1rem);;
+  margin: auto;
+}

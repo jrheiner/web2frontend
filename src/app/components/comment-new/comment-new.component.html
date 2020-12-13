@@ -1,0 +1,16 @@
+<div class="border p-3 rounded" *ngIf="isLoggedIn()">
+  <div class="row">
+    <div class="col-lg-10">
+      <label for="write-comment" class="d-none"></label>
+      <textarea class="form-control" id="write-comment" placeholder="Write a comment"
+                [(ngModel)]="writeComment" maxlength="500"></textarea>
+    </div>
+    <div class="col-lg-2">
+      <button class="btn btn-outline-success btn-block mt-2" (click)="postComment()"
+              [disabled]="sending">
+        <span class="spinner-border spinner-border-sm" *ngIf="sending"></span>
+        <span *ngIf="!sending">Comment</span>
+      </button>
+    </div>
+  </div>
+</div>

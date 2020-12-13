@@ -22,6 +22,8 @@ import {PostDeleteComponent} from './components/post-delete/post-delete.componen
 import {UniqueUsernameDirective} from './directives/unique-username.directive';
 import {RepeatPasswordValidatorDirective} from './directives/repeat-password.directive';
 import { HomeCardsComponent } from './components/home-cards/home-cards.component';
+import { CommentListComponent } from './components/comment-list/comment-list.component';
+import { CommentNewComponent } from './components/comment-new/comment-new.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { HomeCardsComponent } from './components/home-cards/home-cards.component
     PostDeleteComponent,
     UniqueUsernameDirective,
     RepeatPasswordValidatorDirective,
-    HomeCardsComponent
+    HomeCardsComponent,
+    CommentListComponent,
+    CommentNewComponent
   ],
   imports: [
     BrowserModule,

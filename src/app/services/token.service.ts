@@ -6,6 +6,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 export class TokenService {
   loginChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   userChange: EventEmitter<string> = new EventEmitter<string>();
+  newComment: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() {
   }
