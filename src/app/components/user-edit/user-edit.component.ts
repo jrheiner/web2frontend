@@ -38,7 +38,6 @@ export class UserEditComponent implements OnInit {
     this.apiService.getUserSelf().subscribe(data => {
       this.user.username = data.username;
       this.user.status = data.status || '';
-      console.log(data);
       this.componentLoading = false;
     }, error =>
       console.log(error));
@@ -46,33 +45,32 @@ export class UserEditComponent implements OnInit {
   }
 
   private updateUser(): void {
-    const reqData = this.user;
     console.log(this.user);
 
     const formData = new FormData(document.getElementById('editUserForm') as HTMLFormElement);
-    console.log('______FORMDATA______');
+
+    if (!this.user.password || this.user.password.length < 5) {
+      formData.delete('editPassword');
+    }
+
+    if (!this.user.avatar.valid || !this.user.avatar.size) {
+      formData.delete('customAvatar');
+    }
+    if (this.user.username === this.session.getUsername()) {
+      formData.delete('editUsername');
+    } else {
+      this.session.userChange.emit(this.user.username);
+      this.session.setUsername(this.user.username);
+    }
+    console.log('______updated______');
     // @ts-ignore
     for (const pair of formData.entries()) {
+      console.log(pair[0]);
       console.log(pair[1]);
+      console.log('-');
     }
-    console.log('______FORMDATA______');
-
-    if (!reqData.password || reqData.password.length < 5) {
-      delete reqData.password;
-    }
-    if (!reqData.avatar.valid
-      && reqData.avatar.size > 500000
-      && (reqData.avatar.type.includes('png') || reqData.avatar.type.includes('jpeg'))) {
-      delete reqData.avatar;
-    }
-    if (reqData.username === this.session.getUsername()) {
-      delete reqData.username;
-    } else {
-      this.session.userChange.emit(reqData.username);
-      this.session.setUsername(reqData.username);
-    }
-    console.log(reqData);
-    this.apiService.editUserSelf(reqData).subscribe(res => {
+    console.log('______updated______');
+    this.apiService.editUserSelf(formData).subscribe(res => {
       console.log(res);
       this.getUser();
       this.info.type = 'success';
