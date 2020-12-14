@@ -83,6 +83,18 @@ export class ApiService {
     return this.http.get(`/api/user/check/${username}`);
   }
 
+  getUserSaved(): Observable<any> {
+    return this.http.get('/api/user/saved/');
+  }
+
+  checkUserSaved(postId: string): Observable<any> {
+    return this.http.get(`/api/user/saved/${postId}`);
+  }
+
+  addUserSaved(postId: string): Observable<any> {
+    return this.http.post(`/api/user/save/${postId}`, null);
+  }
+
   login(username: string, password: string): Observable<any> {
     return this.http.post('/api/user/login', {username, password});
   }

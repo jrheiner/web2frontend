@@ -24,6 +24,7 @@ import {RepeatPasswordValidatorDirective} from './directives/repeat-password.dir
 import { HomeCardsComponent } from './components/home-cards/home-cards.component';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { CommentNewComponent } from './components/comment-new/comment-new.component';
+import { UserSavedComponent } from './components/user-saved/user-saved.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CommentNewComponent } from './components/comment-new/comment-new.compon
     RepeatPasswordValidatorDirective,
     HomeCardsComponent,
     CommentListComponent,
-    CommentNewComponent
+    CommentNewComponent,
+    UserSavedComponent
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@ import {UserDeleteComponent} from './components/user-delete/user-delete.componen
 import {HelpComponent} from './components/help/help.component';
 import {PostDeleteComponent} from './components/post-delete/post-delete.component';
 import {RoleGuard} from './role.guard';
+import {UserSavedComponent} from './components/user-saved/user-saved.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
   {
     path: 'user', children: [
       {path: '', component: UserDetailsComponent, canActivate: [AuthGuard]},
+      {path: 'saved', component: UserSavedComponent, canActivate: [AuthGuard]},
       {path: 'edit', component: UserEditComponent, canActivate: [AuthGuard]},
       {path: 'delete', component: UserDeleteComponent, canActivate: [AuthGuard]},
       {path: ':id', component: UserDetailsComponent}

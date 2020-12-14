@@ -54,6 +54,10 @@ export class PostDetailsComponent implements OnInit {
       this.notFound = error.error.message;
       this.componentLoading = false;
     });
+
+    this.apiService.checkUserSaved(this.id).subscribe((res) => {
+      this.postIsSaved = res.saved;
+    });
   }
 
   getUsername(): string {
@@ -80,9 +84,14 @@ export class PostDetailsComponent implements OnInit {
   }
 
   savePost(currentValue: boolean): void {
-    // TODO save post to user list idk
-    // do request
-    this.postIsSaved = !currentValue;
+    this.isLoading = true;
+    this.apiService.addUserSaved(this.id).subscribe(() => {
+      this.postIsSaved = !currentValue;
+      this.isLoading = false;
+    }, error => {
+      this.isLoading = false;
+      console.log(error);
+    });
   }
 
   likePost(): void {

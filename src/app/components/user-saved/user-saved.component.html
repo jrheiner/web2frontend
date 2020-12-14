@@ -1,0 +1,38 @@
+<h1 class="display-4 pt-4 pb-4">Saved posts</h1>
+<div *ngIf="!componentLoading">
+
+  <div *ngIf="savedPosts.length > 0">
+    <div class="list-group" *ngFor="let item of savedPosts">
+      <a [routerLink]="'/post/'+item.post.id" class="list-group-item list-group-item-action mb-2">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{item.post.title}}</h5>
+          <small class="text-muted">Saved {{item.saved}}</small>
+        </div>
+        <div class="card-text mb-1">{{item.post.description | slice: 0 : 100}}<span
+          class="fade-out"
+          *ngIf="item.post.description.length > 225">{{item.post.description | slice: 100 : 125}}
+          ...</span>
+        </div>
+        <small class="text-muted">Posted by {{item.post.author.username}} {{item.post.createdAt}}</small>
+      </a>
+    </div>
+  </div>
+
+  <div *ngIf="savedPosts.length === 0">
+    <h3>
+      No saved posts found.
+      <small class="text-muted">Click the
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-fill" fill="currentColor"
+             xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+                d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5V2z"/>
+        </svg>
+        button to save a post.</small>
+    </h3>
+  </div>
+
+</div>
+<div *ngIf="componentLoading">
+  <div class="spinner-border text-secondary loading-spinner">
+  </div>
+</div>
