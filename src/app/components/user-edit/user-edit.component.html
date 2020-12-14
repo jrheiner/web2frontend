@@ -4,7 +4,7 @@
     {{info.message}}
   </div>
 
-  <form #editUserForm="ngForm" (ngSubmit)="onSubmit()">
+  <form #editUserForm="ngForm" (ngSubmit)="onSubmit()" id="editUserForm">
     <div class="cross-validation" [class.cross-validation-error]="editUserForm.touched || editUserForm.dirty">
       <div class="form-row">
         <div class="form-group col-sm-6">
@@ -12,7 +12,8 @@
           <input id="editUsername" name="editUsername" type="text" class="form-control" required
                  minlength="2" [(ngModel)]="user.username" #editUsername="ngModel"
                  [ngModelOptions]="{ updateOn: 'blur' }"
-                 appUniqueUsername pattern="^(?=[a-zA-Z0-9-_]{2,16}$)[^_-].*[^_-]$" maxlength="16">
+                 appUniqueUsername pattern="^(?=[a-zA-Z0-9-_]{2,16}$)[^_-].*[^_-]$" maxlength="16"
+                 autocomplete="username">
 
           <small class="form-text text-muted" *ngIf="editUsername.pending">Checking username...</small>
           <div *ngIf="editUsername.invalid && (editUsername.dirty || editUsername.touched)"
@@ -62,9 +63,45 @@
         <input id="editStatus" name="editStatus" type="text" class="form-control" [(ngModel)]="user.status"
                #editStatus="ngModel" maxlength="150">
       </div>
+      <div class="form-row d-flex flex-column mb-2">
+        <p class="mb-1">Profile picture</p>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="resetAvatar" name="resetAvatar"
+                   (change)="setCheckbox($event)">
+            <label class="form-check-label" for="resetAvatar">
+              Delete current profile picture and use generated one.
+            </label>
+          </div>
+        </div>
+        <div class="form-group mr-5">
+          <label for="customAvatar">Example file input</label>
+          <input type="file" class="form-control-file" id="customAvatar" name="customAvatar" [disabled]="resetAvatar"
+                 accept="image/jpeg, image/png" (change)="onFileChange($event)">
+          <small class="text-muted">Only PNG/JPEG allowed. 500kb max</small>
+          <br>
+          <small class="text-success"
+                 *ngIf="user.avatar.size <= 500000 && user.avatar.size">
+            {{user.avatar.size / 1024 | number: '1.0-0' }} kb
+          </small>
+          <small class="text-danger" *ngIf="user.avatar.size > 500000">
+            {{user.avatar.size / 1024 | number: '1.0-0' }} kb
+          </small>
+          <br>
+          <small class="text-success"
+                 *ngIf="user.avatar.type.includes('png') || user.avatar.type.includes('jpeg')">
+            {{user.avatar.type}}
+          </small>
+          <small class="text-danger"
+                 *ngIf="!(user.avatar.type.includes('png') || user.avatar.type.includes('jpeg'))">
+            {{user.avatar.type}}
+          </small>
+        </div>
+      </div>
+
     </div>
     <button type="submit" class="btn btn-success"
-            [disabled]="(editUserForm.invalid || editUsername.pending)">Update
+            [disabled]="(editUserForm.invalid || editUsername.pending || !this.user.avatar.valid)">Update
     </button>
   </form>
 </div>

@@ -60,10 +60,10 @@
                  accept="image/jpeg,image/png">
           <small class="text-success"
                  *ngIf="postImages.imageOne.size <= 500000 && postImages.imageOne.size">
-            {{postImages.imageOne?.size / 1024 | number}} kb
+            {{postImages.imageOne?.size / 1024 | number: '1.0-0' }} kb
           </small>
           <small class="text-danger" *ngIf="postImages.imageOne.size > 500000">
-            {{postImages.imageOne?.size / 1024 | number}} kb
+            {{postImages.imageOne?.size / 1024 | number: '1.0-0' }} kb
           </small>
           <br>
           <small class="text-success"
@@ -81,10 +81,10 @@
                  accept="image/jpeg,image/png">
           <small class="text-success"
                  *ngIf="postImages.imageTwo.size <= 500000 && postImages.imageTwo.size">
-            {{postImages.imageTwo?.size / 1024 | number}} kb
+            {{postImages.imageTwo?.size / 1024 | number: '1.0-0' }} kb
           </small>
           <small class="text-danger" *ngIf="postImages.imageTwo.size > 500000">
-            {{postImages.imageTwo?.size / 1024 | number}} kb
+            {{postImages.imageTwo?.size / 1024 | number: '1.0-0' }} kb
           </small>
           <br>
           <small class="text-success"
@@ -102,10 +102,10 @@
                  accept="image/jpeg,image/png">
           <small class="text-success"
                  *ngIf="postImages.imageThree.size <= 500000 && postImages.imageThree.size">
-            {{postImages.imageThree?.size / 1024 | number}} kb
+            {{postImages.imageThree?.size / 1024 | number: '1.0-0' }} kb
           </small>
           <small class="text-danger" *ngIf="postImages.imageThree.size > 500000">
-            {{postImages.imageThree?.size / 1024 | number}} kb
+            {{postImages.imageThree?.size / 1024 | number: '1.0-0' }} kb
           </small>
           <br>
           <small class="text-success"

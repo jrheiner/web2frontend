@@ -12,7 +12,12 @@ export class UserEditComponent implements OnInit {
   user = {
     username: '',
     password: '',
-    status: ''
+    status: '',
+    avatar: {
+      size: 0,
+      type: '',
+      valid: true
+    }
   };
 
   info = {
@@ -20,6 +25,7 @@ export class UserEditComponent implements OnInit {
     message: ''
   };
   componentLoading = true;
+  resetAvatar: boolean;
 
   constructor(private apiService: ApiService, private session: TokenService) {
   }
@@ -41,8 +47,23 @@ export class UserEditComponent implements OnInit {
 
   private updateUser(): void {
     const reqData = this.user;
+    console.log(this.user);
+
+    const formData = new FormData(document.getElementById('editUserForm') as HTMLFormElement);
+    console.log('______FORMDATA______');
+    // @ts-ignore
+    for (const pair of formData.entries()) {
+      console.log(pair[1]);
+    }
+    console.log('______FORMDATA______');
+
     if (!reqData.password || reqData.password.length < 5) {
       delete reqData.password;
+    }
+    if (!reqData.avatar.valid
+      && reqData.avatar.size > 500000
+      && (reqData.avatar.type.includes('png') || reqData.avatar.type.includes('jpeg'))) {
+      delete reqData.avatar;
     }
     if (reqData.username === this.session.getUsername()) {
       delete reqData.username;
@@ -65,5 +86,32 @@ export class UserEditComponent implements OnInit {
 
   onSubmit(): void {
     this.updateUser();
+  }
+
+  onFileChange(event): void {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.user.avatar.type = file.type;
+      this.user.avatar.size = file.size;
+      this.user.avatar.valid = (this.user.avatar.type.includes('png')
+        || this.user.avatar.type.includes('jpeg'))
+        && this.user.avatar.size <= 500000;
+    } else {
+      this.resetFileInput();
+    }
+  }
+
+  setCheckbox(event: Event): void {
+    const checkbox = event.target as HTMLInputElement;
+    this.resetAvatar = checkbox.checked;
+    this.resetFileInput();
+  }
+
+  private resetFileInput(): void {
+    const fileInput = document.getElementById('customAvatar') as HTMLInputElement;
+    fileInput.value = '';
+    this.user.avatar.type = '';
+    this.user.avatar.size = 0;
+    this.user.avatar.valid = true;
   }
 }
