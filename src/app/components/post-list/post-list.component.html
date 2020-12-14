@@ -18,8 +18,8 @@
                 ...</span>
               </div>
             </div>
-            <div class="col-md-4 d-flex align-items-center">
-              <img *ngIf="post?.type === 'img' && post?.images.length > 0" alt="Post image preview"
+            <div *ngIf="post?.type === 'img' && post?.images.length > 0" class="col-md-4 d-flex align-items-center">
+              <img alt="Post image preview"
                    class="card-img-bottom post-img-preview"
                    src="http://localhost:3000/assets/{{post?.images[0]}}">
             </div>
