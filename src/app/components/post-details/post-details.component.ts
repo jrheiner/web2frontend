@@ -25,6 +25,7 @@ export class PostDetailsComponent implements OnInit {
     score: 0,
     type: '',
     images: [],
+    link: '',
     createdAt: '',
     updatedAt: ''
   };
@@ -43,6 +44,11 @@ export class PostDetailsComponent implements OnInit {
       this.post = post;
       this.post.description = this.post.description.replace(/\\n/g, String.fromCharCode(13, 10));
       this.componentLoading = false;
+      if (this.post.link !== '') {
+        if (!this.post.link.includes('http')) {
+          this.post.link = 'https://' + this.post.link;
+        }
+      }
     }, error => {
       console.log(error);
       this.notFound = error.error.message;

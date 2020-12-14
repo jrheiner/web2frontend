@@ -28,12 +28,14 @@
 
     <div class="form-group">
       <label for="description">Description</label>
-      <textarea id="description" name="description" class="form-control" required minlength="3"
+      <textarea id="description" name="description" class="form-control" [required]="post.type === 'text'" minlength="3"
                 onkeydown='this.style.height = "";this.style.height = this.scrollHeight + 3 + "px"'
                 [(ngModel)]="post.description"
                 #description="ngModel"></textarea>
       <small class="form-text text-muted"
-             *ngIf="!description.invalid || description.untouched">Required.</small>
+             *ngIf="(!description.invalid || description.untouched ) && post.type === 'text'">Required.</small>
+      <small class="form-text text-muted"
+             *ngIf="(!description.invalid || description.untouched ) && post.type!=='text'">Optional.</small>
       <div *ngIf="description.invalid && (description.dirty || description.touched)"
            class="invalid-feedback">
 
@@ -50,7 +52,7 @@
       <div class="col-md-2">
         <ul>
           <li>PNG/JPEG only</li>
-          <li>Max. 500 kb</li>
+          <li>Max. 500 kb (per image)</li>
         </ul>
       </div>
       <div class="col-md-10 d-flex flex-wrap">
@@ -122,8 +124,23 @@
       </div>
     </div>
 
-    <div *ngIf="post.type  === 'link'">
-      link form here
+    <div *ngIf="post.type  === 'link'" class="mb-3">
+      <label for="link">Link</label>
+      <input id="link" name="link" type="text"
+             pattern="(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
+             class="form-control" required [(ngModel)]="post.link"
+             #link="ngModel">
+      <small class="form-text text-muted"
+             *ngIf="!link.invalid || link.untouched">Required.</small>
+      <div *ngIf="link.invalid && (link.dirty || link.touched)"
+           class="invalid-feedback">
+        <div *ngIf="link.errors.required">
+          A link post requires a link.
+        </div>
+        <div *ngIf="link.errors.pattern">
+          Enter a valid url.
+        </div>
+      </div>
     </div>
 
     <button type="submit" class="btn btn-success" [disabled]="newPostForm.invalid || filesInvalid || working">

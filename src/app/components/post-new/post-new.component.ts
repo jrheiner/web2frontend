@@ -16,6 +16,7 @@ export class PostNewComponent implements OnInit {
     title: '',
     description: '',
     type: 'text',
+    link: ''
   };
   postImages = {
     imageOne: {
@@ -43,6 +44,10 @@ export class PostNewComponent implements OnInit {
   }
 
   createPost(data: FormData): void {
+    // @ts-ignore
+    for (const value of data.values()) {
+      console.log(value);
+    }
     this.apiService.postPost(data).subscribe(res => {
       this.working = false;
       this.successId = res.id;
