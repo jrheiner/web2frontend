@@ -82,7 +82,7 @@ export class PostDetailsComponent implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
-    this.copyLink = '✓ (Link copied to clipboard)';
+    this.copyLink = ' (Link copied to clipboard)';
   }
 
   savePost(currentValue: boolean): void {

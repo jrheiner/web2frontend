@@ -15,7 +15,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   searchTerm = '';
   const;
   timer;
-  sorting: 'top' | 'new' = 'new';
+  sorting: 'top' | 'new' | 'old' = 'new';
 
   constructor(private apiService: ApiService) {
   }
@@ -54,10 +54,17 @@ export class PostListComponent implements OnInit, OnDestroy {
   sortPosts(data): void {
     switch (this.sorting) {
       case 'new':
-        return data.reverse();
-      case 'top':
-        data = data.reverse();
         return data.sort((a, b) => {
+          return b.updatedAtUnix - a.updatedAtUnix;
+        });
+      case 'old':
+        return data.sort((a, b) => {
+          return a.updatedAtUnix - b.updatedAtUnix;
+        });
+      case 'top':
+        return data.sort((a, b) => {
+          return b.updatedAtUnix - a.updatedAtUnix;
+        }).sort((a, b) => {
           if (a.score > b.score) {
             return -1;
           } else if (a.score > b.score) {
@@ -78,7 +85,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     });
   }
 
-  setSorting(mode: 'top' | 'new'): void {
+  setSorting(mode: 'top' | 'new' | 'old'): void {
     this.sorting = mode;
     this.redoListFromCache();
     this.search(this.searchTerm);

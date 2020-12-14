@@ -12,16 +12,19 @@
       <h5 class="alert-heading">None of {{cachedPosts.length}} posts have a title matching '{{searchTerm}}'.</h5>
     </div>
 
-    <div class="btn-group btn-block btn-group-sm" id="sort-group">
+    <div class="btn-group btn-block btn-group-sm">
       <button type="button" class="btn btn-label btn-dark" disabled>Sort posts by</button>
       <button type="button" [class.btn-primary]="sorting === 'top'" [class.btn-outline-secondary]="sorting !== 'top'"
               class="btn" [disabled]="sorting === 'top'"
-              id="btn-likes"
               (click)="setSorting('top')">most likes
       </button>
       <button type="button" [class.btn-primary]="sorting === 'new'" [class.btn-outline-secondary]="sorting !== 'new'"
-              class="btn " [disabled]="sorting === 'new'" id="btn-new"
+              class="btn " [disabled]="sorting === 'new'"
               (click)="setSorting('new')">newest
+      </button>
+      <button type="button" [class.btn-primary]="sorting === 'old'" [class.btn-outline-secondary]="sorting !== 'old'"
+              class="btn " [disabled]="sorting === 'old'"
+              (click)="setSorting('old')">oldest
       </button>
     </div>
 
@@ -55,7 +58,8 @@
         <div class="card-footer d-flex justify-content-between">
           <small class="text-muted">{{post.createdAt}} <span
             *ngIf="post.createdAt != post.updatedAt">• Last updated {{post.updatedAt}}</span></small>
-          <div><span class="badge badge-success p-1 d-flex align-items-center">
+          <div><span class="badge p-1 d-flex align-items-center" [class.badge-success]="post.score>0"
+                     [class.badge-secondary]="post.score==0">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                  class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
   <path fill-rule="evenodd"

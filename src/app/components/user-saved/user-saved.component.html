@@ -6,7 +6,7 @@
       <a [routerLink]="'/post/'+item.post.id" class="list-group-item list-group-item-action mb-2">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">{{item.post.title}}</h5>
-          <small class="text-muted">Saved {{item.saved}}</small>
+          <small>Saved {{item.saved}}</small>
         </div>
         <div class="card-text mb-1">{{item.post.description | slice: 0 : 100}}<span
           class="fade-out"
