@@ -7,7 +7,7 @@
     <span *ngIf="info.type==='success'">Check out the post <a routerLink="/post/{{post.id}}">here</a>.</span>
   </div>
   <form #editPostForm="ngForm" (ngSubmit)="onSubmit()">
-    <div [hidden]="editPostForm.submitted">
+    <div [hidden]="editPostForm.submitted && !working">
       <div class="cross-validation" [class.cross-validation-error]="editPostForm.touched || editPostForm.dirty">
         <div class="form-group">
           <label for="title">Title</label>
@@ -29,10 +29,12 @@
           <label for="description">Description</label>
           <textarea id="description" name="description" class="form-control" required minlength="3"
                     onkeydown='this.style.height = "";this.style.height = this.scrollHeight + 3 + "px"'
-                    [(ngModel)]="post.description"
+                    [(ngModel)]="post.description" [required]="post.type === 'text'"
                     #description="ngModel"></textarea>
           <small class="form-text text-muted"
-                 *ngIf="!description.invalid || description.untouched">Required.</small>
+                 *ngIf="(!description.invalid || description.untouched ) && post.type === 'text'">Required.</small>
+          <small class="form-text text-muted"
+                 *ngIf="(!description.invalid || description.untouched ) && post.type!=='text'">Optional.</small>
           <div *ngIf="description.invalid && (description.dirty || description.touched)"
                class="invalid-feedback">
 
@@ -45,13 +47,36 @@
           </div>
         </div>
 
+        <div *ngIf="post.type  === 'link'" class="mb-3">
+          <label for="link">Link</label>
+          <input id="link" name="link" type="text"
+                 pattern="(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
+                 class="form-control" required [(ngModel)]="post.link"
+                 #link="ngModel">
+          <small class="form-text text-muted"
+                 *ngIf="!link.invalid || link.untouched">Required.</small>
+          <div *ngIf="link.invalid && (link.dirty || link.touched)"
+               class="invalid-feedback">
+            <div *ngIf="link.errors.required">
+              A link post requires a link.
+            </div>
+            <div *ngIf="link.errors.pattern">
+              Enter a valid url.
+            </div>
+          </div>
+        </div>
+
       </div>
 
 
       <div class="btn-toolbar mt-3">
         <div class="btn-group mr-1">
-          <button type="submit" class="btn btn-success" [disabled]="editPostForm.invalid">
-            Update post
+          <button type="submit" class="btn btn-success" [disabled]="editPostForm.invalid || working">
+            <span *ngIf="!working">Update post</span>
+            <div *ngIf="working">
+              <div class="spinner-border">
+              </div>
+            </div>
           </button>
         </div>
         <div class="btn-group">

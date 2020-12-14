@@ -19,6 +19,7 @@ export class PostEditComponent implements OnInit {
     description: '',
     score: '',
     type: '',
+    link: '',
     createdAt: '',
     updatedAt: ''
   };
@@ -28,6 +29,7 @@ export class PostEditComponent implements OnInit {
     message: ''
   };
   componentLoading = true;
+  working = false;
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
   }
@@ -52,18 +54,24 @@ export class PostEditComponent implements OnInit {
   }
 
   private updatePost(): void {
+    this.working = true;
     const reqData = {
       title: this.post.title,
       description: this.post.description,
+      link: undefined
     };
+    if (this.post.type === 'link' && this.post.link !== '') {
+      reqData.link = this.post.link;
+    }
     this.apiService.editPostById(this.id, reqData).subscribe(res => {
       console.log(res);
-      this.info.type = 'success';
-      this.info.message = 'Post updated successfully.';
+      this.router.navigate(['/post/' + res.id]);
+      this.working = false;
     }, err => {
       console.log(err);
       this.info.type = 'danger';
       this.info.message = 'Something went wrong. Try again.';
+      this.working = false;
     });
   }
 
