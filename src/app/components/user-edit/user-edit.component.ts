@@ -26,6 +26,7 @@ export class UserEditComponent implements OnInit {
   };
   componentLoading = true;
   resetAvatar: boolean;
+  working = false;
 
   constructor(private apiService: ApiService, private session: TokenService) {
   }
@@ -45,14 +46,11 @@ export class UserEditComponent implements OnInit {
   }
 
   private updateUser(): void {
-    console.log(this.user);
-
-    const formData = new FormData(document.getElementById('editUserForm') as HTMLFormElement);
-
+    const form = document.getElementById('editUserForm') as HTMLFormElement;
+    const formData = new FormData(form);
     if (!this.user.password || this.user.password.length < 5) {
       formData.delete('editPassword');
     }
-
     if (!this.user.avatar.valid || !this.user.avatar.size) {
       formData.delete('customAvatar');
     }
@@ -62,27 +60,27 @@ export class UserEditComponent implements OnInit {
       this.session.userChange.emit(this.user.username);
       this.session.setUsername(this.user.username);
     }
-    console.log('______updated______');
-    // @ts-ignore
-    for (const pair of formData.entries()) {
-      console.log(pair[0]);
-      console.log(pair[1]);
-      console.log('-');
-    }
-    console.log('______updated______');
     this.apiService.editUserSelf(formData).subscribe(res => {
-      console.log(res);
       this.getUser();
       this.info.type = 'success';
       this.info.message = 'Account updated successfully.';
+      if (formData.has('customAvatar') || formData.has('resetAvatar')) {
+        this.info.message += '\n\nImage operations can take a few seconds to process. ' +
+          'If you don\'t see your profile picture try refreshing the page';
+      }
+      this.working = false;
+      form.reset();
+      this.resetFileInput();
     }, err => {
       console.log(err);
       this.info.type = 'danger';
       this.info.message = 'Something went wrong. Try again.';
+      this.working = false;
     });
   }
 
   onSubmit(): void {
+    this.working = true;
     this.updateUser();
   }
 

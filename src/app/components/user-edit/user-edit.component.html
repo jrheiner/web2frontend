@@ -1,7 +1,6 @@
 <h1 class="display-4 pt-4 pb-4">Edit account</h1>
 <div *ngIf="!componentLoading">
-  <div class="alert alert-{{info.type}}" *ngIf="info.message">
-    {{info.message}}
+  <div class="alert alert-{{info.type}}" *ngIf="info.message" style="white-space: pre-wrap">{{info.message}}
   </div>
 
   <form #editUserForm="ngForm" (ngSubmit)="onSubmit()" id="editUserForm">
@@ -36,7 +35,8 @@
 
         <div class="form-group col-sm-6">
           <label for="editPassword">Password</label>
-          <input id="editPassword" name="editPassword" type="password" class="form-control" [(ngModel)]="user.password"
+          <input id="editPassword" name="editPassword" type="password" class="form-control"
+                 [(ngModel)]="user.password"
                  #editPassword="ngModel" placeholder="(unchanged)" autocomplete="new-password"
                  pattern="(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$)">
           <small id="passwordHelp" class="form-text text-muted" *ngIf="editPassword.touched && editPassword.value">5-32
@@ -79,7 +79,7 @@
           <input type="file" class="form-control-file" id="customAvatar" name="customAvatar" [disabled]="resetAvatar"
                  accept="image/jpeg, image/png" (change)="onFileChange($event)">
           <small class="text-muted">Only PNG/JPEG allowed. 500kb max</small>
-          <br>
+          <br *ngIf="user.avatar.size">
           <small class="text-success"
                  *ngIf="user.avatar.size <= 500000 && user.avatar.size">
             {{user.avatar.size / 1024 | number: '1.0-0' }} kb
@@ -87,7 +87,7 @@
           <small class="text-danger" *ngIf="user.avatar.size > 500000">
             {{user.avatar.size / 1024 | number: '1.0-0' }} kb
           </small>
-          <br>
+          <br *ngIf="user.avatar.size">
           <small class="text-success"
                  *ngIf="user.avatar.type.includes('png') || user.avatar.type.includes('jpeg')">
             {{user.avatar.type}}
@@ -101,8 +101,14 @@
 
     </div>
     <button type="submit" class="btn btn-success"
-            [disabled]="(editUserForm.invalid || editUsername.pending || !this.user.avatar.valid)">Update
+            [disabled]="(editUserForm.invalid || editUsername.pending || !this.user.avatar.valid || working)">
+      <span *ngIf="!working">Update profile</span>
+      <div *ngIf="working">
+        <div class="spinner-border">
+        </div>
+      </div>
     </button>
+
   </form>
 </div>
 <div *ngIf="componentLoading">
