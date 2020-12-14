@@ -44,7 +44,7 @@ export class PostDetailsComponent implements OnInit {
       this.post = post;
       this.post.description = this.post.description.replace(/\\n/g, String.fromCharCode(13, 10));
       this.componentLoading = false;
-      if (this.post.link !== '') {
+      if (this.post.type === 'link' && this.post.link !== '') {
         if (!this.post.link.includes('http')) {
           this.post.link = 'https://' + this.post.link;
         }
