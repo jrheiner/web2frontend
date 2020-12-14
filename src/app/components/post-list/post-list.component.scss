@@ -8,3 +8,9 @@
   object-fit: cover;
   max-height: 200px;
 }
+
+.btn-label:disabled,
+btn-label[disabled] {
+  opacity: 1 !important;
+  max-width: 150px;
+}
