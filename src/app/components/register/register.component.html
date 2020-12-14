@@ -19,7 +19,8 @@
       <input id="registerUsername" name="registerUsername" type="text" class="form-control" required
              minlength="2" [(ngModel)]="user.username" #registerUsername="ngModel"
              [ngModelOptions]="{ updateOn: 'blur' }" autocomplete="username"
-             appUniqueUsername pattern="^(?=[a-zA-Z0-9-_]{2,16}$)[^_-].*[^_-]$" maxlength="16">
+             appUniqueUsername pattern="^(?=[a-zA-Z0-9-_]{2,16}$)[^_-].*[^_-]$" maxlength="16"
+             [readOnly]="disableRegister">
 
       <small class="form-text text-muted" *ngIf="registerForm.pending">Checking username...</small>
       <div *ngIf="registerUsername.invalid && (registerUsername.dirty || registerUsername.touched)"
@@ -45,7 +46,8 @@
       <input id="registerPassword" name="registerPassword" type="password" class="form-control"
              [(ngModel)]="user.password" autocomplete="new-password"
              #registerPassword="ngModel" required
-             pattern="(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$)">
+             pattern="(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$)"
+             [readOnly]="disableRegister">
       <small id="passwordHelp" class="form-text text-muted"
              *ngIf="registerPassword.touched && registerPassword.value">5-32
         characters. At least one
@@ -75,7 +77,8 @@
         <input id="registerPasswordRepeat" name="registerPasswordRepeat" type="password" class="form-control"
                [(ngModel)]="passwordRepeat" autocomplete="new-password"
                #registerPasswordRepeat="ngModel" required
-               pattern="(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$)">
+               pattern="(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$)"
+               [readOnly]="disableRegister">
         <div
           *ngIf="(registerPasswordRepeat.invalid || registerForm.errors?.NotMatching) && (registerPasswordRepeat.dirty || registerPasswordRepeat.touched)"
           class="invalid-feedback">
@@ -91,13 +94,18 @@
     </div>
 
     <button type="submit" class="btn btn-success btn-block btn-lg"
-            [disabled]="(registerForm.invalid || registerForm.pending || disableRegisterBtn)">Register
+            [disabled]="(registerForm.invalid || registerForm.pending || disableRegister || working)">
+      <span *ngIf="!working">Register</span>
+      <div *ngIf="working">
+        <div class="spinner-border">
+        </div>
+      </div>
     </button>
   </form>
-  <button class="btn btn-lg btn-outline-secondary btn-block mt-3" routerLink="/login" *ngIf="!disableRegisterBtn">Go to
+  <button class="btn btn-lg btn-outline-secondary btn-block mt-3" routerLink="/login" *ngIf="!disableRegister">Go to
     Login
   </button>
-  <button class="btn btn-lg btn-primary btn-block mt-3" routerLink="/login" *ngIf="disableRegisterBtn">Go to
+  <button class="btn btn-lg btn-primary btn-block mt-3" routerLink="/login" *ngIf="disableRegister">Go to
     Login
   </button>
 </div>

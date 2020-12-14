@@ -21,7 +21,8 @@ export class RegisterComponent {
     message: ''
   };
 
-  disableRegisterBtn = false;
+  disableRegister = false;
+  working = false;
 
   constructor(private apiService: ApiService, public router: Router, private session: TokenService) {
 
@@ -31,31 +32,19 @@ export class RegisterComponent {
   }
 
   register(): void {
+    this.working = true;
     this.apiService.register(this.user.username, this.user.password).subscribe((res) => {
       console.log(res);
       this.info.type = 'success';
-      this.info.message = `Account ${res.username} created!`;
-      this.disableRegisterBtn = true;
+      this.info.message = `Account ${res.username} created! You can now login.`;
+      this.disableRegister = true;
+      this.working = false;
     }, err => {
       this.info.type = 'danger';
       this.info.message = 'Something went wrong. Try again.';
+      this.working = false;
     });
   }
-
-
-  /*login(data: { username: string, password: string }): void {
-    this.apiService.register(data.username, data.password).subscribe((res) => {
-      console.log(res);
-      this.info = `Account ${res.username} created!`;
-      this.alert = null;
-      this.isLoading = false;
-    }, (err) => {
-      console.log(err);
-      this.isLoading = false;
-      this.registerForm.enable();
-      this.alert = err.error.message;
-    });
-  }*/
 
   onSubmit(): void {
     this.register();

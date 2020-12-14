@@ -66,7 +66,7 @@ export class UserEditComponent implements OnInit {
       this.info.message = 'Account updated successfully.';
       if (formData.has('customAvatar') || formData.has('resetAvatar')) {
         this.info.message += '\n\nImage operations can take a few seconds to process. ' +
-          'If you don\'t see your profile picture try refreshing the page';
+          'If you don\'t see your profile picture try reloading (F5) the page, sometimes the browser caches the old profile picture.';
       }
       this.working = false;
       form.reset();

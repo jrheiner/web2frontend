@@ -17,12 +17,17 @@ export class HelpComponent implements OnInit {
       collection: [
         {
           question: 'What are the username and password requirements?',
-          answer: 'test2',
+          answer: 'A username is 2-16 characters long, contains only alphanumeric characters, ' +
+            'underscore, and minus. It cannot start or end with an underscore or minus.\nA username has to be unique, ' +
+            'meaning only one user can have it.\n\n' +
+            'A password is 5-32 characters long, has to contain at least one uppercase, ' +
+            'one lowercase, one number, and one special character (@$!%*?&).',
           show: true
         },
         {
           question: 'Do I need an account?',
-          answer: 'test2',
+          answer: 'You do not need an account to view posts, comments, or user profiles.\n' +
+            'To create posts yourself, comment and vote on other posts you have to register and login.',
           show: true
         }
       ]
