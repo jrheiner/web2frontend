@@ -4,3 +4,7 @@
   -webkit-text-fill-color: transparent;
 }
 
+.post-img-preview {
+  object-fit: cover;
+  max-height: 200px;
+}

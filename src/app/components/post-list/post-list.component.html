@@ -6,25 +6,35 @@
     <div *ngFor="let post of posts">
       <div class="card mb-3 mt-3">
         <div class="card-body">
-          <h5 class="card-title"><a routerLink="/post/{{post.id}}">{{post.title}}</a></h5>
-          <h6 class="card-subtitle mb-2 text-muted" title="{{post.author._id}}">posted by <a
-            routerLink="/user/{{post?.author._id}}">{{post?.author.username}}</a></h6>
-          <div class="card-text mb-1">{{post.description | slice: 0 : 225}}<span
-            class="fade-out"
-            *ngIf="post.description.length > 225">{{post.description | slice: 225 : 250}}
-            ...</span>
+          <div class="row">
+            <div class="col-md-8">
+              <h5 class="card-title"><a routerLink="/post/{{post.id}}">{{post.title}}</a></h5>
+              <h6 class="card-subtitle mb-2 text-muted" title="{{post.author._id}}">posted by <a
+                routerLink="/user/{{post?.author._id}}">{{post?.author.username}}</a></h6>
+
+              <div class="card-text mb-1">{{post.description | slice: 0 : 225}}<span
+                class="fade-out"
+                *ngIf="post.description.length > 225">{{post.description | slice: 225 : 250}}
+                ...</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <img *ngIf="post?.type === 'img' && post?.images.length > 0" alt="Post image preview"
+                   class="card-img-bottom post-img-preview"
+                   src="http://localhost:3000/assets/{{post?.images[0]}}">
+            </div>
           </div>
-          <p class="card-text">
+          <!--<p class="card-text">
             <span class="badge badge-dark" *ngIf="post.type === 'text'">Text</span>
             <span class="badge badge-dark" *ngIf="post.type === 'img'">Image</span>
             <span class="badge badge-dark" *ngIf="post.type === 'link'">Link</span>
-          </p>
+          </p>-->
         </div>
-        <!--<img src="https://via.placeholder.com/1800x1500" class="card-img-bottom" alt="...">-->
         <div class="card-footer">
           <small class="text-muted">{{post.createdAt}} <span
             *ngIf="post.createdAt != post.updatedAt">• Last updated {{post.updatedAt}}</span></small>
         </div>
+
       </div>
     </div>
   </div>

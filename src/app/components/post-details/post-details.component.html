@@ -22,10 +22,12 @@
         <!-- Post with multiple images -->
         <div id="carouselIndicators" class="carousel slide" data-ride="carousel"
              *ngIf="post?.type === 'img' && post?.images.length > 1">
-          <ol class="carousel-indicators bg-dark">
-            <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselIndicators" data-slide-to="1" *ngIf="post?.images.length >= 2"></li>
-            <li data-target="#carouselIndicators" data-slide-to="2" *ngIf="post?.images.length === 3"></li>
+          <ol class="carousel-indicators">
+            <li data-target="#carouselIndicators" data-slide-to="0" class="active border border-dark"></li>
+            <li data-target="#carouselIndicators" data-slide-to="1" class="border border-dark"
+                *ngIf="post?.images.length >= 2"></li>
+            <li data-target="#carouselIndicators" data-slide-to="2" class="border border-dark"
+                *ngIf="post?.images.length === 3"></li>
           </ol>
           <div class="carousel-inner">
             <div class="carousel-item active">
