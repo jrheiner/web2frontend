@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ApiService} from '../../services/api.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-post-list',
@@ -8,16 +9,18 @@ import {ApiService} from '../../services/api.service';
 })
 export class PostListComponent implements OnInit, OnDestroy {
 
+  private perPage = 3;
   cachedPosts;
   posts;
   empty = false;
   componentLoading = true;
   searchTerm = '';
-  const;
   timer;
   sorting: 'top' | 'new' | 'old' = 'new';
+  page = 1;
+  subscription;
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -34,6 +37,7 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   redoListFromCache(): void {
     this.posts = this.sortPosts(this.cachedPosts);
+    this.goToPage(this.page);
   }
 
   updatePostList(): void {
@@ -44,6 +48,19 @@ export class PostListComponent implements OnInit, OnDestroy {
         this.cachedPosts = this.sortPosts(data);
       }
       this.empty = !Boolean(Object.keys(this.cachedPosts).length);
+      if (!this.subscription) {
+        this.subscription = this.route.queryParams.subscribe(params => {
+          if (params && params.p && !isNaN(params.p)) {
+            this.page = +params.p;
+            this.goToPage(this.page);
+            if (this.page <= 0) {
+              this.resetQueryParams();
+            }
+          } else {
+            this.resetQueryParams();
+          }
+        });
+      }
       this.componentLoading = false;
     }, error => {
       console.log(error);
@@ -89,5 +106,38 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.sorting = mode;
     this.redoListFromCache();
     this.search(this.searchTerm);
+  }
+
+  goToPage(page: number): void {
+    console.log((page - 1) * this.perPage, page * this.perPage);
+    if (page <= this.getLastPage()) {
+      this.posts = this.cachedPosts.slice((page - 1) * this.perPage, page * this.perPage);
+    } else {
+      this.page = this.getLastPage();
+      this.router.navigate(
+        [],
+        {
+          relativeTo: this.route,
+          queryParams: {p: this.page},
+          queryParamsHandling: 'merge'
+        });
+      this.goToPage(this.page);
+    }
+  }
+
+  getLastPage(): number {
+    return Math.ceil(this.cachedPosts.length / this.perPage);
+  }
+
+  resetQueryParams(): void {
+    this.page = 1;
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: {p: this.page},
+        queryParamsHandling: 'merge'
+      });
+    this.goToPage(this.page);
   }
 }
