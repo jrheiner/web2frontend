@@ -55,9 +55,11 @@ export class PostDetailsComponent implements OnInit {
       this.componentLoading = false;
     });
 
-    this.apiService.checkUserSaved(this.id).subscribe((res) => {
-      this.postIsSaved = res.saved;
-    });
+    if (this.isLoggedIn()) {
+      this.apiService.checkUserSaved(this.id).subscribe((res) => {
+        this.postIsSaved = res.saved;
+      });
+    }
   }
 
   getUsername(): string {

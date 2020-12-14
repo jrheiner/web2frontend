@@ -3,6 +3,14 @@
     <div class="alert alert-info mt-5" *ngIf="empty">
       No posts yet!
     </div>
+    <div class="mb-3 mt-3">
+      <label for="search" class="d-none"></label>
+      <input [(ngModel)]="searchTerm" class="form-control" placeholder="Search for a post title..." id="search"
+             (ngModelChange)="search($event)">
+    </div>
+    <div class="alert alert-secondary" *ngIf="this.posts.length === 0">
+      <h5 class="alert-heading">None of {{cachedPosts.length}} posts have a title matching '{{searchTerm}}'.</h5>
+    </div>
     <div *ngFor="let post of posts">
       <div class="card mb-3 mt-3">
         <div class="card-body">
