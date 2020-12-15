@@ -12,6 +12,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   private perPage = 3;
   cachedPosts;
   posts;
+  displayPosts;
   empty = false;
   componentLoading = true;
   searchTerm = '';
@@ -95,11 +96,13 @@ export class PostListComponent implements OnInit, OnDestroy {
     }
   }
 
+
   search(event: any): void {
     const term = event ? event.toLowerCase().trim() : '';
     this.posts = this.cachedPosts.filter(x => {
       return x.title.toLowerCase().trim().includes(term);
     });
+    this.goToPage(this.page);
   }
 
   setSorting(mode: 'top' | 'new' | 'old'): void {
@@ -109,9 +112,8 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   goToPage(page: number): void {
-    console.log((page - 1) * this.perPage, page * this.perPage);
     if (page <= this.getLastPage()) {
-      this.posts = this.cachedPosts.slice((page - 1) * this.perPage, page * this.perPage);
+      this.displayPosts = this.posts.slice((page - 1) * this.perPage, page * this.perPage);
     } else {
       this.page = this.getLastPage();
       this.router.navigate(
@@ -126,7 +128,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   getLastPage(): number {
-    return Math.ceil(this.cachedPosts.length / this.perPage);
+    return Math.ceil(this.posts.length / this.perPage);
   }
 
   resetQueryParams(): void {
