@@ -9,7 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class PostListComponent implements OnInit, OnDestroy {
 
-  private perPage = 3;
+  private perPage = 4;
   cachedPosts;
   posts;
   displayPosts;
