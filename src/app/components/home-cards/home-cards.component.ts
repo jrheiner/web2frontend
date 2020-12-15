@@ -13,12 +13,6 @@ export class HomeCardsComponent implements OnInit {
   }
 
   projectData = {
-    disk_assets: {
-      storageSize: 0
-    },
-    disk_avatars: {
-      storageSize: 0
-    },
     db: {
       storageSize: 0
     },
