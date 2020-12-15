@@ -27,6 +27,7 @@ export class UserEditComponent implements OnInit {
   componentLoading = true;
   resetAvatar: boolean;
   working = false;
+  error = false;
 
   constructor(private apiService: ApiService, private session: TokenService) {
   }
@@ -40,9 +41,11 @@ export class UserEditComponent implements OnInit {
       this.user.username = data.username;
       this.user.status = data.status || '';
       this.componentLoading = false;
-    }, error =>
-      console.log(error));
-    this.componentLoading = false;
+      this.error = false;
+    }, (err) => {
+      this.error = true;
+      this.componentLoading = false;
+    });
   }
 
   private updateUser(): void {

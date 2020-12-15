@@ -29,6 +29,7 @@ export class CommentListComponent implements OnInit, OnDestroy {
   updateComment = '';
   componentLoading = true;
   private serviceSubscription: Subscription;
+  error = false;
 
 
   private static commentsAllow(allowed: boolean): void {
@@ -70,8 +71,8 @@ export class CommentListComponent implements OnInit, OnDestroy {
     this.apiService.getComments(this.id).subscribe((comments) => {
       this.comments = comments.reverse();
       this.componentLoading = false;
-    }, error => {
-      console.log(error);
+    }, () => {
+      this.error = true;
       this.componentLoading = false;
     });
   }

@@ -14,6 +14,7 @@ export class UserDeleteComponent implements OnInit {
   username;
   input = '';
   working = false;
+  error = false;
 
   constructor(private apiService: ApiService, private session: TokenService, private router: Router) {
   }
@@ -31,7 +32,14 @@ export class UserDeleteComponent implements OnInit {
         this.session.clearSession();
         this.session.loginChange.emit(false);
         this.working = false;
-      }, error => console.log(error));
+        this.error = false;
+      }, (err) => {
+        if (err.error.error === true) {
+          console.log(err.error.message);
+        } else {
+          this.error = true;
+        }
+      });
     }
   }
 }

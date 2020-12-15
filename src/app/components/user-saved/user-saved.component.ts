@@ -21,6 +21,7 @@ export class UserSavedComponent implements OnInit {
     },
     saved: '',
   }];
+  error = false;
 
   constructor(private apiService: ApiService) {
   }
@@ -34,8 +35,9 @@ export class UserSavedComponent implements OnInit {
       console.log(data);
       this.savedPosts = data.reverse();
       this.componentLoading = false;
-    }, error => {
-      console.log(error);
+      this.error = false;
+    }, () => {
+      this.error = true;
       this.componentLoading = false;
     });
   }

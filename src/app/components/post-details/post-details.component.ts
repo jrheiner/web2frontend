@@ -34,6 +34,7 @@ export class PostDetailsComponent implements OnInit {
   postIsSaved = false;
   isLoading = false;
   componentLoading = true;
+  error = false;
 
   ngOnInit(): void {
     this.updatePostDetails();
@@ -44,14 +45,18 @@ export class PostDetailsComponent implements OnInit {
       this.post = post;
       this.post.description = this.post.description.replace(/\\n/g, String.fromCharCode(13, 10));
       this.componentLoading = false;
+      this.error = false;
       if (this.post.type === 'link' && this.post.link !== '') {
         if (!this.post.link.includes('http')) {
           this.post.link = 'https://' + this.post.link;
         }
       }
-    }, error => {
-      console.log(error);
-      this.notFound = error.error.message;
+    }, err => {
+      if (err.error.error === true) {
+        this.notFound = err.error.message;
+      } else {
+        this.error = true;
+      }
       this.componentLoading = false;
     });
 

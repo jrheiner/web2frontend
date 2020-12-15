@@ -13,6 +13,7 @@ export class CommentNewComponent implements OnInit {
   private id = this.route.snapshot.paramMap.get('id');
   sending = false;
   writeComment = '';
+  error = false;
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private session: TokenService) {
   }
@@ -32,9 +33,10 @@ export class CommentNewComponent implements OnInit {
       this.session.newComment.emit();
       this.sending = false;
       this.writeComment = '';
-    }, error => {
+      this.error = true;
+    }, () => {
       this.sending = false;
-      console.log(error);
+      this.error = true;
     });
   }
 

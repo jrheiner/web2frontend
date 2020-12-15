@@ -39,6 +39,7 @@ export class HomeCardsComponent implements OnInit {
     }
   };
   loading = true;
+  error = false;
 
   ngOnInit(): void {
     this.getProjectData();
@@ -48,8 +49,8 @@ export class HomeCardsComponent implements OnInit {
     this.apiService.getProjectStats().subscribe((data) => {
       this.projectData = data;
       this.loading = false;
-    }, error => {
-      console.log(error);
+    }, () => {
+      this.error = true;
       this.loading = false;
     });
   }

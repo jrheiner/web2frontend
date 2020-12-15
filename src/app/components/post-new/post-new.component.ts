@@ -39,6 +39,8 @@ export class PostNewComponent implements OnInit {
   successId = '0';
   working = false;
   filesInvalid = false;
+  error = false;
+  alert = '';
 
   ngOnInit(): void {
   }
@@ -47,9 +49,15 @@ export class PostNewComponent implements OnInit {
     this.apiService.postPost(data).subscribe(res => {
       this.working = false;
       this.successId = res.id;
+      this.error = false;
     }, err => {
-      this.working = false;
-      console.log(err);
+      if (err.error.error === true) {
+        this.working = false;
+        this.alert = err.error.message;
+      } else {
+        this.error = true;
+        this.working = false;
+      }
     });
   }
 

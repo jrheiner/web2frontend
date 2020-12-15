@@ -23,6 +23,7 @@ export class RegisterComponent {
 
   disableRegister = false;
   working = false;
+  error = false;
 
   constructor(private apiService: ApiService, public router: Router, private session: TokenService) {
 
@@ -39,9 +40,13 @@ export class RegisterComponent {
       this.info.message = `Account ${res.username} created! You can now login.`;
       this.disableRegister = true;
       this.working = false;
-    }, err => {
-      this.info.type = 'danger';
-      this.info.message = 'Something went wrong. Try again.';
+    }, (err) => {
+      if (err.error.error === true) {
+        this.info.type = 'danger';
+        this.info.message = 'Something went wrong. Try again.';
+      } else {
+        this.error = true;
+      }
       this.working = false;
     });
   }

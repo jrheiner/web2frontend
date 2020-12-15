@@ -10,9 +10,42 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class PostListComponent implements OnInit, OnDestroy {
 
   private perPage = 4;
-  cachedPosts;
-  posts;
-  displayPosts;
+  cachedPosts: {
+    id: string,
+    title: string,
+    description: string,
+    score: number,
+    type: string,
+    images: [],
+    link: '',
+    author: { _id: string, username: string },
+    createdAt: string, createdAtUnix: number,
+    updatedAt: string, updatedAtUnix: number
+  }[];
+  posts: {
+    id: string,
+    title: string,
+    description: string,
+    score: number,
+    type: string,
+    images: [],
+    link: '',
+    author: { _id: string, username: string },
+    createdAt: string, createdAtUnix: number,
+    updatedAt: string, updatedAtUnix: number
+  }[];
+  displayPosts: {
+    id: string,
+    title: string,
+    description: string,
+    score: number,
+    type: string,
+    images: [],
+    link: '',
+    author: { _id: string, username: string },
+    createdAt: string, createdAtUnix: number,
+    updatedAt: string, updatedAtUnix: number
+  }[];
   empty = false;
   componentLoading = true;
   searchTerm = '';
@@ -20,6 +53,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   sorting: 'top' | 'new' | 'old' = 'new';
   page = 1;
   subscription;
+  error = false;
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
   }
@@ -63,13 +97,24 @@ export class PostListComponent implements OnInit, OnDestroy {
         });
       }
       this.componentLoading = false;
-    }, error => {
-      console.log(error);
+    }, () => {
+      this.error = true;
       this.componentLoading = false;
     });
   }
 
-  sortPosts(data): void {
+  sortPosts(data): {
+    id: string,
+    title: string,
+    description: string,
+    score: number,
+    type: string,
+    images: [],
+    link: '',
+    author: { _id: string, username: string },
+    createdAt: string, createdAtUnix: number,
+    updatedAt: string, updatedAtUnix: number
+  }[] {
     switch (this.sorting) {
       case 'new':
         return data.sort((a, b) => {

@@ -13,6 +13,7 @@ export class LoginComponent {
   loginForm;
   alert;
   isLoading = false;
+  error = false;
 
   constructor(public authService: AuthService, public router: Router, private formBuilder: FormBuilder, private session: TokenService) {
     this.loginForm = this.formBuilder.group({
@@ -35,10 +36,16 @@ export class LoginComponent {
         this.router.navigate([this.authService.redirectUrl || '']);
       }
     }, (err) => {
-      console.log(err);
       this.isLoading = false;
-      this.loginForm.enable();
-      this.alert = err.error.message;
+      console.log(err.error);
+      if (err.error.error === true) {
+        this.error = false;
+        this.loginForm.enable();
+        this.alert = err.error.message;
+      } else {
+        this.loginForm.enable();
+        this.error = true;
+      }
     });
   }
 

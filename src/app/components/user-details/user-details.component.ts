@@ -12,6 +12,7 @@ export class UserDetailsComponent implements OnInit {
   notFound;
   user;
   componentLoading = true;
+  error = false;
 
   constructor(private apiService: ApiService, private route: ActivatedRoute) {
   }
@@ -20,22 +21,33 @@ export class UserDetailsComponent implements OnInit {
     const id: string = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
       this.apiService.getUserById(id).subscribe((data) => {
-        this.setUserInfo(data);
-        this.componentLoading = false;
-      }, err => {
-        this.notFound = err.error.message;
-        console.log(err);
-        this.componentLoading = false;
+        this.handleResponse(data);
+      }, (err) => {
+        this.handleError(err);
       });
     } else {
       this.apiService.getUserSelf().subscribe((data) => {
-        this.setUserInfo(data);
-        this.componentLoading = false;
-      }, error => {
-        console.log(error);
-        this.componentLoading = false;
+        this.handleResponse(data);
+      }, (err) => {
+        this.handleError(err);
       });
     }
+  }
+
+  handleError(err: any): void {
+    if (err.error.error === true) {
+      this.notFound = err.error.message;
+      this.error = false;
+    } else {
+      this.error = true;
+    }
+    this.componentLoading = false;
+  }
+
+  handleResponse(data: any): void {
+    this.setUserInfo(data);
+    this.componentLoading = false;
+    this.error = false;
   }
 
   setUserInfo(data: any): void {
