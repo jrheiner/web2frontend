@@ -7,12 +7,12 @@ import {PostEditComponent} from './components/post/post-edit/post-edit.component
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {UserDetailsComponent} from './components/user/user-details/user-details.component';
-import {AuthGuard} from './auth.guard';
+import {AuthGuard} from './guards/auth.guard';
 import {UserEditComponent} from './components/user/user-edit/user-edit.component';
 import {UserDeleteComponent} from './components/user/user-delete/user-delete.component';
 import {HelpComponent} from './components/help/help.component';
 import {PostDeleteComponent} from './components/post/post-delete/post-delete.component';
-import {RoleGuard} from './role.guard';
+import {RoleGuard} from './guards/role.guard';
 import {UserSavedComponent} from './components/user/user-saved/user-saved.component';
 
 
