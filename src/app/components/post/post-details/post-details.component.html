@@ -15,7 +15,7 @@
         <div *ngIf="post.type === 'link'">
           <div class="card">
             <div class="card-body p-1">
-              <a class="ml-3" [href]="post?.link"><samp>{{post?.link}}</samp></a>
+              <a class="ml-3" [href]="post?.link" target="_blank"><samp>{{post?.link}}</samp></a>
               <div>
                 <small class="text-muted ml-1 font-italic">Note: This link was posted by a user and should be treated
                   with caution.
