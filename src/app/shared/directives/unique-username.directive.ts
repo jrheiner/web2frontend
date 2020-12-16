@@ -12,11 +12,11 @@ export class UniqueUsernameValidator implements AsyncValidator {
   }
 
   validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
-    if (this.session.isLoggedIn() && control.value === this.session.getUsername()) {
+    if (this.session.isLoggedIn() && control.value.toLowerCase() === this.session.getUsername().toLowerCase()) {
       // Current username is always unique
       return of(null);
     }
-    return this.apiService.checkUsername(control.value).pipe(
+    return this.apiService.checkUsername(control.value.toLowerCase()).pipe(
       map(isUnique => (!isUnique.unique ? {uniqueError: true} : null)),
       catchError(() => of(null))
     );
