@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ApiService} from '../../services/api.service';
+import {ApiService} from '@core/services/api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -15,6 +15,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     title: string,
     description: string,
     score: number,
+    commentCount: number,
     type: string,
     images: [],
     link: '',
@@ -27,6 +28,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     title: string,
     description: string,
     score: number,
+    commentCount: number,
     type: string,
     images: [],
     link: '',
@@ -39,6 +41,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     title: string,
     description: string,
     score: number,
+    commentCount: number,
     type: string,
     images: [],
     link: '',
@@ -108,6 +111,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     title: string,
     description: string,
     score: number,
+    commentCount: number,
     type: string,
     images: [],
     link: '',
@@ -115,6 +119,14 @@ export class PostListComponent implements OnInit, OnDestroy {
     createdAt: string, createdAtUnix: number,
     updatedAt: string, updatedAtUnix: number
   }[] {
+    this.page = 1;
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: {p: this.page},
+        queryParamsHandling: 'merge'
+      });
     switch (this.sorting) {
       case 'new':
         return data.sort((a, b) => {
@@ -140,7 +152,6 @@ export class PostListComponent implements OnInit, OnDestroy {
         return data.reverse();
     }
   }
-
 
   search(event: any): void {
     const term = event ? event.toLowerCase().trim() : '';

@@ -1,0 +1,217 @@
+<div *ngIf="!componentLoading && !error">
+  <div class="alert alert-danger mt-3" role="alert" *ngIf="notFound">
+    {{notFound}}
+  </div>
+  <div class="row" *ngIf="!notFound">
+    <div class="col-lg-9">
+      <div class="mt-4">
+        <h2 class="post-title" [title]="post?.id">{{post?.title}}</h2>
+        <span class="text-muted">Posted {{post?.createdAt}} by <a
+          routerLink="/user/{{post?.author._id}}">{{post?.author.username}}</a></span>
+        <br>
+        <small class="text-muted" *ngIf="post?.createdAtUnix != post?.updatedAtUnix">Last
+          updated {{post?.updatedAt}}</small>
+        <hr>
+        <div *ngIf="post.type === 'link'">
+          <div class="card">
+            <div class="card-body p-1">
+              <a class="ml-3" [href]="post?.link" target="_blank"><samp>{{post?.link}}</samp></a>
+              <div>
+                <small class="text-muted ml-1 font-italic">Note: This link was posted by a user and should be treated
+                  with caution.
+                </small>
+              </div>
+            </div>
+          </div>
+          <hr>
+        </div>
+        <!-- Post with single image -->
+        <img *ngIf="post?.type === 'img' && post?.images.length === 1"
+             [src]="post?.images[0]"
+             class="d-block w-100 post-img" alt="Post image one">
+        <!-- Post with multiple images -->
+        <div id="carouselIndicators" class="carousel slide" data-ride="carousel"
+             *ngIf="post?.type === 'img' && post?.images.length > 1">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselIndicators" data-slide-to="0" class="active border border-dark"></li>
+            <li data-target="#carouselIndicators" data-slide-to="1" class="border border-dark"
+                *ngIf="post?.images.length >= 2"></li>
+            <li data-target="#carouselIndicators" data-slide-to="2" class="border border-dark"
+                *ngIf="post?.images.length === 3"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img [src]="post?.images[0]" class="d-block w-100 post-img"
+                   alt="Post image one">
+            </div>
+            <div class="carousel-item" *ngIf="post?.images.length >= 2">
+              <img [src]="post?.images[1]" class="d-block w-100 post-img"
+                   alt="Post image two">
+            </div>
+            <div class="carousel-item" *ngIf="post?.images.length === 3">
+              <img [src]="post?.images[2]" class="d-block w-100 post-img"
+                   alt="Post image three">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselIndicators" data-slide="prev">
+            <span class="carousel-control-prev-icon bg-dark"></span>
+          </a>
+          <a class="carousel-control-next" href="#carouselIndicators" data-slide="next">
+            <span class="carousel-control-next-icon bg-dark"></span>
+          </a>
+        </div>
+        <hr *ngIf="post?.type === 'img'">
+        <!-- Post description -->
+        <div class="post-description">{{post?.description}}</div>
+        <hr *ngIf="post?.description.length !== 0">
+        <!-- Comment posting -->
+        <app-comment-new></app-comment-new>
+        <!-- Comments -->
+        <app-comment-list></app-comment-list>
+      </div>
+    </div>
+    <!-- Post details action cards -->
+    <div class="col-lg-3 order-lg-last order-first">
+      <div class="row">
+        <!-- Show Cards below each other on larger screens -->
+        <div class="mt-5 pixel-div d-none d-lg-block"></div>
+        <div class="col-sm-12 d-none d-lg-block">
+          <div class="card mt-3" *ngIf="post?.author.username === getUsername()">
+            <div class="card-body">
+              <h5 class="card-title">Manage your post</h5>
+              <button class="btn btn-secondary btn-block" routerLink="/post/{{post?.id}}/edit">Edit post</button>
+              <button class="btn btn-danger btn-block" routerLink="/post/{{post?.id}}/delete">Delete post</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 d-none d-lg-block">
+          <div class="card mt-3">
+            <div class="card-body">
+              <h5 class="card-title">User action</h5>
+              <!-- Like button -->
+              <button class="btn btn-success btn-block" (click)="likePost()" [disabled]="!isLoggedIn() || isLoading">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                     class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                        d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16v-1c.563 0 .901-.272 1.066-.56a.865.865 0 0 0 .121-.416c0-.12-.035-.165-.04-.17l-.354-.354.353-.354c.202-.201.407-.511.505-.804.104-.312.043-.441-.005-.488l-.353-.354.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315L12.793 9l.353-.354c.353-.352.373-.713.267-1.02-.122-.35-.396-.593-.571-.652-.653-.217-1.447-.224-2.11-.164a8.907 8.907 0 0 0-1.094.171l-.014.003-.003.001a.5.5 0 0 1-.595-.643 8.34 8.34 0 0 0 .145-4.726c-.03-.111-.128-.215-.288-.255l-.262-.065c-.306-.077-.642.156-.667.518-.075 1.082-.239 2.15-.482 2.85-.174.502-.603 1.268-1.238 1.977-.637.712-1.519 1.41-2.614 1.708-.394.108-.62.396-.62.65v4.002c0 .26.22.515.553.55 1.293.137 1.936.53 2.491.868l.04.025c.27.164.495.296.776.393.277.095.63.163 1.14.163h3.5v1H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+                </svg>
+                <span> {{post?.score}}</span>
+              </button>
+              <!-- Save button -->
+              <button class="btn btn-primary btn-block" (click)="savePost(postIsSaved)"
+                      [disabled]="!isLoggedIn() || isLoading">
+          <span *ngIf="!postIsSaved">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark"
+                 viewBox="0 0 16 16">
+  <path fill-rule="evenodd"
+        d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+</svg>
+          </span>
+                <span *ngIf="postIsSaved">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-bookmark-check-fill" viewBox="0 0 16 16">
+  <path fill-rule="evenodd"
+        d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm6.854 5.854a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+</svg>
+            (Saved)
+          </span>
+              </button>
+              <!-- Share button -->
+              <button class="btn btn-info btn-block" (click)="copyShareLink()">
+                <svg *ngIf="!copyLink" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-share"
+                     viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                        d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                </svg>
+                <svg *ngIf="copyLink" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-share-fill" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                        d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
+                </svg>
+                <div *ngIf="copyLink"> {{copyLink}}</div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Show Cards next to each other on smaller screens -->
+        <div class="col-sm-6 d-lg-none order-1">
+          <div class="card mt-3" *ngIf="post?.author.username === getUsername()">
+            <div class="card-body">
+              <h5 class="card-title">Manage your post</h5>
+              <button class="btn btn-secondary btn-block" routerLink="/post/{{post?.id}}/edit">Edit post</button>
+              <button class="btn btn-danger btn-block" routerLink="/post/{{post?.id}}/delete">Delete post</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 d-lg-none order-0">
+          <div class="card mt-3">
+            <div class="card-header">
+              User action
+            </div>
+            <div class="card-body">
+              <!-- Like button -->
+              <button class="btn btn-success btn-block" (click)="likePost()" [disabled]="!isLoggedIn() || isLoading">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                     class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                        d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16v-1c.563 0 .901-.272 1.066-.56a.865.865 0 0 0 .121-.416c0-.12-.035-.165-.04-.17l-.354-.354.353-.354c.202-.201.407-.511.505-.804.104-.312.043-.441-.005-.488l-.353-.354.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315L12.793 9l.353-.354c.353-.352.373-.713.267-1.02-.122-.35-.396-.593-.571-.652-.653-.217-1.447-.224-2.11-.164a8.907 8.907 0 0 0-1.094.171l-.014.003-.003.001a.5.5 0 0 1-.595-.643 8.34 8.34 0 0 0 .145-4.726c-.03-.111-.128-.215-.288-.255l-.262-.065c-.306-.077-.642.156-.667.518-.075 1.082-.239 2.15-.482 2.85-.174.502-.603 1.268-1.238 1.977-.637.712-1.519 1.41-2.614 1.708-.394.108-.62.396-.62.65v4.002c0 .26.22.515.553.55 1.293.137 1.936.53 2.491.868l.04.025c.27.164.495.296.776.393.277.095.63.163 1.14.163h3.5v1H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+                </svg>
+                <span> {{post?.score}}</span>
+              </button>
+              <!-- Save button -->
+              <button class="btn btn-primary btn-block" (click)="savePost(postIsSaved)"
+                      [disabled]="!isLoggedIn() || isLoading">
+          <span *ngIf="!postIsSaved">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark"
+                 viewBox="0 0 16 16">
+  <path fill-rule="evenodd"
+        d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+</svg>
+          </span>
+                <span *ngIf="postIsSaved">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-bookmark-check" viewBox="0 0 16 16">
+  <path fill-rule="evenodd"
+        d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+  <path fill-rule="evenodd"
+        d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+</svg>
+            (Saved)
+          </span>
+              </button>
+              <!-- Share button -->
+              <button class="btn btn-info btn-block" (click)="copyShareLink()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share"
+                     viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                        d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                </svg>
+                <span *ngIf="copyLink"> {{copyLink}}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div *ngIf="error" class="mt-5">
+  <div class="text-danger d-flex justify-content-center">
+    <p class="lead">Error contacting server. Try again later.</p>
+  </div>
+  <div class="text-danger d-flex justify-content-center">
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+           class="bi bi-cloud-slash-fill" viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M3.112 5.112a3.125 3.125 0 0 0-.17.613C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13H11L3.112 5.112zm11.372 7.372L4.937 2.937A5.512 5.512 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773a3.2 3.2 0 0 1-1.516 2.711zm-.838 1.87l-12-12 .708-.708 12 12-.707.707z"/>
+      </svg>
+    </div>
+  </div>
+</div>
+<div *ngIf="componentLoading">
+  <div class="spinner-border text-secondary loading-spinner">
+  </div>
+</div>
