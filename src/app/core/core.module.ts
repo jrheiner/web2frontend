@@ -4,14 +4,18 @@ import {HttpClientModule} from '@angular/common/http';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {RouterModule} from '@angular/router';
 import {BrowserModule} from '@angular/platform-browser';
+import {HomeComponent} from './components/home/home.component';
 
 
 @NgModule({
   declarations: [
-    NavbarComponent]
+    NavbarComponent,
+    HomeComponent
+  ]
   ,
   exports: [
-    NavbarComponent
+    NavbarComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
