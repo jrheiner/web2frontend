@@ -4,10 +4,8 @@ import {PostDeleteComponent} from './post-delete/post-delete.component';
 import {PostDetailsComponent} from './post-details/post-details.component';
 import {PostEditComponent} from './post-edit/post-edit.component';
 import {PostNewComponent} from './post-new/post-new.component';
-import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
 import {CommentModule} from '../comment/comment.module';
+import {SharedModule} from '../../shared/shared.module';
 
 
 @NgModule({
@@ -20,9 +18,7 @@ import {CommentModule} from '../comment/comment.module';
   imports: [
     CommonModule,
     CommentModule,
-    BrowserModule,
-    FormsModule,
-    RouterModule
+    SharedModule
   ]
 })
 export class PostModule {

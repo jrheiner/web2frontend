@@ -2,9 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CommentListComponent} from './comment-list/comment-list.component';
 import {CommentNewComponent} from './comment-new/comment-new.component';
-import {FormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
-import {BrowserModule} from '@angular/platform-browser';
+import {SharedModule} from '../../shared/shared.module';
 
 
 @NgModule({
@@ -14,9 +12,7 @@ import {BrowserModule} from '@angular/platform-browser';
   ],
   imports: [
     CommonModule,
-    FormsModule,
-    RouterModule,
-    BrowserModule
+    SharedModule
   ],
   exports: [
     CommentListComponent,
