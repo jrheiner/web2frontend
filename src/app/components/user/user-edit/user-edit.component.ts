@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from '../../../core/services/api.service';
-import {TokenService} from '../../../core/services/token.service';
+import {ApiService} from '@core/services/api.service';
+import {TokenService} from '@core/services/token.service';
 
 @Component({
   selector: 'app-user-edit',

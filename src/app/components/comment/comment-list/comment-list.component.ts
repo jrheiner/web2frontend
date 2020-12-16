@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {TokenService} from '../../../core/services/token.service';
-import {ApiService} from '../../../core/services/api.service';
+import {TokenService} from '@core/services/token.service';
+import {ApiService} from '@core/services/api.service';
 import {Subscription} from 'rxjs';
 
 @Component({

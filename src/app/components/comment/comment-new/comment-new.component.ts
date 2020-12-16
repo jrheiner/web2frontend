@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from '../../../core/services/api.service';
+import {ApiService} from '@core/services/api.service';
 import {ActivatedRoute} from '@angular/router';
-import {TokenService} from '../../../core/services/token.service';
+import {TokenService} from '@core/services/token.service';
 
 @Component({
   selector: 'app-comment-new',

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {ApiService} from '../../core/services/api.service';
-import {TokenService} from '../../core/services/token.service';
+import {ApiService} from '@core/services/api.service';
+import {TokenService} from '@core/services/token.service';
 
 @Component({
   selector: 'app-register',
