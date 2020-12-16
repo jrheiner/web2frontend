@@ -1,8 +1,8 @@
-import { RepeatPasswordDirective } from './repeat-password.directive';
+import {RepeatPasswordValidatorDirective} from './repeat-password.directive';
 
 describe('RepeatPasswordDirective', () => {
   it('should create an instance', () => {
-    const directive = new RepeatPasswordDirective();
+    const directive = new RepeatPasswordValidatorDirective();
     expect(directive).toBeTruthy();
   });
 });
