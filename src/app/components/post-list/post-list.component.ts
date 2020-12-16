@@ -119,6 +119,14 @@ export class PostListComponent implements OnInit, OnDestroy {
     createdAt: string, createdAtUnix: number,
     updatedAt: string, updatedAtUnix: number
   }[] {
+    this.page = 1;
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: {p: this.page},
+        queryParamsHandling: 'merge'
+      });
     switch (this.sorting) {
       case 'new':
         return data.sort((a, b) => {
@@ -144,7 +152,6 @@ export class PostListComponent implements OnInit, OnDestroy {
         return data.reverse();
     }
   }
-
 
   search(event: any): void {
     const term = event ? event.toLowerCase().trim() : '';
