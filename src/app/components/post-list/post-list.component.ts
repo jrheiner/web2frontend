@@ -173,7 +173,8 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   getLastPage(): number {
-    return Math.ceil(this.posts.length / this.perPage);
+    const calcLastPage = Math.ceil(this.posts.length / this.perPage);
+    return calcLastPage ? calcLastPage : 1;
   }
 
   resetQueryParams(): void {
