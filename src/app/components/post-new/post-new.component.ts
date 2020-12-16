@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {TokenService} from '../../services/token.service';
-import {ApiService} from '../../services/api.service';
+import {TokenService} from '../../core/services/token.service';
+import {ApiService} from '../../core/services/api.service';
 
 @Component({
   selector: 'app-post-new',

@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {TokenService} from './services/token.service';
+import {TokenService} from './core/services/token.service';
 
-import {AuthService} from './services/auth.service';
+import {AuthService} from './core/services/auth.service';
 
 /**
  * Route guard to check if a user is logged in. Redirects them to the login page if they are not logged in.

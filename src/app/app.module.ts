@@ -22,6 +22,7 @@ import {HomeCardsComponent} from './components/home-cards/home-cards.component';
 import {CommentListComponent} from './components/comment-list/comment-list.component';
 import {CommentNewComponent} from './components/comment-new/comment-new.component';
 import {UserModule} from './components/user/user.module';
+import {CoreModule} from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {UserModule} from './components/user/user.module';
     CommentNewComponent,
   ],
   imports: [
+    CoreModule,
     UserModule,
     BrowserModule,
     HttpClientModule,

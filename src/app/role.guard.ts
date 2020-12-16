@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {TokenService} from './services/token.service';
-import {ApiService} from './services/api.service';
+import {TokenService} from './core/services/token.service';
+import {ApiService} from './core/services/api.service';
 
 @Injectable({
   providedIn: 'root'
