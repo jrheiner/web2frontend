@@ -12,19 +12,16 @@ import {PostNewComponent} from './components/post-new/post-new.component';
 import {PostEditComponent} from './components/post-edit/post-edit.component';
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
-import {UserDetailsComponent} from './components/user-details/user-details.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {UserEditComponent} from './components/user-edit/user-edit.component';
 import {AuthInterceptor} from './auth.interceptor';
-import {UserDeleteComponent} from './components/user-delete/user-delete.component';
 import {HelpComponent} from './components/help/help.component';
 import {PostDeleteComponent} from './components/post-delete/post-delete.component';
 import {UniqueUsernameDirective} from './directives/unique-username.directive';
 import {RepeatPasswordValidatorDirective} from './directives/repeat-password.directive';
-import { HomeCardsComponent } from './components/home-cards/home-cards.component';
-import { CommentListComponent } from './components/comment-list/comment-list.component';
-import { CommentNewComponent } from './components/comment-new/comment-new.component';
-import { UserSavedComponent } from './components/user-saved/user-saved.component';
+import {HomeCardsComponent} from './components/home-cards/home-cards.component';
+import {CommentListComponent} from './components/comment-list/comment-list.component';
+import {CommentNewComponent} from './components/comment-new/comment-new.component';
+import {UserModule} from './components/user/user.module';
 
 @NgModule({
   declarations: [
@@ -37,9 +34,6 @@ import { UserSavedComponent } from './components/user-saved/user-saved.component
     PostEditComponent,
     LoginComponent,
     RegisterComponent,
-    UserDetailsComponent,
-    UserEditComponent,
-    UserDeleteComponent,
     HelpComponent,
     PostDeleteComponent,
     UniqueUsernameDirective,
@@ -47,9 +41,9 @@ import { UserSavedComponent } from './components/user-saved/user-saved.component
     HomeCardsComponent,
     CommentListComponent,
     CommentNewComponent,
-    UserSavedComponent
   ],
   imports: [
+    UserModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,

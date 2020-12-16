@@ -46,7 +46,7 @@
       <h1 class="display-4 pt-4 pb-4">Posts</h1>
       <div *ngIf="user?.postCount">
         <div class="list-group" *ngFor="let post of user?.userActivity.posts.reverse()">
-          <a routerLink="/post/{{post.id}}" class="list-group-item list-group-item-action">
+          <a [routerLink]="'/post/'+post.id" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <span class="post-title">{{post.title}}</span>
               <small class="pl-2">
