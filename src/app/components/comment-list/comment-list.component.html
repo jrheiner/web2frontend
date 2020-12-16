@@ -7,7 +7,7 @@
           <div class=" p-1">
             <a routerLink="/user/{{comment.author._id}}" class="text-decoration-none">
               <h6 class="mb-2">
-                <img src="http://localhost:3000/avatars/{{comment.author._id}}.png"
+                <img [src]="comment.author.avatar"
                      class="border user-avatar"
                      alt="Avatar">
                 {{comment.author.username}}</h6>

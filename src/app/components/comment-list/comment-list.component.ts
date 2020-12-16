@@ -23,7 +23,8 @@ export class CommentListComponent implements OnInit, OnDestroy {
     updatedAt: '',
     author: {
       _id: '',
-      username: ''
+      username: '',
+      avatar: ''
     }
   }];
   updateComment = '';
