@@ -27,7 +27,9 @@ export class PostDetailsComponent implements OnInit {
     images: [],
     link: '',
     createdAt: '',
-    updatedAt: ''
+    updatedAt: '',
+    createdAtUnix: '',
+    updatedAtUnix: ''
   };
   notFound: string;
   copyLink: string;

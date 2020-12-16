@@ -21,6 +21,8 @@ export class CommentListComponent implements OnInit, OnDestroy {
     description: '',
     createdAt: '',
     updatedAt: '',
+    createdAtUnix: '',
+    updatedAtUnix: '',
     author: {
       _id: '',
       username: '',

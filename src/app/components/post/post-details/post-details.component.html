@@ -9,7 +9,7 @@
         <span class="text-muted">Posted {{post?.createdAt}} by <a
           routerLink="/user/{{post?.author._id}}">{{post?.author.username}}</a></span>
         <br>
-        <small class="text-muted" *ngIf="post?.createdAt != post?.updatedAt">Last
+        <small class="text-muted" *ngIf="post?.createdAtUnix != post?.updatedAtUnix">Last
           updated {{post?.updatedAt}}</small>
         <hr>
         <div *ngIf="post.type === 'link'">

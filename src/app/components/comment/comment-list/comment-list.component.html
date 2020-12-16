@@ -75,7 +75,7 @@
       <div [id]="'comment-display-'+comment.id">
         <div class="mb-1 text-break comment-description"
              [id]="'comment-desc-'+comment.id">{{comment.description}}</div>
-        <small *ngIf="comment.createdAt !== comment.updatedAt"
+        <small *ngIf="comment.createdAtUnix !== comment.updatedAtUnix"
                class="text-muted">Edited {{comment.updatedAt}}</small>
       </div>
       <div [id]="'comment-edit-'+comment.id">

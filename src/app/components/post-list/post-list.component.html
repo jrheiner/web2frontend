@@ -71,8 +71,7 @@
           </div>
           <div class="card-footer d-flex justify-content-between">
             <small class="text-muted">{{post.createdAt}} <span
-              *ngIf="post.createdAt != post.updatedAt">• Last updated {{post.updatedAt}}</span></small>
-
+              *ngIf="post.createdAtUnix != post.updatedAtUnix">• Last updated {{post.updatedAt}}</span></small>
             <div class="d-flex flex-wrap">
                <span class="badge p-1 d-flex align-items-center mr-2" [class.badge-primary]="post.commentCount>0"
                      [class.badge-secondary]="post.commentCount==0">
@@ -93,7 +92,6 @@
             &nbsp;{{post.score}}</span>
             </div>
           </div>
-
         </div>
       </div>
       <nav>
@@ -113,7 +111,6 @@
       </nav>
     </div>
   </div>
-
 
   <div class="col-xl-4">
     <app-home-cards></app-home-cards>
