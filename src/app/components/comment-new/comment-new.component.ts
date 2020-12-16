@@ -33,7 +33,7 @@ export class CommentNewComponent implements OnInit {
       this.session.newComment.emit();
       this.sending = false;
       this.writeComment = '';
-      this.error = true;
+      this.error = false;
     }, () => {
       this.sending = false;
       this.error = true;
