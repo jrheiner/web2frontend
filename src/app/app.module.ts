@@ -16,13 +16,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthInterceptor} from './auth.interceptor';
 import {HelpComponent} from './components/help/help.component';
 import {PostDeleteComponent} from './components/post-delete/post-delete.component';
-import {UniqueUsernameDirective} from './directives/unique-username.directive';
-import {RepeatPasswordValidatorDirective} from './directives/repeat-password.directive';
 import {HomeCardsComponent} from './components/home-cards/home-cards.component';
 import {CommentListComponent} from './components/comment-list/comment-list.component';
 import {CommentNewComponent} from './components/comment-new/comment-new.component';
 import {UserModule} from './components/user/user.module';
 import {CoreModule} from './core/core.module';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -37,14 +36,13 @@ import {CoreModule} from './core/core.module';
     RegisterComponent,
     HelpComponent,
     PostDeleteComponent,
-    UniqueUsernameDirective,
-    RepeatPasswordValidatorDirective,
     HomeCardsComponent,
     CommentListComponent,
     CommentNewComponent,
   ],
   imports: [
     CoreModule,
+    SharedModule,
     UserModule,
     BrowserModule,
     HttpClientModule,

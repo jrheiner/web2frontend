@@ -8,6 +8,7 @@ import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from '../../app-routing.module';
+import {SharedModule} from '../../shared/shared.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import {AppRoutingModule} from '../../app-routing.module';
   ],
   imports: [
     CommonModule,
+    SharedModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

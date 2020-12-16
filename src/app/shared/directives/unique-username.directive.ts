@@ -1,9 +1,9 @@
 import {Directive, forwardRef, Injectable} from '@angular/core';
 import {AbstractControl, AsyncValidator, NG_ASYNC_VALIDATORS, ValidationErrors} from '@angular/forms';
-import {ApiService} from '../core/services/api.service';
+import {ApiService} from '../../core/services/api.service';
 import {Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import {TokenService} from '../core/services/token.service';
+import {TokenService} from '../../core/services/token.service';
 
 
 @Injectable({providedIn: 'root'})
