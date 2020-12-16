@@ -10,7 +10,6 @@ import {RegisterComponent} from './components/register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthInterceptor} from './auth.interceptor';
 import {HelpComponent} from './components/help/help.component';
-import {HomeCardsComponent} from './components/home-cards/home-cards.component';
 import {UserModule} from './components/user/user.module';
 import {CoreModule} from './core/core.module';
 import {SharedModule} from './shared/shared.module';
@@ -23,7 +22,6 @@ import {PostModule} from './components/post/post.module';
     LoginComponent,
     RegisterComponent,
     HelpComponent,
-    HomeCardsComponent,
   ],
   imports: [
     CoreModule,

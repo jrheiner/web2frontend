@@ -5,17 +5,20 @@ import {NavbarComponent} from './components/navbar/navbar.component';
 import {RouterModule} from '@angular/router';
 import {BrowserModule} from '@angular/platform-browser';
 import {HomeComponent} from './components/home/home.component';
+import {HomeCardsComponent} from './components/home-cards/home-cards.component';
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    HomeCardsComponent
   ]
   ,
   exports: [
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    HomeCardsComponent
   ],
   imports: [
     CommonModule,
