@@ -2,14 +2,22 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from '@core/services/api.service';
 import {ActivatedRoute} from '@angular/router';
 
+/**
+ * User details, shows the user profile
+ */
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.scss']
 })
 export class UserDetailsComponent implements OnInit {
-
+  /**
+   * Message to show if the user id was not found
+   */
   notFound;
+  /**
+   * Information to display in the user profile
+   */
   user: {
     avatar: string,
     createdAt: string,
@@ -45,12 +53,26 @@ export class UserDetailsComponent implements OnInit {
     postCount: number,
     commentCount: number,
   };
+  /**
+   * Flag if the component is still loading information
+   */
   componentLoading = true;
+  /**
+   * Flag if the server responds with an unhandled error
+   */
   error = false;
 
+  /**
+   * Constructor
+   * @param apiService - ApiService to make API calls
+   * @param route - ActivatedRoute to get URL parameter
+   */
   constructor(private apiService: ApiService, private route: ActivatedRoute) {
   }
 
+  /**
+   * Get user id, if available, and load user information on initialization
+   */
   ngOnInit(): void {
     const id: string = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
@@ -68,6 +90,10 @@ export class UserDetailsComponent implements OnInit {
     }
   }
 
+  /**
+   * Handle error response
+   * @param err - Http error that is returned
+   */
   handleError(err: any): void {
     if (err.error.error === true) {
       this.notFound = err.error.message;
@@ -78,12 +104,20 @@ export class UserDetailsComponent implements OnInit {
     this.componentLoading = false;
   }
 
+  /**
+   * Handle successful response
+   * @param data - Response data
+   */
   handleResponse(data: any): void {
     this.setUserInfo(data);
     this.componentLoading = false;
     this.error = false;
   }
 
+  /**
+   * Set user variable so information is displayed on the page
+   * @param data - User information, e.g. response data
+   */
   setUserInfo(data: any): void {
     this.user = data;
     if (data.userActivity.posts.length !== 0) {

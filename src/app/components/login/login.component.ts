@@ -4,17 +4,40 @@ import {AuthService} from '@core/services/auth.service';
 import {FormBuilder} from '@angular/forms';
 import {TokenService} from '@core/services/token.service';
 
+/**
+ * Login component handling login form
+ */
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  /**
+   * Login Form
+   */
   loginForm;
+  /**
+   * Alert message
+   */
   alert;
+  /**
+   * Loading Flag
+   */
   isLoading = false;
+  /**
+   * Error flag
+   */
   error = false;
 
+  /**
+   * Constructor, initializes empty form
+   * @param authService - AuthService to make login request
+   * @param router - Router to redirect user
+   * @param formBuilder - FormBuilder to handle login form
+   * @param session - Session to set session state
+   */
   constructor(public authService: AuthService, public router: Router, private formBuilder: FormBuilder, private session: TokenService) {
     this.loginForm = this.formBuilder.group({
       username: '',
@@ -27,7 +50,10 @@ export class LoginComponent {
     }
   }
 
-
+  /**
+   * Make login request and redirect if successfull
+   * @param data - Form data
+   */
   login(data: { username: string, password: string }): void {
     this.authService.login(data.username.toLowerCase(), data.password).subscribe((res) => {
       console.log(res);
@@ -51,6 +77,13 @@ export class LoginComponent {
     });
   }
 
+  /**
+   * Form submit function, checks for empty forms or invalid credentials then calls login()
+   * @description Invalid credentials refers to
+   * username or password not fulfilling requirements (e.g. too short)
+   *
+   * @param data - Form data
+   */
   onSubmit(data): void {
     if (data.username !== '' && data.password !== '') {
       if (data.username.length > 1 && data.password.length > 4) {

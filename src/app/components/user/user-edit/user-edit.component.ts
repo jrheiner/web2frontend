@@ -2,13 +2,18 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from '@core/services/api.service';
 import {TokenService} from '@core/services/token.service';
 
+/**
+ * User edit component
+ */
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.scss']
 })
 export class UserEditComponent implements OnInit {
-
+  /**
+   * Store user information that is entered/shown.
+   */
   user = {
     username: '',
     password: '',
@@ -19,23 +24,48 @@ export class UserEditComponent implements OnInit {
       valid: true
     }
   };
-
+  /**
+   * Show success or error message to user.
+   */
   info = {
     type: '',
     message: ''
   };
+  /**
+   * Flag if the component is still loading data.
+   */
   componentLoading = true;
+  /**
+   * Form value if the user wants to reset his avatar, e.g. delete his current avatar.
+   */
   resetAvatar: boolean;
+  /**
+   * Flag if request is in progress.
+   */
   working = false;
+  /**
+   * Flag if an unhandled server error occurs.
+   */
   error = false;
 
+  /**
+   * Constructor
+   * @param apiService - ApiService to make API calls.
+   * @param session - TokenService to get session information.
+   */
   constructor(private apiService: ApiService, private session: TokenService) {
   }
 
+  /**
+   * Get information about logged in user on initialization.
+   */
   ngOnInit(): void {
     this.getUser();
   }
 
+  /**
+   * Make API call to get user information.
+   */
   getUser(): void {
     this.apiService.getUserSelf().subscribe(data => {
       this.user.username = data.username;
@@ -48,6 +78,10 @@ export class UserEditComponent implements OnInit {
     });
   }
 
+  /**
+   * Get all available form data and make API call to update user.
+   * @private
+   */
   private updateUser(): void {
     const form = document.getElementById('editUserForm') as HTMLFormElement;
     const formData = new FormData(form);
@@ -82,11 +116,18 @@ export class UserEditComponent implements OnInit {
     });
   }
 
+  /**
+   * Wrapper function to call updateUser() when the form is submitted.
+   */
   onSubmit(): void {
     this.working = true;
     this.updateUser();
   }
 
+  /**
+   * OnChange listener to validate a avatar file if it changes.
+   * @param event - File upload change
+   */
   onFileChange(event): void {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -100,12 +141,20 @@ export class UserEditComponent implements OnInit {
     }
   }
 
+  /**
+   * Checkbox change listener to set variable.
+   * @param event - Checkbox change
+   */
   setCheckbox(event: Event): void {
     const checkbox = event.target as HTMLInputElement;
     this.resetAvatar = checkbox.checked;
     this.resetFileInput();
   }
 
+  /**
+   * Clears the current file from the file upload field.
+   * @private
+   */
   private resetFileInput(): void {
     const fileInput = document.getElementById('customAvatar') as HTMLInputElement;
     fileInput.value = '';

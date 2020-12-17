@@ -1,15 +1,24 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
+/**
+ * Help component display information about the application, and providing answers to common questions
+ */
+
 @Component({
   selector: 'app-help',
   templateUrl: './help.component.html',
   styleUrls: ['./help.component.scss']
 })
 export class HelpComponent implements OnInit {
-
+  /**
+   * Variable for the search bar input
+   */
   searchTerm = '';
 
+  /**
+   * Information to display
+   */
   baseDB = [
     {
       category: 'General',
@@ -68,11 +77,22 @@ export class HelpComponent implements OnInit {
     }
   ];
 
+  /**
+   * Copy of information to display we can change
+   * according to the search input without losing original copy. Linked to the HTML template.
+   */
   helpDB = Array.from(this.baseDB);
 
+  /**
+   * Constructor
+   * @param route - ActivatedRoute to get URL search parameter
+   */
   constructor(private route: ActivatedRoute) {
   }
 
+  /**
+   * On initialization get the URL parameter if it was provided
+   */
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       if (params) {
@@ -82,6 +102,12 @@ export class HelpComponent implements OnInit {
     });
   }
 
+  /**
+   * Search function
+   * @description Manipulates the display copy of the data to only contain matching results.
+   * Looking for matches in title, question, and answer
+   * @param event - Searchbar input
+   */
   search(event: string): void {
     const term = event ? event.toLowerCase() : '';
     this.helpDB.forEach((entry, outerIndex) => {

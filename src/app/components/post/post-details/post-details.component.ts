@@ -3,6 +3,10 @@ import {ApiService} from '@core/services/api.service';
 import {ActivatedRoute} from '@angular/router';
 import {TokenService} from '@core/services/token.service';
 
+/**
+ * Post details, also includes comment list and comment form
+ */
+
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
@@ -10,10 +14,23 @@ import {TokenService} from '@core/services/token.service';
 })
 export class PostDetailsComponent implements OnInit {
 
+  /**
+   * Constructor
+   * @param apiService - ApiService to make API calls
+   * @param route - ActivatedRoute to get URL parameter
+   * @param session - TokenService to get session state information
+   */
   constructor(private apiService: ApiService, private route: ActivatedRoute, private session: TokenService) {
   }
 
+  /**
+   * Get post id from URL
+   * @private
+   */
   private id = this.route.snapshot.paramMap.get('id');
+  /**
+   * Holds information about the displayed post
+   */
   post = {
     id: '',
     author: {
@@ -31,17 +48,43 @@ export class PostDetailsComponent implements OnInit {
     createdAtUnix: '',
     updatedAtUnix: ''
   };
+  /**
+   * Flag if post is not found
+   */
   notFound: string;
+  /**
+   * Share button tex
+   */
   copyLink: string;
+  /**
+   * Flag if user visit has this post in his save list
+   */
   postIsSaved = false;
+  /**
+   * Flag if liking or saving a post is in progress
+   */
   isLoading = false;
+  /**
+   * Flag if component is loading
+   */
   componentLoading = true;
+  /**
+   * Flag to show error screen
+   */
   error = false;
 
+  /**
+   * Call updatePostDetails to get post information on initialization
+   */
   ngOnInit(): void {
     this.updatePostDetails();
   }
 
+  /**
+   * Makes the API call to get information about the current post.
+   * Also checks if a posts is saved if the user is logged in.
+   * @private
+   */
   private updatePostDetails(): void {
     this.apiService.getPostById(this.id).subscribe((post) => {
       this.post = post;
@@ -69,14 +112,23 @@ export class PostDetailsComponent implements OnInit {
     }
   }
 
+  /**
+   * Wrapper function to get username of logged in user
+   */
   getUsername(): string {
     return this.session.getUsername();
   }
 
+  /**
+   * Wrapper function to get login state of current user
+   */
   isLoggedIn(): boolean {
     return this.session.isLoggedIn();
   }
 
+  /**
+   * Copies post URL to clipboard
+   */
   copyShareLink(): void {
     const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
@@ -92,6 +144,11 @@ export class PostDetailsComponent implements OnInit {
     this.copyLink = ' (Link copied to clipboard)';
   }
 
+  /**
+   * Adds the post to the user save list.
+   * If the post is already saved, this removes the post form the save list.
+   * @param currentValue - True if the post is saved, false otherwise
+   */
   savePost(currentValue: boolean): void {
     this.isLoading = true;
     this.apiService.addUserSaved(this.id).subscribe(() => {
@@ -103,6 +160,9 @@ export class PostDetailsComponent implements OnInit {
     });
   }
 
+  /**
+   * Sends like request, if a post is already like by the user, the like is removed
+   */
   likePost(): void {
     this.isLoading = true;
     this.apiService.likePost(this.post.id).subscribe(res => {

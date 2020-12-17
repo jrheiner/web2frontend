@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '@core/services/api.service';
 
+/**
+ * Post delete component
+ */
 @Component({
   selector: 'app-post-delete',
   templateUrl: './post-delete.component.html',
@@ -9,15 +12,34 @@ import {ApiService} from '@core/services/api.service';
 })
 export class PostDeleteComponent implements OnInit {
 
+  /**
+   * Get post id from URL
+   * @private
+   */
   private id = this.route.snapshot.paramMap.get('id');
+  /**
+   * Flag if request is in progress
+   */
   working = false;
 
+  /**
+   * Constructor
+   * @param apiService - ApiService to make API calls
+   * @param route - Route to get URL parameter
+   * @param router - Router to navigate user
+   */
   constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
   }
 
+  /**
+   * No initialization needed
+   */
   ngOnInit(): void {
   }
 
+  /**
+   * Delete request
+   */
   delete(): void {
     this.working = true;
     this.apiService.deletePostById(this.id).subscribe(() => {
@@ -27,6 +49,9 @@ export class PostDeleteComponent implements OnInit {
 
   }
 
+  /**
+   * Cancel and go back
+   */
   cancel(): void {
     // noinspection JSIgnoredPromiseFromCall
     this.router.navigate(['/post/' + this.id]);

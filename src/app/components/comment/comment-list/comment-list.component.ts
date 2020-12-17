@@ -4,6 +4,10 @@ import {TokenService} from '@core/services/token.service';
 import {ApiService} from '@core/services/api.service';
 import {Subscription} from 'rxjs';
 
+/**
+ * Comment list component, displays all comments for a specific post
+ */
+
 @Component({
   selector: 'app-comment-list',
   templateUrl: './comment-list.component.html',
@@ -11,10 +15,22 @@ import {Subscription} from 'rxjs';
 })
 export class CommentListComponent implements OnInit, OnDestroy {
 
+  /**
+   * Comment list constructor
+   * @param route - ActivatedRoute to get url parameter
+   * @param session - TokenService for session calls
+   * @param apiService - ApiService to make requests to the api
+   */
   constructor(private route: ActivatedRoute, private session: TokenService, private apiService: ApiService) {
   }
 
+  /**
+   * Get post id from url
+   */
   private id = this.route.snapshot.paramMap.get('id');
+  /**
+   * Define comments array which will hold all comments after the api requst
+   */
   comments = [{
     id: '',
     parent: '',
@@ -29,12 +45,29 @@ export class CommentListComponent implements OnInit, OnDestroy {
       avatar: ''
     }
   }];
+  /**
+   * Variable for the comment editing mode bind
+   */
   updateComment = '';
+  /**
+   * Flag to signal when the component has finished loading
+   */
   componentLoading = true;
+  /**
+   * Event Subscription for new comment event
+   * @private
+   */
   private serviceSubscription: Subscription;
+  /**
+   * Flag to display Server error div
+   */
   error = false;
 
-
+  /**
+   * Set disabled state for the comment edit button
+   * @param {boolean} allowed - If button is enabled or disabled
+   * @private
+   */
   private static commentsAllow(allowed: boolean): void {
     const buttons = document.getElementsByClassName('btn-edit-comment') as HTMLCollectionOf<HTMLButtonElement>;
     // @ts-ignore
@@ -43,6 +76,11 @@ export class CommentListComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Enable comment editing mode for a specific comment
+   * @param {string} id - Comment id
+   * @private
+   */
   private static enableCommentEditing(id: string): void {
     const btnGroup = document.getElementById('btn-group-' + id);
     const btnEditGroup = document.getElementById('btn-edit-group-' + id);
@@ -57,6 +95,10 @@ export class CommentListComponent implements OnInit, OnDestroy {
     EditArea.className = 'form-control d-none';
   }
 
+  /**
+   * Initialization by getting all comments
+   * and setting up an Event Subscription to refresh if a new comment is posted
+   */
   ngOnInit(): void {
     this.updateComments();
     this.serviceSubscription = this.session.newComment.subscribe(() => {
@@ -64,12 +106,19 @@ export class CommentListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Unsubscribe from new comment event to avoid duplicate subscriptions
+   */
   ngOnDestroy(): void {
     if (this.serviceSubscription) {
       this.serviceSubscription.unsubscribe();
     }
   }
 
+  /**
+   * Gets all comments from api
+   * @private
+   */
   private updateComments(): void {
     this.apiService.getComments(this.id).subscribe((comments) => {
       this.comments = comments.reverse();
@@ -80,14 +129,24 @@ export class CommentListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Wrapper function to get session username
+   */
   getUsername(): string {
     return this.session.getUsername();
   }
 
+  /**
+   * Wrapper function to get session login state
+   */
   isLoggedIn(): boolean {
     return this.session.isLoggedIn();
   }
 
+  /**
+   * Delete a comment by id
+   * @param {string} id - Comment id to delete
+   */
   deleteComment(id: string): void {
     const comment = document.getElementById(id);
     const deleteBtn = document.getElementById('btn-delete-' + id) as HTMLButtonElement;
@@ -104,6 +163,11 @@ export class CommentListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Start editing mode for a specific comment
+   * @description Hides the comment text and displays a textarea field
+   * @param {string} id - Comment id
+   */
   startCommentEdit(id: string): void {
     CommentListComponent.commentsAllow(false);
     const btnGroup = document.getElementById('btn-group-' + id);
@@ -122,6 +186,10 @@ export class CommentListComponent implements OnInit, OnDestroy {
     EditArea.style.height = EditArea.scrollHeight + 3 + 'px';
   }
 
+  /**
+   * Finish comment editing mode and send the update request
+   * @param {string} id - Comment id
+   */
   finishCommentEdit(id: string): void {
     CommentListComponent.commentsAllow(true);
     CommentListComponent.enableCommentEditing(id);
@@ -136,12 +204,21 @@ export class CommentListComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Cancel comment editing mode and go back without changes
+   * @param {string} id - Comment id
+   */
   cancelCommentEdit(id: string): void {
     CommentListComponent.commentsAllow(true);
     CommentListComponent.enableCommentEditing(id);
     this.updateComment = '';
   }
 
+  /**
+   * Get comment description by comment id
+   * @param {string} id - Comment id
+   * @private
+   */
   private getCommentText(id: string): string {
     const foundComment = this.comments.find(element => element.id === id);
     return foundComment ? foundComment.description : '';
