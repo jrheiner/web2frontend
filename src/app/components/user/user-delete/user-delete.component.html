@@ -24,11 +24,13 @@
   <div class="row">
     <div class="col-sm-6 align-self-center">
       <label for="deleteUsername"></label>
-      <input id="deleteUsername" type="text" class="form-control" [placeholder]="username" [(ngModel)]="input">
+      <input id="deleteUsername" type="text" class="form-control" [(ngModel)]="input">
+      <small class="text-muted">Required.</small>
     </div>
   </div>
 
-  <button type="submit" class="btn btn-lg btn-danger mt-4 mb-4" (click)="deleteAccount()" [disabled]="alert || working">
+  <button type="submit" class="btn btn-lg btn-danger mt-4 mb-4" (click)="deleteAccount()"
+          [disabled]="alert || working || input.toLowerCase()!==username.toLowerCase()">
     <span *ngIf="!working">Delete account</span>
     <span *ngIf="working">
       <span class="spinner-border">
