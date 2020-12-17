@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CommentListComponent } from './comment-list.component';
+import {CommentListComponent} from './comment-list.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('CommentListComponent', () => {
   let component: CommentListComponent;
@@ -8,9 +10,10 @@ describe('CommentListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CommentListComponent ]
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [CommentListComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

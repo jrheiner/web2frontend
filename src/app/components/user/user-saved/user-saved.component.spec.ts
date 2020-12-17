@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UserSavedComponent } from './user-saved.component';
+import {UserSavedComponent} from './user-saved.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('UserSavedComponent', () => {
   let component: UserSavedComponent;
@@ -8,9 +9,10 @@ describe('UserSavedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserSavedComponent ]
+      imports: [HttpClientTestingModule],
+      declarations: [UserSavedComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

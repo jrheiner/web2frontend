@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CommentNewComponent } from './comment-new.component';
+import {CommentNewComponent} from './comment-new.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('CommentNewComponent', () => {
   let component: CommentNewComponent;
@@ -8,9 +10,10 @@ describe('CommentNewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CommentNewComponent ]
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [CommentNewComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

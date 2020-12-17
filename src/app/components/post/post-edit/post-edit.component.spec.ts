@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { PostEditComponent } from './post-edit.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {PostEditComponent} from './post-edit.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('PostEditComponent', () => {
   let component: PostEditComponent;
@@ -8,9 +9,10 @@ describe('PostEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PostEditComponent ]
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [PostEditComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

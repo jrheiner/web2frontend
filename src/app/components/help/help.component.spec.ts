@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HelpComponent } from './help.component';
+import {HelpComponent} from './help.component';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('HelpComponent', () => {
   let component: HelpComponent;
@@ -8,9 +9,10 @@ describe('HelpComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HelpComponent ]
+      imports: [RouterTestingModule],
+      declarations: [HelpComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
