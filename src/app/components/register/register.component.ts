@@ -28,6 +28,7 @@ export class RegisterComponent {
   constructor(private apiService: ApiService, public router: Router, private session: TokenService) {
 
     if (this.session.isLoggedIn()) {
+      // noinspection JSIgnoredPromiseFromCall
       this.router.navigate(['']);
     }
   }

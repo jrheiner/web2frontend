@@ -34,6 +34,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   logout(): void {
     this.session.clearSession();
+    // noinspection JSIgnoredPromiseFromCall
     this.router.navigate(['login']);
   }
 

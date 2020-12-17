@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenService} from '@core/services/token.service';
 import {ApiService} from '@core/services/api.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-delete',
@@ -16,7 +15,7 @@ export class UserDeleteComponent implements OnInit {
   working = false;
   error = false;
 
-  constructor(private apiService: ApiService, private session: TokenService, private router: Router) {
+  constructor(private apiService: ApiService, private session: TokenService) {
   }
 
   ngOnInit(): void {
@@ -26,7 +25,7 @@ export class UserDeleteComponent implements OnInit {
   deleteAccount(): void {
     if (this.input === this.username) {
       this.working = true;
-      this.apiService.deleteUserSelf().subscribe(data => {
+      this.apiService.deleteUserSelf().subscribe(() => {
         this.session.clearSession();
         this.alert = 'Successfully deleted account.';
         this.session.clearSession();

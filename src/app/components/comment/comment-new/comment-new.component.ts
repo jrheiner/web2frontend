@@ -29,7 +29,7 @@ export class CommentNewComponent implements OnInit {
     const comment = {
       description: this.writeComment
     };
-    this.apiService.postComment(this.id, comment).subscribe(res => {
+    this.apiService.postComment(this.id, comment).subscribe(() => {
       this.session.newComment.emit();
       this.sending = false;
       this.writeComment = '';

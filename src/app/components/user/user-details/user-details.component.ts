@@ -10,7 +10,41 @@ import {ActivatedRoute} from '@angular/router';
 export class UserDetailsComponent implements OnInit {
 
   notFound;
-  user;
+  user: {
+    avatar: string,
+    createdAt: string,
+    id: string,
+    score: number,
+    status: string,
+    username: string,
+    userActivity: {
+      comments: {
+        id: string,
+        parent: string,
+        description: string,
+        createdAt: string,
+        createdAtUnix: number,
+        updatedAt: string,
+        updatedAtUnix: number
+      }[],
+      posts: {
+        id: string,
+        title: string,
+        description: string,
+        score: number,
+        type: string,
+        images: string[],
+        commentCount: number,
+        createdAt: string,
+        createdAtUnix: number,
+        updatedAt: string,
+        updatedAtUnix: number
+      }[]
+    },
+    lastActivity: string,
+    postCount: number,
+    commentCount: number,
+  };
   componentLoading = true;
   error = false;
 
@@ -53,11 +87,11 @@ export class UserDetailsComponent implements OnInit {
   setUserInfo(data: any): void {
     this.user = data;
     if (data.userActivity.posts.length !== 0) {
-      this.user.lastAcitivty = data.userActivity.posts[Object.keys(data.userActivity.posts).sort().reverse()[0]].updatedAt;
+      this.user.lastActivity = data.userActivity.posts[Object.keys(data.userActivity.posts).sort().reverse()[0]].updatedAt;
     } else if (data.userActivity.comments.length !== 0) {
-      this.user.lastAcitivty = data.userActivity.comments[Object.keys(data.userActivity.comments).sort().reverse()[0]].updatedAt;
+      this.user.lastActivity = data.userActivity.comments[Object.keys(data.userActivity.comments).sort().reverse()[0]].updatedAt;
     } else {
-      this.user.lastAcitivty = data.createdAt;
+      this.user.lastActivity = data.createdAt;
     }
     this.user.postCount = Object.keys(data.userActivity.posts).length;
     this.user.commentCount = Object.keys(data.userActivity.comments).length;

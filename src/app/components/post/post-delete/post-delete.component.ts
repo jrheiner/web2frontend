@@ -21,12 +21,14 @@ export class PostDeleteComponent implements OnInit {
   delete(): void {
     this.working = true;
     this.apiService.deletePostById(this.id).subscribe(() => {
+      // noinspection JSIgnoredPromiseFromCall
       this.router.navigate(['/']);
     });
 
   }
 
   cancel(): void {
+    // noinspection JSIgnoredPromiseFromCall
     this.router.navigate(['/post/' + this.id]);
   }
 }

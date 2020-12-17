@@ -164,10 +164,10 @@
 
     <button type="submit" class="btn btn-success" [disabled]="newPostForm.invalid || filesInvalid || working">
       <span *ngIf="!working">Submit post</span>
-      <div *ngIf="working">
-        <div class="spinner-border">
-        </div>
-      </div>
+      <span *ngIf="working">
+        <span class="spinner-border">
+        </span>
+      </span>
     </button>
 
   </div>

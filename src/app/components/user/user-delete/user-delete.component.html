@@ -30,9 +30,9 @@
 
   <button type="submit" class="btn btn-lg btn-danger mt-4 mb-4" (click)="deleteAccount()" [disabled]="alert || working">
     <span *ngIf="!working">Delete account</span>
-    <div *ngIf="working">
-      <div class="spinner-border">
-      </div>
-    </div>
+    <span *ngIf="working">
+      <span class="spinner-border">
+      </span>
+    </span>
   </button>
 </div>

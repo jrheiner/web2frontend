@@ -5,7 +5,7 @@ import {UserDetailsComponent} from './user-details/user-details.component';
 import {UserEditComponent} from './user-edit/user-edit.component';
 import {UserSavedComponent} from './user-saved/user-saved.component';
 import {AppRoutingModule} from '../../app-routing.module';
-import {SharedModule} from '../../shared/shared.module';
+import {SharedModule} from '@shared/shared.module';
 
 
 @NgModule({
