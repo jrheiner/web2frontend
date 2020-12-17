@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" routerLink="/">PLACEHOLDER</a>
+  <a class="navbar-brand" routerLink="/" data-toggle="collapse" data-target=".navbar-collapse.show">PLACEHOLDER</a>
   <!--suppress SpellCheckingInspection -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent">
@@ -9,13 +9,13 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
         <a class="nav-link" routerLink="">Home</a>
       </li>
-      <li class="nav-item" *ngIf="hideLogin">
+      <li class="nav-item" *ngIf="hideLogin" data-toggle="collapse" data-target=".navbar-collapse.show">
         <a class="nav-link text-success font-weight-bold" routerLink="post/new">Create new post</a>
       </li>
-      <li class="nav-item dropdown" *ngIf="hideLogin">
+      <li class="nav-item dropdown" *ngIf="hideLogin" data-toggle="collapse" data-target=".navbar-collapse.show">
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Account</a>
         <div class="dropdown-menu">
           <h6 class="dropdown-header">Profile: {{currentUser}}</h6>
@@ -25,10 +25,10 @@
           <a class="dropdown-item" routerLink="user/delete">Delete</a>
         </div>
       </li>
-      <li class="nav-item" *ngIf="hideLogin">
+      <li class="nav-item" *ngIf="hideLogin" data-toggle="collapse" data-target=".navbar-collapse.show">
         <a class="nav-link" routerLink="user/saved">Saved posts</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
         <a class="nav-link" routerLink="help">Help</a>
       </li>
     </ul>
@@ -36,10 +36,17 @@
     <span class="badge badge-light mr-3 px-2 login-badge" *ngIf="hideLogin">Logged in as
       <span
         class=" font-weight-bold">{{currentUser}}
-      </span></span>
-    <button class="btn btn-success my-2 my-sm-0" routerLink="login" *ngIf="!hideLogin">Login</button>
-    <button class="btn btn-primary my-2 my-sm-0 ml-2" routerLink="register" *ngIf="!hideLogin">Register</button>
-    <button class="btn btn-danger my-2 my-sm-0" (click)="logout()" *ngIf="hideLogin">Logout</button>
+      </span>
+    </span>
+    <button class="btn btn-success my-2 my-sm-0" routerLink="login" *ngIf="!hideLogin" data-toggle="collapse"
+            data-target=".navbar-collapse.show">Login
+    </button>
+    <button class="btn btn-primary my-2 my-sm-0 ml-2" routerLink="register" *ngIf="!hideLogin" data-toggle="collapse"
+            data-target=".navbar-collapse.show">Register
+    </button>
+    <button class="btn btn-danger my-2 my-sm-0" (click)="logout()" *ngIf="hideLogin" data-toggle="collapse"
+            data-target=".navbar-collapse.show">Logout
+    </button>
 
   </div>
 </nav>
