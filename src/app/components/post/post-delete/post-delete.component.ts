@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '@core/services/api.service';
+import {Title} from '@angular/platform-browser';
 
 /**
  * Post delete component
@@ -27,8 +28,11 @@ export class PostDeleteComponent implements OnInit {
    * @param apiService - ApiService to make API calls
    * @param route - Route to get URL parameter
    * @param router - Router to navigate user
+   * @param title - Title to set browser title
    */
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
+  constructor(private apiService: ApiService, private route: ActivatedRoute,
+              private router: Router, private title: Title) {
+    this.title.setTitle('Delete post');
   }
 
   /**

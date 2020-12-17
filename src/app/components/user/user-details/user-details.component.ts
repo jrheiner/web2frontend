@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '@core/services/api.service';
 import {ActivatedRoute} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 /**
  * User details, shows the user profile
@@ -66,8 +67,10 @@ export class UserDetailsComponent implements OnInit {
    * Constructor
    * @param apiService - ApiService to make API calls
    * @param route - ActivatedRoute to get URL parameter
+   * @param title - Title to set browser title
    */
-  constructor(private apiService: ApiService, private route: ActivatedRoute) {
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private title: Title) {
+    this.title.setTitle('User profile');
   }
 
   /**

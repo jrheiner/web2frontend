@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from '@core/services/api.service';
 import {ActivatedRoute} from '@angular/router';
 import {TokenService} from '@core/services/token.service';
+import {Title} from '@angular/platform-browser';
 
 /**
  * Post details, also includes comment list and comment form
@@ -19,8 +20,11 @@ export class PostDetailsComponent implements OnInit {
    * @param apiService - ApiService to make API calls
    * @param route - ActivatedRoute to get URL parameter
    * @param session - TokenService to get session state information
+   * @param title - Title to set browser title
    */
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private session: TokenService) {
+  constructor(private apiService: ApiService, private route: ActivatedRoute,
+              private session: TokenService, private title: Title) {
+    this.title.setTitle('Post details');
   }
 
   /**

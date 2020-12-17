@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {AuthService} from '@core/services/auth.service';
 import {FormBuilder} from '@angular/forms';
 import {TokenService} from '@core/services/token.service';
+import {Title} from '@angular/platform-browser';
 
 /**
  * Login component handling login form
@@ -37,8 +38,12 @@ export class LoginComponent {
    * @param router - Router to redirect user
    * @param formBuilder - FormBuilder to handle login form
    * @param session - Session to set session state
+   * @param title - Title to set browser title
    */
-  constructor(public authService: AuthService, public router: Router, private formBuilder: FormBuilder, private session: TokenService) {
+  constructor(public authService: AuthService, public router: Router,
+              private formBuilder: FormBuilder, private session: TokenService,
+              private title: Title) {
+    this.title.setTitle('Login');
     this.loginForm = this.formBuilder.group({
       username: '',
       password: ''

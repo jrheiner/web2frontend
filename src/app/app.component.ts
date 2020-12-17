@@ -13,5 +13,5 @@ export class AppComponent {
   /**
    * Default window title
    */
-  title = 'FrontEnd';
+  title = 'Home';
 }

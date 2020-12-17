@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '@core/services/api.service';
 import {TokenService} from '@core/services/token.service';
+import {Title} from '@angular/platform-browser';
 
 /**
  * User edit component
@@ -52,8 +53,10 @@ export class UserEditComponent implements OnInit {
    * Constructor
    * @param apiService - ApiService to make API calls.
    * @param session - TokenService to get session information.
+   * @param title - Title to set browser title
    */
-  constructor(private apiService: ApiService, private session: TokenService) {
+  constructor(private apiService: ApiService, private session: TokenService, private title: Title) {
+    this.title.setTitle('Edit account');
   }
 
   /**

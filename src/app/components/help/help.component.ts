@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 /**
  * Help component display information about the application, and providing answers to common questions
@@ -86,8 +87,10 @@ export class HelpComponent implements OnInit {
   /**
    * Constructor
    * @param route - ActivatedRoute to get URL search parameter
+   * @param title - Title to set browser title
    */
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private title: Title) {
+    this.title.setTitle('Help and FAQ');
   }
 
   /**

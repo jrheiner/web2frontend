@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {ApiService} from '@core/services/api.service';
 import {TokenService} from '@core/services/token.service';
+import {Title} from '@angular/platform-browser';
 
 /**
  * Register component, shows and handles the register form
@@ -51,8 +52,10 @@ export class RegisterComponent {
    * @param apiService - ApiService to make API call
    * @param router - Router to navigate the user
    * @param session - TokenService to get session information
+   * @param title - Title to set browser title
    */
-  constructor(private apiService: ApiService, public router: Router, private session: TokenService) {
+  constructor(private apiService: ApiService, public router: Router, private session: TokenService, private title: Title) {
+    this.title.setTitle('Register');
     if (this.session.isLoggedIn()) {
       // noinspection JSIgnoredPromiseFromCall
       this.router.navigate(['']);

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '@core/services/api.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 /**
  * Post edit component
@@ -53,8 +54,11 @@ export class PostEditComponent implements OnInit {
    * @param apiService - ApiService to make API calls
    * @param route - ActivatedRoute to get URL parameter
    * @param router - Router to navigate the user
+   * @param title - Title to set browser title
    */
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
+  constructor(private apiService: ApiService, private route: ActivatedRoute,
+              private router: Router, private title: Title) {
+    this.title.setTitle('Edit post');
   }
 
   /**

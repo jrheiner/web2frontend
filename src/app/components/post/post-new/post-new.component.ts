@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenService} from '@core/services/token.service';
 import {ApiService} from '@core/services/api.service';
+import {Title} from '@angular/platform-browser';
 
 /**
  * New post component, form for creating a new post
@@ -15,8 +16,10 @@ export class PostNewComponent implements OnInit {
    * Constructor
    * @param session - TokenService to access session information
    * @param apiService - ApiService to make API calls
+   * @param title - Title to set browser title
    */
-  constructor(private session: TokenService, private apiService: ApiService) {
+  constructor(private session: TokenService, private apiService: ApiService, private title: Title) {
+    this.title.setTitle('Create new post');
   }
 
   /**

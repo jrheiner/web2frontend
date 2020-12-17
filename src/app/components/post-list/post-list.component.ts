@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ApiService} from '@core/services/api.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 /**
  * Post list component, displays all posts on the homepage
@@ -103,8 +104,11 @@ export class PostListComponent implements OnInit, OnDestroy {
    * @param apiService - ApiService to make API calls
    * @param route - ActivatedRoute to get query params
    * @param router - Router to navigate to specific page
+   * @param title - Title to set browser title
    */
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
+  constructor(private apiService: ApiService, private route: ActivatedRoute,
+              private router: Router, private title: Title) {
+    this.title.setTitle('Home');
   }
 
   /**

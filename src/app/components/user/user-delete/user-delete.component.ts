@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenService} from '@core/services/token.service';
 import {ApiService} from '@core/services/api.service';
+import {Title} from '@angular/platform-browser';
 
 /**
  * Delete user component
@@ -37,8 +38,10 @@ export class UserDeleteComponent implements OnInit {
    * Constructor
    * @param apiService - ApiService to make API call
    * @param session - TokenService to get session information
+   * @param title - Title to set browser title
    */
-  constructor(private apiService: ApiService, private session: TokenService) {
+  constructor(private apiService: ApiService, private session: TokenService, private title: Title) {
+    this.title.setTitle('Delete user profile');
   }
 
   /**

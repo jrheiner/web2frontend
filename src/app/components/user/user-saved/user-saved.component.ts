@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '@core/services/api.service';
+import {Title} from '@angular/platform-browser';
 
 /**
  * User save list component, displays posts saved by the user
@@ -38,8 +39,10 @@ export class UserSavedComponent implements OnInit {
   /**
    * Constructor
    * @param apiService - ApiService to make API calls
+   * @param title - Title to set browser title
    */
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private title: Title) {
+    this.title.setTitle('My saved posts');
   }
 
   /**
