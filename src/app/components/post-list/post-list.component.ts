@@ -120,6 +120,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     updatedAt: string, updatedAtUnix: number
   }[] {
     this.page = 1;
+    // noinspection JSIgnoredPromiseFromCall
     this.router.navigate(
       [],
       {
@@ -172,6 +173,7 @@ export class PostListComponent implements OnInit, OnDestroy {
       this.displayPosts = this.posts.slice((page - 1) * this.perPage, page * this.perPage);
     } else {
       this.page = this.getLastPage();
+      // noinspection JSIgnoredPromiseFromCall
       this.router.navigate(
         [],
         {
@@ -190,6 +192,7 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   resetQueryParams(): void {
     this.page = 1;
+    // noinspection JSIgnoredPromiseFromCall
     this.router.navigate(
       [],
       {

@@ -22,6 +22,7 @@ export class LoginComponent {
     });
 
     if (this.session.isLoggedIn()) {
+      // noinspection JSIgnoredPromiseFromCall
       this.router.navigate(['']);
     }
   }
@@ -33,6 +34,7 @@ export class LoginComponent {
       if (res.hasOwnProperty('token')) {
         this.session.setUsername(res.username);
         this.session.setToken(res.token);
+        // noinspection JSIgnoredPromiseFromCall
         this.router.navigate([this.authService.redirectUrl || '']);
       }
     }, (err) => {

@@ -73,10 +73,10 @@
         <div class="btn-group mr-1">
           <button type="submit" class="btn btn-success" [disabled]="editPostForm.invalid || working">
             <span *ngIf="!working">Update post</span>
-            <div *ngIf="working">
-              <div class="spinner-border">
-              </div>
-            </div>
+            <span *ngIf="working">
+              <span class="spinner-border">
+              </span>
+            </span>
           </button>
         </div>
         <div class="btn-group">

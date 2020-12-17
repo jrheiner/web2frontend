@@ -11,8 +11,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthInterceptor} from './auth.interceptor';
 import {HelpComponent} from './components/help/help.component';
 import {UserModule} from './components/user/user.module';
-import {CoreModule} from './core/core.module';
-import {SharedModule} from './shared/shared.module';
+import {CoreModule} from '@core/core.module';
+import {SharedModule} from '@shared/shared.module';
 import {PostModule} from './components/post/post.module';
 
 @NgModule({

@@ -5,6 +5,7 @@ import {TokenService} from '@core/services/token.service';
 import {ApiService} from '@core/services/api.service';
 
 
+// noinspection JSUnusedLocalSymbols
 @Injectable({
   providedIn: 'root'
 })
@@ -25,6 +26,7 @@ export class RoleGuard implements CanActivate {
           obs.next(true);
         } else {
           if (this.session.isLoggedIn()) {
+            // noinspection JSIgnoredPromiseFromCall
             this.router.navigate(['/post/' + id]);
           }
           obs.next(false);

@@ -64,11 +64,10 @@ export class PostEditComponent implements OnInit {
       reqData.link = this.post.link;
     }
     this.apiService.editPostById(this.id, reqData).subscribe(res => {
-      console.log(res);
+      // noinspection JSIgnoredPromiseFromCall
       this.router.navigate(['/post/' + res.id]);
       this.working = false;
-    }, err => {
-      console.log(err);
+    }, () => {
       this.info.type = 'danger';
       this.info.message = 'Something went wrong. Try again.';
       this.working = false;
@@ -76,6 +75,7 @@ export class PostEditComponent implements OnInit {
   }
 
   cancel(): void {
+    // noinspection JSIgnoredPromiseFromCall
     this.router.navigate(['/post/' + this.id]);
   }
 }

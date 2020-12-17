@@ -42,7 +42,7 @@ export class UserEditComponent implements OnInit {
       this.user.status = data.status || '';
       this.componentLoading = false;
       this.error = false;
-    }, (err) => {
+    }, () => {
       this.error = true;
       this.componentLoading = false;
     });
@@ -63,7 +63,7 @@ export class UserEditComponent implements OnInit {
       this.session.userChange.emit(this.user.username);
       this.session.setUsername(this.user.username);
     }
-    this.apiService.editUserSelf(formData).subscribe(res => {
+    this.apiService.editUserSelf(formData).subscribe(() => {
       this.getUser();
       this.info.type = 'success';
       this.info.message = 'Account updated successfully.';

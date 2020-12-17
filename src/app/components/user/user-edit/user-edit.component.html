@@ -75,7 +75,7 @@
       <div class="form-group">
         <label for="editStatus">Status</label>
         <input id="editStatus" name="editStatus" type="text" class="form-control" [(ngModel)]="user.status"
-               #editStatus="ngModel" maxlength="150">
+               maxlength="150">
       </div>
       <div class="form-row d-flex flex-column mb-2">
         <p class="mb-1">Profile picture</p>
@@ -117,10 +117,10 @@
     <button type="submit" class="btn btn-success"
             [disabled]="(editUserForm.invalid || editUsername.pending || !this.user.avatar.valid || working)">
       <span *ngIf="!working">Update profile</span>
-      <div *ngIf="working">
-        <div class="spinner-border">
-        </div>
-      </div>
+      <span *ngIf="working">
+        <span class="spinner-border">
+        </span>
+      </span>
     </button>
 
   </form>

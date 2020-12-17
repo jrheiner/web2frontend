@@ -79,9 +79,10 @@
                class="text-muted">Edited {{comment.updatedAt}}</small>
       </div>
       <div [id]="'comment-edit-'+comment.id">
-              <textarea [(ngModel)]="updateComment" [id]="'edit-area-'+comment.id"
-                        class="form-control d-none" maxlength="500"
-                        onkeydown='this.style.height = "";this.style.height = this.scrollHeight + 3 + "px"'></textarea>
+        <!--suppress HtmlFormInputWithoutLabel -->
+        <textarea [(ngModel)]="updateComment" [id]="'edit-area-'+comment.id"
+                  class="form-control d-none" maxlength="500"
+                  onkeydown='this.style.height = "";this.style.height = this.scrollHeight + 3 + "px"'></textarea>
       </div>
     </div>
   </div>

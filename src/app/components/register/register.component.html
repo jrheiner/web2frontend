@@ -111,10 +111,10 @@
     <button type="submit" class="btn btn-success btn-block btn-lg"
             [disabled]="(registerForm.invalid || registerForm.pending || disableRegister || working)">
       <span *ngIf="!working">Register</span>
-      <div *ngIf="working">
-        <div class="spinner-border">
-        </div>
-      </div>
+      <span *ngIf="working">
+        <span class="spinner-border">
+        </span>
+      </span>
     </button>
   </form>
   <button class="btn btn-lg btn-outline-secondary btn-block mt-3" routerLink="/login" *ngIf="!disableRegister">Go to
