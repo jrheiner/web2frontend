@@ -30,7 +30,7 @@
   </div>
 
   <button type="submit" class="btn btn-lg btn-danger mt-4 mb-4" (click)="deleteAccount()"
-          [disabled]="alert || working || input.toLowerCase()!==username.toLowerCase()">
+          [disabled]="alert || working || input?.toLowerCase() !== username?.toLowerCase()">
     <span *ngIf="!working">Delete account</span>
     <span *ngIf="working">
       <span class="spinner-border">

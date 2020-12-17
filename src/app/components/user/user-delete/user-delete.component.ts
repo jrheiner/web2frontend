@@ -52,7 +52,7 @@ export class UserDeleteComponent implements OnInit {
    * Make delete user request username matches input. Also displays success or error message
    */
   deleteAccount(): void {
-    if (this.input.toLowerCase() === this.username.toLowerCase()) {
+    if (this.input && this.username && this.input.toLowerCase() === this.username.toLowerCase()) {
       this.working = true;
       this.apiService.deleteUserSelf().subscribe(() => {
         this.session.clearSession();
