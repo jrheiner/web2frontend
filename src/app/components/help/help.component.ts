@@ -35,10 +35,22 @@ export class HelpComponent implements OnInit {
           show: true
         },
         {
+          question: 'What does \'Error contacting server\' mean?',
+          answer: 'This means that the web application is unable to connect to the back-end server. ' +
+            'This error is usually caused on the server-side and can be fixed by starting or restarting the server.'
+        },
+        {
           question: 'Do I need an account?',
           answer: 'You do not need an account to view posts, comments, or user profiles.\n' +
-            'To create posts yourself, comment and vote on other posts you have to register and login.',
+            'To create posts yourself, comment, and vote on other posts you have to register and log in.',
           show: true
+        },
+        {
+          question: 'Where is the data and images stored?',
+          answer: 'This project relies on two cloud providers, MongoDB Atlas and Cloudinary. ' +
+            'Data is stored in a MongoDB cluster hosted on AWS, ' +
+            'image assets like post images or profile pictures are stored within the Cloudinary media library.\n' +
+            'If you delete your post, comment, or account we also delete it from the database or media library.'
         }
       ]
     },
@@ -55,8 +67,14 @@ export class HelpComponent implements OnInit {
         },
         {
           question: 'How can I delete my account?',
-          answer: 'test1',
+          answer: 'To delete your account, first, make sure you are logged in. ' +
+            'Then click \'Account\' in the navigation bar and select delete. There you can delete your account after confirming.\n\n' +
+            'Note: A deleted account can not be recovered, all posts, comments, and other account activity will be permanently deleted.',
           show: true
+        },
+        {
+          question: 'Can I change my profile picture?',
+          answer: 'Yes! You can upload a custom profile picture for all other users to see.'
         }
       ]
     },
@@ -66,12 +84,17 @@ export class HelpComponent implements OnInit {
       collection: [
         {
           question: 'How can I post images?',
-          answer: 'test1',
+          answer: 'To post an image or multiple images you need to be logged into your account. ' +
+            'Then click \'Create new post\' in the navigation bar. ' +
+            'A form will open where you can select the three different post types.' +
+            ' To include up to three images in your post, select post type \'Image\'.',
           show: true
         },
         {
-          question: 'How can I edit my posts?',
-          answer: 'test1',
+          question: 'Can I edit my post afterwards?',
+          answer: 'Yes, editing a post after creating it is possible. ' +
+            'To do so select the post and click the \'Edit post\' button in the \'Manage your post\' card.\n' +
+            'To quickly find your post you can use the search bar or visit your profile, where all posts made by you are listed.',
           show: true
         }
       ]
