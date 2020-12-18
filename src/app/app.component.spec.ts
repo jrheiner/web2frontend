@@ -18,13 +18,13 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'FrontEnd'`, () => {
+  it(`should have as title 'ConnectApp'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('FrontEnd');
+    expect(app.title).toEqual('ConnectApp');
   });
 
-  it('should render title', () => {
+  it('should render navbar and home', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
