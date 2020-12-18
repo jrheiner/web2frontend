@@ -92,7 +92,7 @@ export class HelpComponent implements OnInit {
         },
         {
           question: 'Can I edit my post afterwards?',
-          answer: 'Yes, editing a post after creating it is possible. ' +
+          answer: 'Yes, editing a post after creating is possible. ' +
             'To do so select the post and click the \'Edit post\' button in the \'Manage your post\' card.\n' +
             'To quickly find your post you can use the search bar or visit your profile, where all posts made by you are listed.',
           show: true
