@@ -7,6 +7,17 @@ It is an Angular 11 application interacting with the server-side through JSON we
 For a general description of the project please refer to the ReadMe.md included in the submission directory directly.
 This file only covers parts specific to the FrontEnd project
 
+## Script overview
+
+| Command       | Description               |
+|---------------|---------------------------|
+| npm install   | Install required packages |
+| npm run start | Start development server  |
+| npm run tests | Run unit tests            |
+| npm run lint  | Run linting               |
+| npm run e2e   | Run E2E test              |
+| npm run docs  | Build documentation       |
+
 ## Installation
 
 To install the required packages go to the 'FrontEnd' directory, open the terminal/console/bash, and type
