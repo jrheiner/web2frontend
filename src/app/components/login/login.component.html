@@ -1,5 +1,5 @@
 <h1 class="display-2 pt-5 pb-5 text-center">Login</h1>
-<div class="alert alert-danger" role="alert" *ngIf="alert">
+<div class="alert alert-danger" role="alert" *ngIf="alert" id="alert">
   {{alert}}
 </div>
 
@@ -32,7 +32,7 @@
          autocomplete="on" minlength="5"
          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,32}$">
 
-  <button class="btn btn-lg btn-success btn-block mt-3" type="submit" [disabled]="loginForm.disabled">
+  <button class="btn btn-lg btn-success btn-block mt-3" type="submit" [disabled]="loginForm.disabled" id="submit-btn">
     <span *ngIf="!isLoading">Login</span>
     <span *ngIf="isLoading" class="spinner-border" role="status"></span>
   </button>

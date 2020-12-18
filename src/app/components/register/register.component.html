@@ -7,7 +7,7 @@
   Later on, you can customize your profile by adding a status or profile picture.
 </p>
 
-<div class="alert alert-{{info.type}}" *ngIf="info.message">
+<div class="alert alert-{{info.type}}" *ngIf="info.message" id="register-alert">
   {{info.message}}
 </div>
 
@@ -109,7 +109,7 @@
     </div>
 
     <button type="submit" class="btn btn-success btn-block btn-lg"
-            [disabled]="(registerForm.invalid || registerForm.pending || disableRegister || working)">
+            [disabled]="(registerForm.invalid || registerForm.pending || disableRegister || working)" id="register-btn">
       <span *ngIf="!working">Register</span>
       <span *ngIf="working">
         <span class="spinner-border">

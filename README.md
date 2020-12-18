@@ -23,6 +23,8 @@ This file only covers parts specific to the FrontEnd project
 To install the required packages go to the 'FrontEnd' directory, open the terminal/console/bash, and type
 in `npm install`.
 
+To later run the E2E test also run 'webdriver-manager update' to download the binaries. (TODO check if this is needed)
+
 ## Development environment
 
 The development environment includes the Angular development server, where the app will automatically reload if you
@@ -56,4 +58,21 @@ The unit tests check if all components, services, and directives are created and
 
 ## Running end-to-end tests
 
+(TODO CHECK THIS) Before running the E2E test run 'webdriver-manager update' to download binaries.
+
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+The E2E test emulates a user lifecycle. This means Protractor:
+
+1. Navigates to the register page
+2. Registers a new test user
+
+- Test user configuration specified in `app.po.ts`
+  - Default username `test517357643167`
+
+3. Navigates to the login page
+4. Logs in as the test user
+5. Navigates to delete user page
+6. Deletes the test user, so no artifacts remain
+
+All this is done using Chromium ChromeDriver in the browser.

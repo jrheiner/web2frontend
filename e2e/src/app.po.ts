@@ -1,11 +1,32 @@
-import { browser, by, element } from 'protractor';
+import {browser} from 'protractor';
 
 export class AppPage {
-  navigateTo(): Promise<unknown> {
-    return browser.get(browser.baseUrl) as Promise<unknown>;
+  /**
+   * Test user configuration
+   */
+  static username = 'test517357643167';
+  static password = 'testTEST!1';
+
+  /**
+   * Simple sleep function for debugging
+   * @param ms - Time to sleep in ms
+   */
+  static async delay(ms: number): Promise<any> {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  getTitleText(): Promise<string> {
-    return element(by.css('app-root .content span')).getText() as Promise<string>;
+  /**
+   * Navigate to base url
+   */
+  navigateTo(): Promise<unknown> {
+    return browser.get(browser.baseUrl) as Promise<unknown>;
+
+  }
+
+  /**
+   * Get current browser title
+   */
+  getTitle(): Promise<string> {
+    return browser.getTitle() as Promise<string>;
   }
 }

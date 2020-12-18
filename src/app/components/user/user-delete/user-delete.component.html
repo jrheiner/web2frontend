@@ -2,7 +2,7 @@
 <p class="lead">
   This action will delete your account permanently with no way to recover it. It also includes deleting your comments
   and posts. Comments of other users on your posts will be deleted as well.</p>
-<div class="alert alert-success mt-3" role="alert" *ngIf="alert">
+<div class="alert alert-success mt-3" role="alert" *ngIf="alert" id="delete-alert">
   {{alert}}
 </div>
 <div *ngIf="error">
@@ -30,7 +30,7 @@
   </div>
 
   <button type="submit" class="btn btn-lg btn-danger mt-4 mb-4" (click)="deleteAccount()"
-          [disabled]="alert || working || input?.toLowerCase() !== username?.toLowerCase()">
+          [disabled]="alert || working || input?.toLowerCase() !== username?.toLowerCase()" id="delete-btn">
     <span *ngIf="!working">Delete account</span>
     <span *ngIf="working">
       <span class="spinner-border">
