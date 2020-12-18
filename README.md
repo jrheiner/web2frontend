@@ -60,6 +60,8 @@ The unit tests check if all components, services, and directives are created and
 
 (TODO CHECK THIS) Before running the E2E test run 'webdriver-manager update' to download binaries.
 
+> Make sure the back-end server is running on localhost:3000!
+
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
 The E2E test emulates a user lifecycle. This means Protractor:
