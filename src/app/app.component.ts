@@ -13,5 +13,5 @@ export class AppComponent {
   /**
    * Default window title
    */
-  title = 'Home';
+  title = 'ConnectApp';
 }

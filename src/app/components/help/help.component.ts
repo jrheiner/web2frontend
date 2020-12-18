@@ -113,7 +113,7 @@ export class HelpComponent implements OnInit {
    * @param title - Title to set browser title
    */
   constructor(private route: ActivatedRoute, private title: Title) {
-    this.title.setTitle('Help and FAQ');
+    this.title.setTitle('ConnectApp: Help and FAQ');
   }
 
   /**

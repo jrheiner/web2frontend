@@ -43,7 +43,7 @@ export class LoginComponent {
   constructor(public authService: AuthService, public router: Router,
               private formBuilder: FormBuilder, private session: TokenService,
               private title: Title) {
-    this.title.setTitle('Login');
+    this.title.setTitle('ConnectApp: Login');
     this.loginForm = this.formBuilder.group({
       username: '',
       password: ''

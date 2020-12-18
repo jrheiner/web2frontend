@@ -41,7 +41,7 @@ export class UserDeleteComponent implements OnInit {
    * @param title - Title to set browser title
    */
   constructor(private apiService: ApiService, private session: TokenService, private title: Title) {
-    this.title.setTitle('Delete user profile');
+    this.title.setTitle('ConnectApp: Delete user profile');
   }
 
   /**

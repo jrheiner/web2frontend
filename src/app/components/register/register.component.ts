@@ -55,7 +55,7 @@ export class RegisterComponent {
    * @param title - Title to set browser title
    */
   constructor(private apiService: ApiService, public router: Router, private session: TokenService, private title: Title) {
-    this.title.setTitle('Register');
+    this.title.setTitle('ConnectApp: Register');
     if (this.session.isLoggedIn()) {
       // noinspection JSIgnoredPromiseFromCall
       this.router.navigate(['']);

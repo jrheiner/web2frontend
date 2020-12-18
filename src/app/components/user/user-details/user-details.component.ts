@@ -70,7 +70,7 @@ export class UserDetailsComponent implements OnInit {
    * @param title - Title to set browser title
    */
   constructor(private apiService: ApiService, private route: ActivatedRoute, private title: Title) {
-    this.title.setTitle('User profile');
+    this.title.setTitle('ConnectApp: User profile');
   }
 
   /**

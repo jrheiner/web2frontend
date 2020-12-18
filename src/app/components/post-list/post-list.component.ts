@@ -108,7 +108,7 @@ export class PostListComponent implements OnInit, OnDestroy {
    */
   constructor(private apiService: ApiService, private route: ActivatedRoute,
               private router: Router, private title: Title) {
-    this.title.setTitle('Home');
+    this.title.setTitle('ConnectApp: Home');
   }
 
   /**

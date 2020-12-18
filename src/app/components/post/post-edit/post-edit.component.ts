@@ -58,7 +58,7 @@ export class PostEditComponent implements OnInit {
    */
   constructor(private apiService: ApiService, private route: ActivatedRoute,
               private router: Router, private title: Title) {
-    this.title.setTitle('Edit post');
+    this.title.setTitle('ConnectApp: Edit post');
   }
 
   /**

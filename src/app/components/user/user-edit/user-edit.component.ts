@@ -56,7 +56,7 @@ export class UserEditComponent implements OnInit {
    * @param title - Title to set browser title
    */
   constructor(private apiService: ApiService, private session: TokenService, private title: Title) {
-    this.title.setTitle('Edit account');
+    this.title.setTitle('ConnectApp: Edit account');
   }
 
   /**

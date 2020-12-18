@@ -19,7 +19,7 @@ export class PostNewComponent implements OnInit {
    * @param title - Title to set browser title
    */
   constructor(private session: TokenService, private apiService: ApiService, private title: Title) {
-    this.title.setTitle('Create new post');
+    this.title.setTitle('ConnectApp: Create new post');
   }
 
   /**

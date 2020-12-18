@@ -24,7 +24,7 @@ export class PostDetailsComponent implements OnInit {
    */
   constructor(private apiService: ApiService, private route: ActivatedRoute,
               private session: TokenService, private title: Title) {
-    this.title.setTitle('Post details');
+    this.title.setTitle('ConnectApp: Post details');
   }
 
   /**

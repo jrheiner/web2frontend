@@ -32,7 +32,7 @@ export class PostDeleteComponent implements OnInit {
    */
   constructor(private apiService: ApiService, private route: ActivatedRoute,
               private router: Router, private title: Title) {
-    this.title.setTitle('Delete post');
+    this.title.setTitle('ConnectApp: Delete post');
   }
 
   /**

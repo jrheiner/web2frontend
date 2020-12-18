@@ -42,7 +42,7 @@ export class UserSavedComponent implements OnInit {
    * @param title - Title to set browser title
    */
   constructor(private apiService: ApiService, private title: Title) {
-    this.title.setTitle('My saved posts');
+    this.title.setTitle('ConnectApp: My saved posts');
   }
 
   /**
