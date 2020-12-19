@@ -1,6 +1,9 @@
 import {AppPage} from './app.po';
-import {browser, by, element, logging, protractor} from 'protractor';
+import {browser, by, element, protractor} from 'protractor';
 
+/**
+ * User lifecycle test
+ */
 describe('workspace-project ConnectApp', () => {
   let page: AppPage;
   const testUsername = AppPage.username;
@@ -82,13 +85,6 @@ describe('workspace-project ConnectApp', () => {
     const deleteAlert = await element(by.id('delete-alert'));
     await browser.wait(EC.elementToBeClickable(deleteAlert), 15000);
     return expect<any>(deleteAlert.getText()).toEqual('Successfully deleted account.');
-  });
-
-  afterEach(async () => {
-    const logs = await browser.manage().logs().get(logging.Type.BROWSER);
-    expect(logs).not.toContain(jasmine.objectContaining({
-      level: logging.Level.SEVERE,
-    } as logging.Entry));
   });
 })
 ;

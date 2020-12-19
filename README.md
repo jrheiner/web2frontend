@@ -77,4 +77,4 @@ The E2E test emulates a user lifecycle. This means Protractor:
 5. Navigates to delete user page
 6. Deletes the test user, so no artifacts remain
 
-All this is done using Chromium ChromeDriver in the browser.
+All this is done using Chromium webdriver and then a second time using the Firefox webdriver.

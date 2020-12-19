@@ -11,10 +11,22 @@ exports.config = {
   allScriptsTimeout: 11000,
   specs: [
     './src/**/*.e2e-spec.ts'
-  ],
+  ],/*
   capabilities: {
     browserName: 'chrome'
-  },
+  },*/
+  multiCapabilities: [
+    {
+      browserName: 'chrome',
+      'chromeOptions': {
+        'args': ['show-fps-counter=true']
+      }
+    },
+    {
+      'browserName': 'firefox',
+    }
+  ],
+  maxSessions: 1,
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
