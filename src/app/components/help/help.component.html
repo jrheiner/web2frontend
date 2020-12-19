@@ -11,8 +11,8 @@
 <div *ngFor="let category of helpDB; let i  = index">
   <div *ngIf="category.show">
     <p class="h3">{{category.category}}</p>
-    <div class="list-group" *ngFor="let help of category.collection; let i = index">
-      <div class="list-group-item" *ngIf="help.show">
+    <div class="list-group m-0" *ngFor="let help of category.collection; let i = index">
+      <div class="list-group-item mb-3" *ngIf="help.show">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">{{help.question}}</h5>
         </div>

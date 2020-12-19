@@ -21,9 +21,6 @@ exports.config = {
       'chromeOptions': {
         'args': ['show-fps-counter=true']
       }
-    },
-    {
-      'browserName': 'firefox',
     }
   ],
   maxSessions: 1,
