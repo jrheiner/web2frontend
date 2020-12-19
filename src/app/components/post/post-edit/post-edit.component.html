@@ -12,7 +12,7 @@
         <div class="form-group">
           <label for="title">Title</label>
           <input id="title" name="title" type="text" class="form-control" required [(ngModel)]="post.title"
-                 #title="ngModel">
+                 #title="ngModel" maxlength="150">
           <small class="form-text text-muted"
                  *ngIf="!title.invalid || title.untouched">Required.</small>
           <div *ngIf="title.invalid && (title.dirty || title.touched)"
@@ -30,7 +30,7 @@
           <textarea id="description" name="description" class="form-control" required minlength="3"
                     onkeydown='this.style.height = "";this.style.height = this.scrollHeight + 3 + "px"'
                     [(ngModel)]="post.description" [required]="post.type === 'text'"
-                    #description="ngModel"></textarea>
+                    #description="ngModel" maxlength="2000"></textarea>
           <small class="form-text text-muted"
                  *ngIf="(!description.invalid || description.untouched ) && post.type === 'text'">Required.</small>
           <small class="form-text text-muted"
@@ -52,7 +52,7 @@
           <input id="link" name="link" type="text"
                  pattern="(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
                  class="form-control" required [(ngModel)]="post.link"
-                 #link="ngModel">
+                 #link="ngModel" maxlength="150">
           <small class="form-text text-muted"
                  *ngIf="!link.invalid || link.untouched">Required.</small>
           <div *ngIf="link.invalid && (link.dirty || link.touched)"

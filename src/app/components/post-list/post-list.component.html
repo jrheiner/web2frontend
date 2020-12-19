@@ -21,7 +21,7 @@
       <div class="mb-3 mt-3">
         <label for="search" class="d-none"></label>
         <input [(ngModel)]="searchTerm" class="form-control" placeholder="Search for a post title..." id="search"
-               (ngModelChange)="search($event)">
+               (ngModelChange)="search($event)" maxlength="150">
       </div>
       <div class="btn-group btn-block btn-group-sm">
         <button type="button" class="btn btn-label btn-dark" disabled>Sort posts by</button>

@@ -6,7 +6,7 @@
 <div class="mb-3">
   <label for="search" class="d-none"></label>
   <input [(ngModel)]="searchTerm" class="form-control" placeholder="Search..." id="search"
-         (ngModelChange)="search($event)">
+         (ngModelChange)="search($event)" maxlength="150">
 </div>
 <div *ngFor="let category of helpDB; let i  = index">
   <div *ngIf="category.show">
