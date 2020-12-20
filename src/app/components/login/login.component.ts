@@ -61,7 +61,6 @@ export class LoginComponent {
    */
   login(data: { username: string, password: string }): void {
     this.authService.login(data.username.toLowerCase(), data.password).subscribe((res) => {
-      console.log(res);
       if (res.hasOwnProperty('token')) {
         this.session.setUsername(res.username);
         this.session.setToken(res.token);

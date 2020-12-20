@@ -59,7 +59,6 @@ export class UserSavedComponent implements OnInit {
    */
   getSavedPosts(): void {
     this.apiService.getUserSaved().subscribe((data) => {
-      console.log(data);
       this.savedPosts = data.reverse();
       this.componentLoading = false;
       this.error = false;

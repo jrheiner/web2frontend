@@ -69,7 +69,6 @@ export class RegisterComponent {
   private register(): void {
     this.working = true;
     this.apiService.register(this.user.username, this.user.password).subscribe((res) => {
-      console.log(res);
       this.info.type = 'success';
       this.info.message = `Account ${res.username} created! You can now login.`;
       this.disableRegister = true;
