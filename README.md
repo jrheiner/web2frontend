@@ -13,7 +13,7 @@ This file only covers parts specific to the FrontEnd project
 |---------------|---------------------------|
 | npm install   | Install required packages |
 | npm run start | Start development server  |
-| npm run tests | Run unit tests            |
+| npm run test  | Run unit tests            |
 | npm run lint  | Run linting               |
 | npm run e2e   | Run E2E test              |
 | npm run docs  | Build documentation       |
