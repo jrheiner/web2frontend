@@ -208,13 +208,7 @@ export class PostListComponent implements OnInit, OnDestroy {
         return data.sort((a, b) => {
           return b.updatedAtUnix - a.updatedAtUnix;
         }).sort((a, b) => {
-          if (a.score > b.score) {
-            return -1;
-          } else if (a.score > b.score) {
-            return 1;
-          } else if (a.score === b.score) {
-            return 0;
-          }
+          return b.score - a.score;
         });
       default:
         return data.reverse();
